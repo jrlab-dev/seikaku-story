@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "coordinates": "glTF: +Y上、入口+Z、敷地中心の地面が原点。1単位1m。",
+  "houses": {
+    "karakuri_fort": {
+      "static": "assets/KarakuriFortHouse.glb",
+      "root": "KarakuriFortHouse",
+      "construction_manifest": "KarakuriFort_construction.json",
+      "sturdiness": 4,
+      "rarity": "超レア",
+      "personality": {
+        "好奇心": "高",
+        "まじめさ": "高",
+        "心配性": "高"
+      },
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          0.28,
+          2.15
+        ],
+        "width_m": 1.2,
+        "height_m": 2.8
+      },
+      "chimney": null,
+      "reactions": {
+        "KarakuriFort_GustHold_v1": {
+          "file": "assets/KarakuriFort_GustHold_v1.glb",
+          "clip": "KarakuriFort_GustHold_v1",
+          "duration_s": 8,
+          "meaning": "建物は固定。1〜6秒で警報灯が5回転、2.6〜3.55秒でパンチが1回伸びて戻る。"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ],
+      "bounds_local_gltf": {
+        "min": [
+          -3.3855950832366943,
+          -0.5699999928474426,
+          -2.985243797302246
+        ],
+        "max": [
+          3.3855950832366943,
+          6.549999713897705,
+          3.509999930858612
+        ]
+      },
+      "footprint_m": [
+        6.771,
+        6.495
+      ],
+      "top_m": 6.55
+    }
+  },
+  "files": {
+    "KarakuriFortHouse": {
+      "name": "KarakuriFortHouse",
+      "sourceSha256": "2ae03fdba0ef67aa45a176d9748b40fdb1871a3a521d8037dec1984c8919e904",
+      "sourceBytes": 9242468,
+      "packedSha256": "e9b144c34845c785b020d24086cf32b6d33aa0f3e2c8d8da53d8fb50cd9d467d",
+      "packedBytes": 4106016,
+      "gzipBytes": 2217057,
+      "brotliBytes": 1483517,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 312,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/0320297cc9602394af592d6b.webp",
+          "originalSha256": "0320297cc9602394af592d6bb55df453cefdff4de58a83bb088d48b0c5727c8c"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/904c56d8cb20416245ba1b2d.webp",
+          "originalSha256": "904c56d8cb20416245ba1b2d0b438eefc72667185f42b1227589ca095e1a988c"
+        },
+        {
+          "uri": "textures/a173fc996b9f982abcb561a5.webp",
+          "originalSha256": "a173fc996b9f982abcb561a527d5c4f1983516dbecbeba2e27618894f3c4c037"
+        },
+        {
+          "uri": "textures/6ccd8116aefd36ab8dbd554d.webp",
+          "originalSha256": "6ccd8116aefd36ab8dbd554d85310c0338fc66d15082ca3d5b6ed4d5ac187f09"
+        }
+      ],
+      "web_gz": "assets/KarakuriFortHouse.glb.gz",
+      "web_br": "assets/KarakuriFortHouse.glb.br"
+    },
+    "KarakuriFort_GustHold_v1": {
+      "name": "KarakuriFort_GustHold_v1",
+      "sourceSha256": "ec624b80102d06b6063d67da849070e48f597bd0e75ae602e661def9bc222859",
+      "sourceBytes": 9251852,
+      "packedSha256": "05d48e94f0ed8becdc24182d3f93ba6cbfa75f79f918550a79968f34d2a23f03",
+      "packedBytes": 4109404,
+      "gzipBytes": 2218463,
+      "brotliBytes": 1483560,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 316,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/0320297cc9602394af592d6b.webp",
+          "originalSha256": "0320297cc9602394af592d6bb55df453cefdff4de58a83bb088d48b0c5727c8c"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/904c56d8cb20416245ba1b2d.webp",
+          "originalSha256": "904c56d8cb20416245ba1b2d0b438eefc72667185f42b1227589ca095e1a988c"
+        },
+        {
+          "uri": "textures/a173fc996b9f982abcb561a5.webp",
+          "originalSha256": "a173fc996b9f982abcb561a527d5c4f1983516dbecbeba2e27618894f3c4c037"
+        },
+        {
+          "uri": "textures/6ccd8116aefd36ab8dbd554d.webp",
+          "originalSha256": "6ccd8116aefd36ab8dbd554d85310c0338fc66d15082ca3d5b6ed4d5ac187f09"
+        }
+      ],
+      "web_gz": "assets/KarakuriFort_GustHold_v1.glb.gz",
+      "web_br": "assets/KarakuriFort_GustHold_v1.glb.br"
+    }
+  },
+  "clips": {
+    "KarakuriFort_GustHold_v1": {
+      "clip": "KarakuriFort_GustHold_v1",
+      "duration_s": 8,
+      "channels": 3
+    }
+  },
+  "loader_note": "GLTFLoader + MeshoptDecoder。可逆WebPはassets/textures。"
+}

@@ -1,0 +1,114 @@
+{
+  "nominalHeight": 1.35,
+  "pixelsPerMetre": 600,
+  "canvas": [
+    1024,
+    1024
+  ],
+  "anchor": [
+    512,
+    971
+  ],
+  "fps": 20,
+  "source": "J79 panic torso + unchanged approved J68 ring and composition from J70",
+  "frames": [
+    {
+      "index": 0,
+      "url": "./escape_wolf/run_00.png",
+      "bounds": [
+        114,
+        187,
+        856,
+        969
+      ]
+    },
+    {
+      "index": 1,
+      "url": "./escape_wolf/run_01.png",
+      "bounds": [
+        116,
+        185,
+        859,
+        968
+      ]
+    },
+    {
+      "index": 2,
+      "url": "./escape_wolf/run_02.png",
+      "bounds": [
+        119,
+        185,
+        865,
+        970
+      ]
+    },
+    {
+      "index": 3,
+      "url": "./escape_wolf/run_03.png",
+      "bounds": [
+        116,
+        185,
+        859,
+        972
+      ]
+    },
+    {
+      "index": 4,
+      "url": "./escape_wolf/run_04.png",
+      "bounds": [
+        114,
+        187,
+        856,
+        960
+      ]
+    },
+    {
+      "index": 5,
+      "url": "./escape_wolf/run_05.png",
+      "bounds": [
+        116,
+        185,
+        859,
+        956
+      ]
+    },
+    {
+      "index": 6,
+      "url": "./escape_wolf/run_06.png",
+      "bounds": [
+        119,
+        185,
+        865,
+        963
+      ]
+    },
+    {
+      "index": 7,
+      "url": "./escape_wolf/run_07.png",
+      "bounds": [
+        116,
+        185,
+        859,
+        964
+      ]
+    }
+  ],
+  "config": {
+    "torso": "wolf_panic_torso.png",
+    "scale": 0.59,
+    "hem_y": 1059,
+    "hips_x": 740,
+    "ground": [
+      512,
+      920
+    ],
+    "ring_h": 180,
+    "ring_w": 410,
+    "overlap": 62,
+    "rot": 0.1,
+    "ring_dx": 0,
+    "bob": 5,
+    "frames": 8,
+    "fill": 0
+  }
+}

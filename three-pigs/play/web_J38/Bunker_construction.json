@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "kind": "Bunker",
+  "source_file": "残りの家4軒/glb/BunkerHouse.glb",
+  "source_sha256": "e3e92b02a19883c40eff091f220291b084e9219526ee87a34538e0109525b5b8",
+  "source_bytes": 4993396,
+  "root_name": "BunkerHouse",
+  "method": "visibility_only_on_fresh_static_scene_clone",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "entrance": "+Z",
+    "local_origin": [
+      0,
+      0,
+      0
+    ],
+    "placement": "retain village placement; do not recenter or rescale"
+  },
+  "duration": null,
+  "personality": null,
+  "stages": [
+    {
+      "index": 0,
+      "id": "ground",
+      "label": "ground",
+      "adds": [],
+      "visible": []
+    },
+    {
+      "index": 1,
+      "id": "foundation",
+      "label": "foundation",
+      "adds": [
+        "Bunker__Floor",
+        "Bunker__Foundation"
+      ],
+      "visible": [
+        "Bunker__Floor",
+        "Bunker__Foundation"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "structure",
+      "label": "structure",
+      "adds": [
+        "Bunker__Frame"
+      ],
+      "visible": [
+        "Bunker__Floor",
+        "Bunker__Foundation",
+        "Bunker__Frame"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walls",
+      "label": "walls",
+      "adds": [
+        "Bunker__Stairs"
+      ],
+      "visible": [
+        "Bunker__Floor",
+        "Bunker__Foundation",
+        "Bunker__Frame",
+        "Bunker__Stairs"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "roof",
+      "label": "roof",
+      "adds": [
+        "Bunker__Hatch"
+      ],
+      "visible": [
+        "Bunker__Floor",
+        "Bunker__Foundation",
+        "Bunker__Frame",
+        "Bunker__Hatch",
+        "Bunker__Stairs"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "complete",
+      "label": "complete",
+      "adds": [
+        "Bunker__Garden",
+        "Bunker__Periscope",
+        "Bunker__Vent"
+      ],
+      "visible": [
+        "Bunker__Floor",
+        "Bunker__Foundation",
+        "Bunker__Frame",
+        "Bunker__Garden",
+        "Bunker__Hatch",
+        "Bunker__Periscope",
+        "Bunker__Stairs",
+        "Bunker__Vent"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node_index": 0,
+      "node_name": "Bunker__Floor",
+      "source_mesh_index": 0,
+      "component": "Floor",
+      "first_stage": 1
+    },
+    {
+      "node_index": 1,
+      "node_name": "Bunker__Foundation",
+      "source_mesh_index": 1,
+      "component": "Foundation",
+      "first_stage": 1
+    },
+    {
+      "node_index": 2,
+      "node_name": "Bunker__Frame",
+      "source_mesh_index": 2,
+      "component": "Frame",
+      "first_stage": 2
+    },
+    {
+      "node_index": 3,
+      "node_name": "Bunker__Garden",
+      "source_mesh_index": 3,
+      "component": "Garden",
+      "first_stage": 5
+    },
+    {
+      "node_index": 4,
+      "node_name": "Bunker__Hatch",
+      "source_mesh_index": 4,
+      "component": "Hatch",
+      "first_stage": 4
+    },
+    {
+      "node_index": 5,
+      "node_name": "Bunker__Periscope",
+      "source_mesh_index": 5,
+      "component": "Periscope",
+      "first_stage": 5
+    },
+    {
+      "node_index": 6,
+      "node_name": "Bunker__Stairs",
+      "source_mesh_index": 6,
+      "component": "Stairs",
+      "first_stage": 3
+    },
+    {
+      "node_index": 7,
+      "node_name": "Bunker__Vent",
+      "source_mesh_index": 7,
+      "component": "Vent",
+      "first_stage": 5
+    }
+  ],
+  "limits": [
+    "Discrete assembly snapshots; actor blocking is supplied by story integrator"
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "kind": "Tent",
+  "source_file": "TentHouse.glb",
+  "source_sha256": "6d133a1cda820d5f727ecd07964110820f7102ebdbf06f850c52cf407224d867",
+  "source_bytes": 5681728,
+  "root_name": "TentHouse",
+  "method": "visibility_only_on_fresh_static_scene_clone",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "entrance": "+Z",
+    "local_origin": [
+      0,
+      0,
+      0
+    ],
+    "placement": "retain current village placement parent; do not recenter or rescale"
+  },
+  "duration": null,
+  "personality": null,
+  "stages": [
+    {
+      "index": 0,
+      "id": "ground",
+      "label": "Ground / empty plot",
+      "adds": [],
+      "visible": []
+    },
+    {
+      "index": 1,
+      "id": "foundation",
+      "label": "Foundation and floor",
+      "adds": [
+        "Tent__Groundsheet",
+        "Tent__Pegs"
+      ],
+      "visible": [
+        "Tent__Groundsheet",
+        "Tent__Pegs"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "structure",
+      "label": "Crossed A-poles at both ends and ridge pole",
+      "adds": [
+        "Tent__Frame"
+      ],
+      "visible": [
+        "Tent__Frame",
+        "Tent__Groundsheet",
+        "Tent__Pegs"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walls",
+      "label": "Green sod walls and gable ends (front left half open)",
+      "adds": [
+        "Tent__Wall_Back",
+        "Tent__Wall_Front",
+        "Tent__Wall_Left",
+        "Tent__Wall_Right"
+      ],
+      "visible": [
+        "Tent__Frame",
+        "Tent__Groundsheet",
+        "Tent__Pegs",
+        "Tent__Wall_Back",
+        "Tent__Wall_Front",
+        "Tent__Wall_Left",
+        "Tent__Wall_Right"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "roof",
+      "label": "Canvas roof and ridge tape",
+      "adds": [
+        "Tent__Roof_Left",
+        "Tent__Roof_Ridge",
+        "Tent__Roof_Right"
+      ],
+      "visible": [
+        "Tent__Frame",
+        "Tent__Groundsheet",
+        "Tent__Pegs",
+        "Tent__Roof_Left",
+        "Tent__Roof_Ridge",
+        "Tent__Roof_Right",
+        "Tent__Wall_Back",
+        "Tent__Wall_Front",
+        "Tent__Wall_Left",
+        "Tent__Wall_Right"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "complete",
+      "label": "Front flap tied back, guy ropes and abandoned toys",
+      "adds": [
+        "Tent__Door_Flap",
+        "Tent__Play_things",
+        "Tent__Ropes"
+      ],
+      "visible": [
+        "Tent__Door_Flap",
+        "Tent__Frame",
+        "Tent__Groundsheet",
+        "Tent__Pegs",
+        "Tent__Play_things",
+        "Tent__Roof_Left",
+        "Tent__Roof_Ridge",
+        "Tent__Roof_Right",
+        "Tent__Ropes",
+        "Tent__Wall_Back",
+        "Tent__Wall_Front",
+        "Tent__Wall_Left",
+        "Tent__Wall_Right"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node_index": 0,
+      "node_name": "Tent__Door_Flap",
+      "source_mesh_index": 0,
+      "component": "Door_Flap",
+      "first_stage": 5
+    },
+    {
+      "node_index": 1,
+      "node_name": "Tent__Frame",
+      "source_mesh_index": 1,
+      "component": "Frame",
+      "first_stage": 2
+    },
+    {
+      "node_index": 2,
+      "node_name": "Tent__Groundsheet",
+      "source_mesh_index": 2,
+      "component": "Groundsheet",
+      "first_stage": 1
+    },
+    {
+      "node_index": 15,
+      "node_name": "Tent__Pegs",
+      "source_mesh_index": null,
+      "component": "Pegs",
+      "first_stage": 1
+    },
+    {
+      "node_index": 19,
+      "node_name": "Tent__Play_things",
+      "source_mesh_index": null,
+      "component": "Play_things",
+      "first_stage": 5
+    },
+    {
+      "node_index": 20,
+      "node_name": "Tent__Roof_Left",
+      "source_mesh_index": 18,
+      "component": "Roof_Left",
+      "first_stage": 4
+    },
+    {
+      "node_index": 21,
+      "node_name": "Tent__Roof_Ridge",
+      "source_mesh_index": 19,
+      "component": "Roof_Ridge",
+      "first_stage": 4
+    },
+    {
+      "node_index": 22,
+      "node_name": "Tent__Roof_Right",
+      "source_mesh_index": 20,
+      "component": "Roof_Right",
+      "first_stage": 4
+    },
+    {
+      "node_index": 23,
+      "node_name": "Tent__Ropes",
+      "source_mesh_index": 21,
+      "component": "Ropes",
+      "first_stage": 5
+    },
+    {
+      "node_index": 24,
+      "node_name": "Tent__Wall_Back",
+      "source_mesh_index": 22,
+      "component": "Wall_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 25,
+      "node_name": "Tent__Wall_Front",
+      "source_mesh_index": 23,
+      "component": "Wall_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 26,
+      "node_name": "Tent__Wall_Left",
+      "source_mesh_index": 24,
+      "component": "Wall_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 27,
+      "node_name": "Tent__Wall_Right",
+      "source_mesh_index": 25,
+      "component": "Wall_Right",
+      "first_stage": 3
+    }
+  ],
+  "brick_structure_note": "Tent: no masonry; stage 2 is crossed A-poles at both ends and a ridge pole. Groups Tent__Pegs and Tent__Play_things contain several meshes each.",
+  "limits": [
+    "Discrete assembly snapshots, not worker hand placement or continuous construction animation",
+    "Construction site character blocking must be supplied by story integrator"
+  ]
+}

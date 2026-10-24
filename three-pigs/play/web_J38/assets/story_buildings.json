@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "wood": {
+    "module": "./wood_story_collapse.js"
+  },
+  "status": "J49 directional gust clips integrated; offscreen playback and reset verified"
+}

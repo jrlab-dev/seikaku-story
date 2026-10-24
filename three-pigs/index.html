@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三びきのこぶた｜性格で変わる物語</title>
+<meta name="description" content="三びきのこぶたとおおかみに性格を与えると、家も結末も変わる。原作どおりのストーリー完成度100%を導き出せるか。">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.role{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.role header{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.role header img{width:56px;height:56px;object-fit:contain;background:#eef3e4;border-radius:12px}
+.role h3{margin:0;font-size:18px}
+.role .type{font-size:13px;color:var(--sub);min-height:1.6em}
+.factor{display:grid;grid-template-columns:5.2em 1fr;align-items:center;gap:6px;margin:5px 0;font-size:13px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:#fff;font:inherit;font-size:12px;padding:5px 0;cursor:pointer;color:var(--ink)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--leaf);color:#fff;font-weight:700}
+.role .mine{margin-top:8px;font-size:12px;border:0;background:none;color:var(--accent);cursor:pointer;padding:0;text-decoration:underline}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:16px 0}
+.panel input{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:10px;width:min(420px,100%)}
+.go{text-align:center;margin:26px 0 10px}
+.note{font-size:13px;color:var(--sub)}
+.goal{background:#fff7d6;border:1px solid #efdc95;border-radius:14px;padding:12px 16px}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="../">性格で変わる物語</a></div></header>
+<main class="wrap">
+ <h1 style="margin:18px 0 6px">三びきのこぶた</h1>
+ <p class="note" style="margin-top:0">長男・次男・三男・おおかみ。4人の性格を決めて、お話を見てみよう。</p>
+ <div class="goal"><b>目標：</b>原作どおり「ストーリー完成度100%」になる4人の性格を見つけよう。家がテントになったり、狼が爆弾を発明したり……原作にない結末も、たくさん隠れています。</div>
+
+ <div class="panel">
+  <b>ビッグファイブ診断の結果を使う</b>
+  <p class="note" style="margin:4px 0 8px">診断結果ページのアドレス（URL）か、5けたのタイプ番号を入れて、使いたい役の「自分の性格にする」を押してください。まだの人は <a href="https://bigfive.jr-genius.jp/quiz.html" target="_blank" rel="noopener">ビッグファイブ診断</a> へ。</p>
+  <input id="mine" placeholder="例：https://bigfive.jr-genius.jp/result.html?code=33535 または 33535" inputmode="url">
+  <div id="mine-msg" class="note"></div>
+ </div>
+
+ <div class="cast" id="cast"></div>
+
+ <div class="go">
+  <a class="btn" id="play" href="#">この性格でお話を見る</a>
+  <p class="note">3Dの絵本劇を読み込みます（初回は通信量が多めです。Wi-Fiがおすすめ）。</p>
+ </div>
+</main>
+<footer><div class="wrap">お話は性格をもとにした創作で、診断の科学的な結論ではありません。</div></footer>
+<script type="module">
+import {TYPE_NAMES} from './play/web_J38/personality_text.mjs';
+const ROLES=[['pig_straw','長男','straw'],['pig_wood','次男','wood'],['pig_brick','三男','brick'],['wolf','おおかみ','wolf']];
+const F=[['O','開放性'],['C','誠実性'],['E','外向性'],['A','協調性'],['N','感受性']];
+const LV=[['1','低い'],['3','ふつう'],['5','高い']];
+const q=new URLSearchParams(location.search),saved=JSON.parse(localStorage.getItem('story_three_pigs_cast')||'null');
+const cast=saved||{pig_straw:'33535',pig_wood:'55331',pig_brick:'33333',wolf:'11311'};
+if(q.get('cast')){const c=q.get('cast').split(',');ROLES.forEach(([id],i)=>{if(/^[135]{5}$/.test(c[i]||''))cast[id]=c[i];});}
+const norm=s=>{const m=String(s).match(/(?:code|type)=([1-5]{5})/)||String(s).match(/\b([1-5]{5})\b/);return m?m[1].replace(/[12]/g,'1').replace(/[45]/g,'5'):null;};
+if(q.get('me')&&norm(q.get('me'))){cast.pig_brick=norm(q.get('me'));}
+const box=document.getElementById('cast');
+function render(){
+ box.innerHTML='';
+ for(const[id,label,img]of ROLES){
+  const d=document.createElement('section');d.className='role';const code=cast[id];
+  d.innerHTML=`<header><img src="../assets/role-${img}.png" alt=""><div><h3>${label}</h3><div class="type">${TYPE_NAMES[code]??''}</div></div></header>`+
+   F.map(([f,name],i)=>`<div class="factor"><span>${name}</span><div class="seg">${LV.map(([v,t])=>`<button data-i="${i}" data-v="${v}" aria-pressed="${code[i]===v}">${t}</button>`).join('')}</div></div>`).join('')+
+   `<button class="mine">自分の性格にする</button>`;
+  d.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{const c=[...cast[id]];c[b.dataset.i]=b.dataset.v;cast[id]=c.join('');save();});
+  d.querySelector('.mine').onclick=()=>{const v=norm(document.getElementById('mine').value);const msg=document.getElementById('mine-msg');if(!v){msg.textContent='結果ページのアドレスか、5けたの番号を入れてください。';return;}cast[id]=v;msg.textContent=label+'を「'+(TYPE_NAMES[v]??v)+'」にしました。';save();};
+  box.append(d);
+ }
+ document.getElementById('play').href='play/web_J38/?cast='+ROLES.map(([id])=>cast[id]).join(',');
+}
+function save(){localStorage.setItem('story_three_pigs_cast',JSON.stringify(cast));render();}
+render();
+</script>
+</body>
+</html>

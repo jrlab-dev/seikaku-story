@@ -1,0 +1,268 @@
+{
+  "schema": 1,
+  "status": "J118 新しい家2軒（テント＝超レア、鉄の要塞＝レア）。話への組み込みは依頼元が行う",
+  "coordinates": "glTF: +Y上・入口は+Z・原点は敷地中心の地面。既存3軒と同じ。置き場所の親（placement）へそのまま入れる。拡大縮小しない",
+  "houses": {
+    "tent": {
+      "static": "assets/TentHouse.glb",
+      "root": "TentHouse",
+      "construction_manifest": "Tent_construction.json",
+      "sturdiness": 0,
+      "footprint_m": [
+        3.84,
+        4.14
+      ],
+      "with_ropes_m": [
+        5.9,
+        6.4
+      ],
+      "ridge_m": 2.6,
+      "top_m": 2.95,
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          0,
+          2.0
+        ],
+        "width_m": 1.9,
+        "height_at_center_m": 1.7,
+        "note": "見本どおりの三角テント。左手前の布を外へ折り返して留めてある。扉はない"
+      },
+      "interior": "空っぽ（敷き布だけ）。狼がのぞいても誰もいない",
+      "suggested_build": {
+        "seconds": 5.0,
+        "cuts_relative_s": [
+          0,
+          0.8,
+          1.6,
+          2.6,
+          3.6
+        ],
+        "end_relative_s": 5.0,
+        "note": "建てて5秒で遊びに行く。屋根(段階4)も地面から届く",
+        "manner": "さっさと建てて、遊びに行こう！"
+      },
+      "reactions": {
+        "Tent_Flatten_v1": {
+          "file": "assets/Tent_Flatten_v1.glb",
+          "clip": "Tent_Flatten_v1",
+          "duration_s": 8,
+          "meaning": "吹かれて一瞬でぺしゃんこ（0.25秒で押され、0.5〜0.9秒で潰れ、少しふくらんで落ち着く）。凧が倒れ、ボールが転がる"
+        },
+        "Tent_BlowAway_v1": {
+          "file": "assets/Tent_BlowAway_v1.glb",
+          "clip": "Tent_BlowAway_v1",
+          "duration_s": 8,
+          "meaning": "杭が抜け、テントごと回りながら空の彼方へ（奥＝-Z方向へ約64m・高さ約25m）。7.4〜8秒で縮んで消える。敷き布と木槌は残る"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "fortress": {
+      "static": "assets/FortressHouse.glb",
+      "root": "FortressHouse",
+      "construction_manifest": "Fortress_construction.json",
+      "sturdiness": 4,
+      "footprint_m": [
+        5.5,
+        5.2
+      ],
+      "with_turrets_m": [
+        6.27,
+        5.97
+      ],
+      "battlement_top_m": 3.95,
+      "turret_top_m": 5.65,
+      "flag_top_m": 6.55,
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          0.28,
+          2.15
+        ],
+        "width_m": 1.2,
+        "height_m": 2.8,
+        "note": "既存3軒と同じ入口位置。南京錠3つと鎖つき"
+      },
+      "chimney": null,
+      "iron_floor_below_ground_m": [
+        -0.57,
+        -0.42
+      ],
+      "suggested_build": {
+        "seconds": 24.0,
+        "cuts_relative_s": [
+          0,
+          5,
+          10,
+          15,
+          19.5
+        ],
+        "end_relative_s": 24.0,
+        "note": "時間がかかる。屋根(段階4)は既存のれんがと同じ足場の高さ",
+        "manner": "念には念を。もう一枚、鉄を足そう。"
+      },
+      "reactions": {
+        "Fortress_GustHold_v1": {
+          "file": "assets/Fortress_GustHold_v1.glb",
+          "clip": "Fortress_GustHold_v1",
+          "duration_s": 8,
+          "meaning": "吹かれてもびくともしない。0.42〜0.7秒に一度だけ小さく「ゴン」（塔の先で約2cm）。旗だけ風下へはためく。爆弾の爆風でも同じクリップでよい"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ]
+    }
+  },
+  "controller": "既存の house-collapse-controller.mjs がそのまま使える（clipName＝上の clip、長さ8秒）。建てる途中は construction-controller.mjs ＋ *_construction.json",
+  "construction_sites": "tent_fortress_construction_sites.mjs（sitesAt で村の座標へ）",
+  "files": {
+    "TentHouse": {
+      "source_glb": "テントと鉄の要塞/glb/TentHouse.glb",
+      "source_bytes": 5681728,
+      "sha256": "6d133a1cda820d5f727ecd07964110820f7102ebdbf06f850c52cf407224d867",
+      "web_gz": "animal/delivery/web_J38/assets/TentHouse.glb.gz",
+      "gz_bytes": 238324,
+      "web_br": "animal/delivery/web_J38/assets/TentHouse.glb.br",
+      "br_bytes": 171282,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp（J44と同じ）・復号が元と完全一致",
+      "textures": [
+        "textures/5103bd4b55861a84a8c12dc8.webp",
+        "textures/61242215f0780c918d41605a.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/a237cfa7674e1ed01f607bb5.webp",
+        "textures/c41dbaeb70183a5b25babc76.webp",
+        "textures/cb28ff5bbd6cb1de15859b8f.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "FortressHouse": {
+      "source_glb": "テントと鉄の要塞/glb/FortressHouse.glb",
+      "source_bytes": 8719612,
+      "sha256": "9427d82bc7ef0b44beb667c7bbdbfffb8a2c7ff7c57f49218d06525cbb7f42f8",
+      "web_gz": "animal/delivery/web_J38/assets/FortressHouse.glb.gz",
+      "gz_bytes": 1696293,
+      "web_br": "animal/delivery/web_J38/assets/FortressHouse.glb.br",
+      "br_bytes": 1072143,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp（J44と同じ）・復号が元と完全一致",
+      "textures": [
+        "textures/0320297cc9602394af592d6b.webp",
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/6ccd8116aefd36ab8dbd554d.webp",
+        "textures/904c56d8cb20416245ba1b2d.webp",
+        "textures/a173fc996b9f982abcb561a5.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/e2975462a8682f18967eb4db.webp"
+      ]
+    },
+    "Tent_Flatten_v1": {
+      "source_glb": "テントと鉄の要塞/glb/Tent_Flatten_v1.glb",
+      "source_bytes": 6116584,
+      "sha256": "eaa8c289b61d562fb8ca92f6278e587fe10a82e440e9574aae32ccddccfebf33",
+      "web_gz": "animal/delivery/web_J38/assets/Tent_Flatten_v1.glb.gz",
+      "gz_bytes": 508130,
+      "web_br": "animal/delivery/web_J38/assets/Tent_Flatten_v1.glb.br",
+      "br_bytes": 408819,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp（J44と同じ）・復号が元と完全一致",
+      "textures": [
+        "textures/5103bd4b55861a84a8c12dc8.webp",
+        "textures/61242215f0780c918d41605a.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/a237cfa7674e1ed01f607bb5.webp",
+        "textures/c41dbaeb70183a5b25babc76.webp",
+        "textures/cb28ff5bbd6cb1de15859b8f.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "Tent_BlowAway_v1": {
+      "source_glb": "テントと鉄の要塞/glb/Tent_BlowAway_v1.glb",
+      "source_bytes": 6417836,
+      "sha256": "ca175c232c2322ec8651cc54334f6569d4833eb819bc64c25c7d33dc9d985a60",
+      "web_gz": "animal/delivery/web_J38/assets/Tent_BlowAway_v1.glb.gz",
+      "gz_bytes": 684832,
+      "web_br": "animal/delivery/web_J38/assets/Tent_BlowAway_v1.glb.br",
+      "br_bytes": 563170,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp（J44と同じ）・復号が元と完全一致",
+      "textures": [
+        "textures/5103bd4b55861a84a8c12dc8.webp",
+        "textures/61242215f0780c918d41605a.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/a237cfa7674e1ed01f607bb5.webp",
+        "textures/c41dbaeb70183a5b25babc76.webp",
+        "textures/cb28ff5bbd6cb1de15859b8f.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "Fortress_GustHold_v1": {
+      "source_glb": "テントと鉄の要塞/glb/Fortress_GustHold_v1.glb",
+      "source_bytes": 8746744,
+      "sha256": "02c7d73d8302f293fcd6f7cd1bf2361b13f376d7e2f42b0841fa795c68bdfe3f",
+      "web_gz": "animal/delivery/web_J38/assets/Fortress_GustHold_v1.glb.gz",
+      "gz_bytes": 1707468,
+      "web_br": "animal/delivery/web_J38/assets/Fortress_GustHold_v1.glb.br",
+      "br_bytes": 1082931,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp（J44と同じ）・復号が元と完全一致",
+      "textures": [
+        "textures/0320297cc9602394af592d6b.webp",
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/6ccd8116aefd36ab8dbd554d.webp",
+        "textures/904c56d8cb20416245ba1b2d.webp",
+        "textures/a173fc996b9f982abcb561a5.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/e2975462a8682f18967eb4db.webp"
+      ]
+    }
+  },
+  "clips": {
+    "Tent_Flatten_v1": {
+      "clip": "Tent_Flatten_v1",
+      "duration_s": 8,
+      "channels": 14
+    },
+    "Tent_BlowAway_v1": {
+      "clip": "Tent_BlowAway_v1",
+      "duration_s": 8,
+      "channels": 54
+    },
+    "Fortress_GustHold_v1": {
+      "clip": "Fortress_GustHold_v1",
+      "duration_s": 8,
+      "channels": 3
+    }
+  },
+  "textures": [
+    "textures/0320297cc9602394af592d6b.webp",
+    "textures/04def6bc617610c7487d6a57.webp",
+    "textures/5103bd4b55861a84a8c12dc8.webp",
+    "textures/61242215f0780c918d41605a.webp",
+    "textures/6ccd8116aefd36ab8dbd554d.webp",
+    "textures/6cd00a8e799b815ff44d6539.webp",
+    "textures/904c56d8cb20416245ba1b2d.webp",
+    "textures/a173fc996b9f982abcb561a5.webp",
+    "textures/a1b40d7e153ad26a5f6bc601.webp",
+    "textures/a237cfa7674e1ed01f607bb5.webp",
+    "textures/a5985c525405dbbab47670b6.webp",
+    "textures/c41dbaeb70183a5b25babc76.webp",
+    "textures/ca75253ea173cdf0ff93f979.webp",
+    "textures/cb28ff5bbd6cb1de15859b8f.webp",
+    "textures/e2975462a8682f18967eb4db.webp",
+    "textures/e5fa31a3663436cbc4619d0f.webp",
+    "textures/fd3fb5c2e43e0efacde9555c.webp"
+  ],
+  "loader_note": "既存の家と同じく GLTFLoader に MeshoptDecoder が必要。画像は assets/textures の WebP を参照する（village_assets.json には未登録＝先読みしたい場合は依頼元で追加）"
+}

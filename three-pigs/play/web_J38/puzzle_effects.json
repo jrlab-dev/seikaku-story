@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "effects": {
+    "BombProp": {
+      "file": "assets/BombProp.glb",
+      "gzip": "assets/BombProp.glb.gz",
+      "brotli": "assets/BombProp.glb.br",
+      "clip": null,
+      "duration_s": null,
+      "diameter_m": 0.45,
+      "origin": "爆弾は底の接地点。爆発は敷地中心の地面。glTF +Y上、1単位1m。",
+      "loop": false
+    },
+    "Bomb_Fuse_v1": {
+      "file": "assets/Bomb_Fuse_v1.glb",
+      "gzip": "assets/Bomb_Fuse_v1.glb.gz",
+      "brotli": "assets/Bomb_Fuse_v1.glb.br",
+      "clip": "Bomb_Fuse_v1",
+      "duration_s": 8,
+      "diameter_m": 0.45,
+      "origin": "爆弾は底の接地点。爆発は敷地中心の地面。glTF +Y上、1単位1m。",
+      "loop": false,
+      "timeline": {
+        "0": "導火線14cm、火花開始",
+        "0-7.9": "導火線が短くなり火花が先端で点滅",
+        "8": "導火線と火花が消える。爆弾の本体は残る。"
+      }
+    },
+    "Explosion_House_v1": {
+      "file": "assets/Explosion_House_v1.glb",
+      "gzip": "assets/Explosion_House_v1.glb.gz",
+      "brotli": "assets/Explosion_House_v1.glb.br",
+      "clip": "Explosion_House_v1",
+      "duration_s": 8,
+      "diameter_m": 8,
+      "origin": "爆弾は底の接地点。爆発は敷地中心の地面。glTF +Y上、1単位1m。",
+      "loop": false,
+      "timeline": {
+        "0": "待機・ほぼ非表示",
+        "0.08": "白い閃光と小さな炎",
+        "0.3": "閃光終了、丸い煙が広がる",
+        "1": "煙が家を包み、破片18個が飛ぶ",
+        "2": "れんが6・木片6・わら6が着地",
+        "4": "煙が上昇し薄れる",
+        "7": "煙は薄く小さくなり、破片も退場開始",
+        "8": "全効果退場"
+      }
+    },
+    "Explosion_Small_v1": {
+      "file": "assets/Explosion_Small_v1.glb",
+      "gzip": "assets/Explosion_Small_v1.glb.gz",
+      "brotli": "assets/Explosion_Small_v1.glb.br",
+      "clip": "Explosion_Small_v1",
+      "duration_s": 8,
+      "diameter_m": 2.5,
+      "origin": "爆弾は底の接地点。爆発は敷地中心の地面。glTF +Y上、1単位1m。",
+      "loop": false,
+      "timeline": {
+        "0": "待機",
+        "0.3": "丸い煙が広がる",
+        "1": "直径約2.5m",
+        "2-7": "ゆっくり上がり薄れる",
+        "8": "退場。閃光・炎・破片なし"
+      }
+    }
+  },
+  "files": {
+    "BombProp": {
+      "name": "BombProp",
+      "sourceSha256": "a0f785529dd8e65df6eb7a0a657b67e734094885a5095dfd3466a5a746ce3400",
+      "sourceBytes": 1387020,
+      "packedSha256": "8c332c7a8be8eccc0e648e7d9c702f25416d11642b09a15d8398b0eb0eaa2b3a",
+      "packedBytes": 34996,
+      "gzipBytes": 17203,
+      "brotliBytes": 13409,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 9,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        }
+      ],
+      "web_gz": "assets/BombProp.glb.gz",
+      "web_br": "assets/BombProp.glb.br"
+    },
+    "Bomb_Fuse_v1": {
+      "name": "Bomb_Fuse_v1",
+      "sourceSha256": "ad46c6ee7a9f849b9205c90b1e352c03fb1e886d11c4456e33891a51304f80e7",
+      "sourceBytes": 1408404,
+      "packedSha256": "4576c79105224de221c445fcd380dbe19aa437d12cebb03ca5b844f2a86b169c",
+      "packedBytes": 52244,
+      "gzipBytes": 24268,
+      "brotliBytes": 19426,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 19,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        }
+      ],
+      "web_gz": "assets/Bomb_Fuse_v1.glb.gz",
+      "web_br": "assets/Bomb_Fuse_v1.glb.br"
+    },
+    "Explosion_House_v1": {
+      "name": "Explosion_House_v1",
+      "sourceSha256": "4c17241bc9afa94316b2f1448e61e96f2126a4c7d794a5da095b098bc7a6a1a7",
+      "sourceBytes": 2273492,
+      "packedSha256": "6e3b7232d3a6dc9ccd1ae2af7287bc705f770d8a4c0a345ce796e2261a9a5bb9",
+      "packedBytes": 189296,
+      "gzipBytes": 70686,
+      "brotliBytes": 60281,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 191,
+      "images": [
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        }
+      ],
+      "web_gz": "assets/Explosion_House_v1.glb.gz",
+      "web_br": "assets/Explosion_House_v1.glb.br"
+    },
+    "Explosion_Small_v1": {
+      "name": "Explosion_Small_v1",
+      "sourceSha256": "fe08a2eec6d774b11522a17f1aa51efd3c888686ec9e95b24f412be91344162b",
+      "sourceBytes": 124908,
+      "packedSha256": "e1ab93a1ade6af38500d59c63cfd647d72b6010abba102050ad934c387ea320d",
+      "packedBytes": 47608,
+      "gzipBytes": 16772,
+      "brotliBytes": 14341,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 50,
+      "images": [],
+      "web_gz": "assets/Explosion_Small_v1.glb.gz",
+      "web_br": "assets/Explosion_Small_v1.glb.br"
+    }
+  },
+  "clips": {
+    "Bomb_Fuse_v1": {
+      "clip": "Bomb_Fuse_v1",
+      "duration_s": 8,
+      "channels": 3
+    },
+    "Explosion_House_v1": {
+      "clip": "Explosion_House_v1",
+      "duration_s": 8,
+      "channels": 92
+    },
+    "Explosion_Small_v1": {
+      "clip": "Explosion_Small_v1",
+      "duration_s": 8,
+      "channels": 24
+    }
+  },
+  "playback": {
+    "module": "puzzle-effects-controller.mjs",
+    "function": "createPuzzleEffect(THREE,gltf)",
+    "usage": "const fx=createPuzzleEffect(THREE,gltf); scene.add(fx.scene); fx.seek(seconds); // または fx.update(deltaSeconds)",
+    "required_for_smoke_fade": true,
+    "reason": "標準glTFでは材質の透明度をアニメーションできないため、煙の上昇・拡縮はGLB、4〜8秒の透明度は付属モジュールで再現。",
+    "depth_write": "4秒まではtrue、その後false",
+    "replay": "seek(0)で戻す。8秒で非表示。ループしない。"
+  },
+  "limits": [
+    "物語、狼、家の消去、音声、衝突判定は含まない。",
+    "煙は18個／12個の単純メッシュ。大量の粒子を使わない。"
+  ]
+}

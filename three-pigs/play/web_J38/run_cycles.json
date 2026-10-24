@@ -1,0 +1,290 @@
+{
+  "pig_straw": {
+    "nominalHeight": 1.35,
+    "pixelsPerMetre": 600,
+    "canvas": [
+      1024,
+      1024
+    ],
+    "anchor": [
+      512,
+      971
+    ],
+    "cycleDistanceMetres": 1.6,
+    "source": "J71 fear torso with unchanged approved J68 spiral mechanism",
+    "frames": [
+      {
+        "index": 0,
+        "url": "./escape_straw/run_00.png",
+        "bounds": [
+          201,
+          151,
+          858,
+          970
+        ]
+      },
+      {
+        "index": 1,
+        "url": "./escape_straw/run_01.png",
+        "bounds": [
+          201,
+          148,
+          881,
+          969
+        ]
+      },
+      {
+        "index": 2,
+        "url": "./escape_straw/run_02.png",
+        "bounds": [
+          201,
+          148,
+          875,
+          971
+        ]
+      },
+      {
+        "index": 3,
+        "url": "./escape_straw/run_03.png",
+        "bounds": [
+          201,
+          148,
+          881,
+          973
+        ]
+      },
+      {
+        "index": 4,
+        "url": "./escape_straw/run_04.png",
+        "bounds": [
+          201,
+          151,
+          858,
+          961
+        ]
+      },
+      {
+        "index": 5,
+        "url": "./escape_straw/run_05.png",
+        "bounds": [
+          201,
+          148,
+          881,
+          957
+        ]
+      },
+      {
+        "index": 6,
+        "url": "./escape_straw/run_06.png",
+        "bounds": [
+          201,
+          148,
+          875,
+          964
+        ]
+      },
+      {
+        "index": 7,
+        "url": "./escape_straw/run_07.png",
+        "bounds": [
+          201,
+          148,
+          881,
+          965
+        ]
+      }
+    ]
+  },
+  "pig_wood": {
+    "nominalHeight": 1.35,
+    "pixelsPerMetre": 600,
+    "canvas": [
+      1024,
+      1024
+    ],
+    "anchor": [
+      512,
+      971
+    ],
+    "cycleDistanceMetres": 1.6,
+    "source": "J71 fear torso with unchanged approved J68 spiral mechanism",
+    "frames": [
+      {
+        "index": 0,
+        "url": "./escape_wood/run_00.png",
+        "bounds": [
+          230,
+          175,
+          888,
+          970
+        ]
+      },
+      {
+        "index": 1,
+        "url": "./escape_wood/run_01.png",
+        "bounds": [
+          229,
+          161,
+          897,
+          969
+        ]
+      },
+      {
+        "index": 2,
+        "url": "./escape_wood/run_02.png",
+        "bounds": [
+          239,
+          163,
+          906,
+          971
+        ]
+      },
+      {
+        "index": 3,
+        "url": "./escape_wood/run_03.png",
+        "bounds": [
+          229,
+          161,
+          897,
+          973
+        ]
+      },
+      {
+        "index": 4,
+        "url": "./escape_wood/run_04.png",
+        "bounds": [
+          230,
+          175,
+          888,
+          961
+        ]
+      },
+      {
+        "index": 5,
+        "url": "./escape_wood/run_05.png",
+        "bounds": [
+          229,
+          161,
+          897,
+          957
+        ]
+      },
+      {
+        "index": 6,
+        "url": "./escape_wood/run_06.png",
+        "bounds": [
+          239,
+          163,
+          906,
+          964
+        ]
+      },
+      {
+        "index": 7,
+        "url": "./escape_wood/run_07.png",
+        "bounds": [
+          229,
+          161,
+          897,
+          965
+        ]
+      }
+    ]
+  },
+  "pig_brick": {
+    "nominalHeight": 1.35,
+    "pixelsPerMetre": 600,
+    "canvas": [
+      1024,
+      1024
+    ],
+    "anchor": [
+      512,
+      971
+    ],
+    "cycleDistanceMetres": 1.6,
+    "source": "J70 matching torso + unchanged approved J68 ring/composition",
+    "frames": [
+      {
+        "index": 0,
+        "url": "./run_brick/run_00.png",
+        "bounds": [
+          254,
+          205,
+          845,
+          969
+        ]
+      },
+      {
+        "index": 1,
+        "url": "./run_brick/run_01.png",
+        "bounds": [
+          255,
+          207,
+          857,
+          968
+        ]
+      },
+      {
+        "index": 2,
+        "url": "./run_brick/run_02.png",
+        "bounds": [
+          255,
+          212,
+          868,
+          970
+        ]
+      },
+      {
+        "index": 3,
+        "url": "./run_brick/run_03.png",
+        "bounds": [
+          244,
+          207,
+          857,
+          971
+        ]
+      },
+      {
+        "index": 4,
+        "url": "./run_brick/run_04.png",
+        "bounds": [
+          268,
+          205,
+          845,
+          960
+        ]
+      },
+      {
+        "index": 5,
+        "url": "./run_brick/run_05.png",
+        "bounds": [
+          243,
+          207,
+          857,
+          956
+        ]
+      },
+      {
+        "index": 6,
+        "url": "./run_brick/run_06.png",
+        "bounds": [
+          244,
+          212,
+          868,
+          963
+        ]
+      },
+      {
+        "index": 7,
+        "url": "./run_brick/run_07.png",
+        "bounds": [
+          261,
+          207,
+          857,
+          964
+        ]
+      }
+    ]
+  }
+}

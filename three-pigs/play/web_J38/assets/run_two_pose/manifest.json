@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "authoredView": "right-facing oblique only",
+  "relativeBodyYawDegrees": 45,
+  "frames": [
+    {
+      "kind": "straw",
+      "phase": 0,
+      "url": "./assets/run_two_pose/straw_0.png",
+      "bounds": [
+        181,
+        48,
+        1073,
+        1169
+      ],
+      "footAnchor": [
+        625,
+        1169
+      ],
+      "heightPixels": 1121,
+      "sourceSha256": "0dd36c6a2263659b59728291b6b37c0d7c4e93c91923530ed8b9ddc63c55550f",
+      "runtimeSha256": "4c439db2b41a42f371bd20c7cd9c8ba87c91c59b462097244e9595822c456114",
+      "opaqueRgbUnchanged": true,
+      "lowAlphaCutoff": 32
+    },
+    {
+      "kind": "straw",
+      "phase": 1,
+      "url": "./assets/run_two_pose/straw_1.png",
+      "bounds": [
+        177,
+        50,
+        1072,
+        1166
+      ],
+      "footAnchor": [
+        625,
+        1166
+      ],
+      "heightPixels": 1116,
+      "sourceSha256": "5983cc599033d22035dceca6489061b4b1d58cddcd32d7d39ffac926e9c11836",
+      "runtimeSha256": "e31ee859243e463b9136e040bf5f71ca271800ee7d783a0a114adc5bffc5e089",
+      "opaqueRgbUnchanged": true,
+      "lowAlphaCutoff": 32
+    },
+    {
+      "kind": "wood",
+      "phase": 0,
+      "url": "./assets/run_two_pose/wood_0.png",
+      "bounds": [
+        179,
+        160,
+        1069,
+        1171
+      ],
+      "footAnchor": [
+        625,
+        1171
+      ],
+      "heightPixels": 1011,
+      "sourceSha256": "1dcdae7cbd2fba2a0da677c961c7de19173f2efcd95544d74fba41c6b83b9777",
+      "runtimeSha256": "2a8792ca52543e906ea3110ea63bdb50f0440566cf5de55020a9ec3988910c55",
+      "opaqueRgbUnchanged": true,
+      "lowAlphaCutoff": 32
+    },
+    {
+      "kind": "wood",
+      "phase": 1,
+      "url": "./assets/run_two_pose/wood_1.png",
+      "bounds": [
+        178,
+        135,
+        1044,
+        1167
+      ],
+      "footAnchor": [
+        625,
+        1167
+      ],
+      "heightPixels": 1032,
+      "sourceSha256": "17f9289172b04ac5995bc794f99ccf39df93322f42e20b9d4c4d20be6fb9bbcc",
+      "runtimeSha256": "08abc88f9b0d9ac6ce02ec25a737ab9b9a0a8c49c139f303f1352a0c5edaefc8",
+      "opaqueRgbUnchanged": true,
+      "lowAlphaCutoff": 32
+    }
+  ]
+}

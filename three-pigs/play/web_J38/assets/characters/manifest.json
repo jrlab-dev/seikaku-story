@@ -1,0 +1,1632 @@
+{
+  "schema": 1,
+  "atlasLayout": [
+    4,
+    2
+  ],
+  "directionConvention": "row-major; left/right describe nose direction on screen; view index is round((bodyYaw-cameraAzimuth)/45deg)",
+  "supportedElevationDegrees": [
+    -15,
+    25
+  ],
+  "walkFramesAvailable": false,
+  "overheadArtAvailable": false,
+  "visualValidation": "pending GUI access",
+  "characters": [
+    {
+      "id": "pig_straw",
+      "label": "長男",
+      "url": "./assets/characters/pig_straw.png",
+      "heightMetres": 1.35,
+      "libraryId": "libfile_0d3029f853e88191b57c3298b0ac1ee7",
+      "version": 0,
+      "sha256": "ede62ca8edbc7911ea35fead5a2a9bd5c799562417e9924983c40a3d6feea3ac",
+      "atlasSize": [
+        1536,
+        1024
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "direction": "front",
+          "nominalCell": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            40,
+            40,
+            339,
+            472
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            336,
+            469
+          ],
+          "globalAlphaBounds": [
+            43,
+            43,
+            376,
+            509
+          ],
+          "crop": [
+            0,
+            0,
+            339,
+            472
+          ],
+          "footAnchor": [
+            172.0,
+            469.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 466.0,
+          "uvRect": [
+            0.026041666666666668,
+            0.5,
+            0.24674479166666666,
+            0.9609375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 1,
+          "direction": "screen_right_front",
+          "nominalCell": [
+            384,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            446,
+            35,
+            310,
+            477
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            307,
+            474
+          ],
+          "globalAlphaBounds": [
+            449,
+            38,
+            753,
+            509
+          ],
+          "crop": [
+            0,
+            0,
+            310,
+            477
+          ],
+          "footAnchor": [
+            156.0,
+            474.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 471.0,
+          "uvRect": [
+            0.2903645833333333,
+            0.5,
+            0.4921875,
+            0.9658203125
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 2,
+          "direction": "screen_right",
+          "nominalCell": [
+            768,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            828,
+            35,
+            259,
+            477
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            256,
+            474
+          ],
+          "globalAlphaBounds": [
+            831,
+            38,
+            1084,
+            509
+          ],
+          "crop": [
+            0,
+            0,
+            259,
+            477
+          ],
+          "footAnchor": [
+            137.0,
+            474.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 471.0,
+          "uvRect": [
+            0.5390625,
+            0.5,
+            0.7076822916666666,
+            0.9658203125
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 3,
+          "direction": "screen_right_back",
+          "nominalCell": [
+            1152,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            1203,
+            33,
+            301,
+            479
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            298,
+            476
+          ],
+          "globalAlphaBounds": [
+            1206,
+            36,
+            1501,
+            509
+          ],
+          "crop": [
+            0,
+            0,
+            301,
+            479
+          ],
+          "footAnchor": [
+            148.5,
+            476.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 473.0,
+          "uvRect": [
+            0.783203125,
+            0.5,
+            0.9791666666666666,
+            0.9677734375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 4,
+          "direction": "back",
+          "nominalCell": [
+            0,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            52,
+            522,
+            330,
+            464
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            327,
+            461
+          ],
+          "globalAlphaBounds": [
+            55,
+            525,
+            379,
+            983
+          ],
+          "crop": [
+            0,
+            0,
+            330,
+            464
+          ],
+          "footAnchor": [
+            165.5,
+            461.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 458.0,
+          "uvRect": [
+            0.033854166666666664,
+            0.037109375,
+            0.24869791666666666,
+            0.490234375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 5,
+          "direction": "screen_left_back",
+          "nominalCell": [
+            384,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            444,
+            522,
+            285,
+            465
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            282,
+            462
+          ],
+          "globalAlphaBounds": [
+            447,
+            525,
+            726,
+            984
+          ],
+          "crop": [
+            0,
+            0,
+            285,
+            465
+          ],
+          "footAnchor": [
+            145.0,
+            462.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 459.0,
+          "uvRect": [
+            0.2890625,
+            0.0361328125,
+            0.474609375,
+            0.490234375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 6,
+          "direction": "screen_left",
+          "nominalCell": [
+            768,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            830,
+            519,
+            255,
+            470
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            252,
+            467
+          ],
+          "globalAlphaBounds": [
+            833,
+            522,
+            1082,
+            986
+          ],
+          "crop": [
+            0,
+            0,
+            255,
+            470
+          ],
+          "footAnchor": [
+            120.5,
+            467.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 464.0,
+          "uvRect": [
+            0.5403645833333334,
+            0.0341796875,
+            0.7063802083333334,
+            0.4931640625
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 7,
+          "direction": "screen_left_front",
+          "nominalCell": [
+            1152,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            1177,
+            523,
+            310,
+            469
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            307,
+            466
+          ],
+          "globalAlphaBounds": [
+            1180,
+            526,
+            1484,
+            989
+          ],
+          "crop": [
+            0,
+            0,
+            310,
+            469
+          ],
+          "footAnchor": [
+            150.0,
+            466.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 463.0,
+          "uvRect": [
+            0.7662760416666666,
+            0.03125,
+            0.9680989583333334,
+            0.4892578125
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        }
+      ],
+      "qualityNotes": []
+    },
+    {
+      "id": "pig_wood",
+      "label": "次男",
+      "url": "./assets/characters/pig_wood.png",
+      "heightMetres": 1.2,
+      "libraryId": "libfile_8e0807a145308191a34e46eefd0a290f",
+      "version": 0,
+      "sha256": "c543f088d3b02bf85b872b9176a18ac9e7d838c420df154dbec3bd30626d1488",
+      "atlasSize": [
+        1536,
+        1024
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "direction": "front",
+          "nominalCell": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            39,
+            32,
+            349,
+            480
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            346,
+            477
+          ],
+          "globalAlphaBounds": [
+            42,
+            35,
+            385,
+            509
+          ],
+          "crop": [
+            0,
+            0,
+            349,
+            480
+          ],
+          "footAnchor": [
+            176.0,
+            477.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 474.0,
+          "uvRect": [
+            0.025390625,
+            0.5,
+            0.2526041666666667,
+            0.96875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 1,
+          "direction": "screen_right_front",
+          "nominalCell": [
+            384,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            441,
+            25,
+            305,
+            488
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            302,
+            485
+          ],
+          "globalAlphaBounds": [
+            444,
+            28,
+            743,
+            510
+          ],
+          "crop": [
+            0,
+            0,
+            305,
+            488
+          ],
+          "footAnchor": [
+            154.5,
+            485.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 482.0,
+          "uvRect": [
+            0.287109375,
+            0.4990234375,
+            0.4856770833333333,
+            0.9755859375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 2,
+          "direction": "screen_right",
+          "nominalCell": [
+            768,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            814,
+            23,
+            247,
+            490
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            244,
+            487
+          ],
+          "globalAlphaBounds": [
+            817,
+            26,
+            1058,
+            510
+          ],
+          "crop": [
+            0,
+            0,
+            247,
+            490
+          ],
+          "footAnchor": [
+            118.0,
+            487.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 484.0,
+          "uvRect": [
+            0.5299479166666666,
+            0.4990234375,
+            0.6907552083333334,
+            0.9775390625
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 3,
+          "direction": "screen_right_back",
+          "nominalCell": [
+            1152,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            1145,
+            26,
+            315,
+            484
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            312,
+            481
+          ],
+          "globalAlphaBounds": [
+            1148,
+            29,
+            1457,
+            507
+          ],
+          "crop": [
+            0,
+            0,
+            315,
+            484
+          ],
+          "footAnchor": [
+            156.5,
+            481.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 478.0,
+          "uvRect": [
+            0.7454427083333334,
+            0.501953125,
+            0.9505208333333334,
+            0.974609375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 4,
+          "direction": "back",
+          "nominalCell": [
+            0,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            42,
+            530,
+            341,
+            469
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            338,
+            466
+          ],
+          "globalAlphaBounds": [
+            45,
+            533,
+            380,
+            996
+          ],
+          "crop": [
+            0,
+            0,
+            341,
+            469
+          ],
+          "footAnchor": [
+            171.0,
+            466.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 463.0,
+          "uvRect": [
+            0.02734375,
+            0.0244140625,
+            0.24934895833333334,
+            0.482421875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 5,
+          "direction": "screen_left_back",
+          "nominalCell": [
+            384,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            435,
+            521,
+            289,
+            479
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            286,
+            476
+          ],
+          "globalAlphaBounds": [
+            438,
+            524,
+            721,
+            997
+          ],
+          "crop": [
+            0,
+            0,
+            289,
+            479
+          ],
+          "footAnchor": [
+            144.5,
+            476.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 473.0,
+          "uvRect": [
+            0.283203125,
+            0.0234375,
+            0.4713541666666667,
+            0.4912109375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 6,
+          "direction": "screen_left",
+          "nominalCell": [
+            768,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            810,
+            520,
+            249,
+            483
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            246,
+            480
+          ],
+          "globalAlphaBounds": [
+            813,
+            523,
+            1056,
+            1000
+          ],
+          "crop": [
+            0,
+            0,
+            249,
+            483
+          ],
+          "footAnchor": [
+            127.5,
+            480.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 477.0,
+          "uvRect": [
+            0.52734375,
+            0.0205078125,
+            0.689453125,
+            0.4921875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 7,
+          "direction": "screen_left_front",
+          "nominalCell": [
+            1152,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            1140,
+            521,
+            317,
+            483
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            314,
+            480
+          ],
+          "globalAlphaBounds": [
+            1143,
+            524,
+            1454,
+            1001
+          ],
+          "crop": [
+            0,
+            0,
+            317,
+            483
+          ],
+          "footAnchor": [
+            154.5,
+            480.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 477.0,
+          "uvRect": [
+            0.7421875,
+            0.01953125,
+            0.9485677083333334,
+            0.4912109375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        }
+      ],
+      "qualityNotes": []
+    },
+    {
+      "id": "pig_brick",
+      "label": "三男",
+      "url": "./assets/characters/pig_brick.png",
+      "heightMetres": 1.2,
+      "libraryId": "libfile_1f0503c655e8819190284945d2e4fbdb",
+      "version": 0,
+      "sha256": "3015dfb45fcb39baa23fd93ea9eae2279dc5d3d94dd34432ea269ea132c4b1ce",
+      "atlasSize": [
+        1536,
+        1024
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "direction": "front",
+          "nominalCell": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            39,
+            20,
+            337,
+            481
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            334,
+            478
+          ],
+          "globalAlphaBounds": [
+            42,
+            23,
+            373,
+            498
+          ],
+          "crop": [
+            0,
+            0,
+            337,
+            481
+          ],
+          "footAnchor": [
+            171.0,
+            478.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 475.0,
+          "uvRect": [
+            0.025390625,
+            0.5107421875,
+            0.24479166666666666,
+            0.98046875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 1,
+          "direction": "screen_right_front",
+          "nominalCell": [
+            384,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            451,
+            26,
+            298,
+            476
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            295,
+            473
+          ],
+          "globalAlphaBounds": [
+            454,
+            29,
+            746,
+            499
+          ],
+          "crop": [
+            0,
+            0,
+            298,
+            476
+          ],
+          "footAnchor": [
+            155.5,
+            473.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 470.0,
+          "uvRect": [
+            0.2936197916666667,
+            0.509765625,
+            0.4876302083333333,
+            0.974609375
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 2,
+          "direction": "screen_right",
+          "nominalCell": [
+            768,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            860,
+            18,
+            226,
+            484
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            223,
+            481
+          ],
+          "globalAlphaBounds": [
+            863,
+            21,
+            1083,
+            499
+          ],
+          "crop": [
+            0,
+            0,
+            226,
+            484
+          ],
+          "footAnchor": [
+            111.5,
+            481.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 478.0,
+          "uvRect": [
+            0.5598958333333334,
+            0.509765625,
+            0.70703125,
+            0.982421875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 3,
+          "direction": "screen_right_back",
+          "nominalCell": [
+            1152,
+            0,
+            384,
+            512
+          ],
+          "cell": [
+            1204,
+            24,
+            278,
+            473
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            275,
+            470
+          ],
+          "globalAlphaBounds": [
+            1207,
+            27,
+            1479,
+            494
+          ],
+          "crop": [
+            0,
+            0,
+            278,
+            473
+          ],
+          "footAnchor": [
+            139.0,
+            470.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 467.0,
+          "uvRect": [
+            0.7838541666666666,
+            0.5146484375,
+            0.96484375,
+            0.9765625
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 4,
+          "direction": "back",
+          "nominalCell": [
+            0,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            51,
+            517,
+            331,
+            469
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            328,
+            466
+          ],
+          "globalAlphaBounds": [
+            54,
+            520,
+            379,
+            983
+          ],
+          "crop": [
+            0,
+            0,
+            331,
+            469
+          ],
+          "footAnchor": [
+            162.5,
+            466.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 463.0,
+          "uvRect": [
+            0.033203125,
+            0.037109375,
+            0.24869791666666666,
+            0.4951171875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 5,
+          "direction": "screen_left_back",
+          "nominalCell": [
+            384,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            435,
+            518,
+            298,
+            469
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            295,
+            466
+          ],
+          "globalAlphaBounds": [
+            438,
+            521,
+            730,
+            984
+          ],
+          "crop": [
+            0,
+            0,
+            298,
+            469
+          ],
+          "footAnchor": [
+            148.5,
+            466.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 463.0,
+          "uvRect": [
+            0.283203125,
+            0.0361328125,
+            0.4772135416666667,
+            0.494140625
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 6,
+          "direction": "screen_left",
+          "nominalCell": [
+            768,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            843,
+            517,
+            220,
+            476
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            217,
+            473
+          ],
+          "globalAlphaBounds": [
+            846,
+            520,
+            1060,
+            990
+          ],
+          "crop": [
+            0,
+            0,
+            220,
+            476
+          ],
+          "footAnchor": [
+            106.5,
+            473.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 470.0,
+          "uvRect": [
+            0.548828125,
+            0.0302734375,
+            0.6920572916666666,
+            0.4951171875
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        },
+        {
+          "index": 7,
+          "direction": "screen_left_front",
+          "nominalCell": [
+            1152,
+            512,
+            384,
+            512
+          ],
+          "cell": [
+            1170,
+            518,
+            313,
+            474
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            310,
+            471
+          ],
+          "globalAlphaBounds": [
+            1173,
+            521,
+            1480,
+            989
+          ],
+          "crop": [
+            0,
+            0,
+            313,
+            474
+          ],
+          "footAnchor": [
+            156.5,
+            471.0
+          ],
+          "topY": 3.0,
+          "heightPixels": 468.0,
+          "uvRect": [
+            0.76171875,
+            0.03125,
+            0.9654947916666666,
+            0.494140625
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "largest eight alpha-connected silhouettes; retain original atlas via UV, including parts crossing nominal grid"
+        }
+      ],
+      "qualityNotes": []
+    },
+    {
+      "id": "wolf",
+      "label": "狼",
+      "url": "./assets/characters/wolf_low_ratio.png",
+      "sourcePath": "source/received_wolf_low/exec-127a0362-6635-49e7-845a-9ce92f0d1347.png",
+      "heightMetres": 1.32,
+      "libraryId": "libfile_3351d1e1e8a88191b4c1bc3ef40a8112",
+      "version": 0,
+      "sha256": "7875bc754ac64ca93af3cb49787ca4ef26c9f69cc280707d305a7b0e1d908671",
+      "atlasSize": [
+        1774,
+        887
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "direction": "front",
+          "nominalCell": [
+            0.0,
+            0.0,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            98,
+            35,
+            312,
+            404
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            309,
+            401
+          ],
+          "globalAlphaBounds": [
+            101,
+            38,
+            407,
+            436
+          ],
+          "crop": [
+            0,
+            0,
+            312,
+            404
+          ],
+          "footAnchor": [
+            156.5,
+            401
+          ],
+          "topY": 3,
+          "heightPixels": 398,
+          "uvRect": [
+            0.0552423900789177,
+            0.5050732807215332,
+            0.23111612175873733,
+            0.9605411499436303
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 1,
+          "direction": "screen_right_front",
+          "nominalCell": [
+            443.5,
+            0.0,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            511,
+            35,
+            348,
+            405
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            345,
+            402
+          ],
+          "globalAlphaBounds": [
+            514,
+            38,
+            856,
+            437
+          ],
+          "crop": [
+            0,
+            0,
+            348,
+            405
+          ],
+          "footAnchor": [
+            181.5,
+            402
+          ],
+          "topY": 3,
+          "heightPixels": 399,
+          "uvRect": [
+            0.28804960541149943,
+            0.503945885005637,
+            0.4842164599774521,
+            0.9605411499436303
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 2,
+          "direction": "screen_right",
+          "nominalCell": [
+            887.0,
+            0.0,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            947,
+            34,
+            345,
+            406
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            342,
+            403
+          ],
+          "globalAlphaBounds": [
+            950,
+            37,
+            1289,
+            437
+          ],
+          "crop": [
+            0,
+            0,
+            345,
+            406
+          ],
+          "footAnchor": [
+            145.0,
+            403
+          ],
+          "topY": 3,
+          "heightPixels": 400,
+          "uvRect": [
+            0.5338218714768884,
+            0.503945885005637,
+            0.7282976324689966,
+            0.9616685456595265
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 3,
+          "direction": "screen_right_back",
+          "nominalCell": [
+            1330.5,
+            0.0,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            1378,
+            39,
+            311,
+            400
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            308,
+            397
+          ],
+          "globalAlphaBounds": [
+            1381,
+            42,
+            1686,
+            436
+          ],
+          "crop": [
+            0,
+            0,
+            311,
+            400
+          ],
+          "footAnchor": [
+            154.0,
+            397
+          ],
+          "topY": 3,
+          "heightPixels": 394,
+          "uvRect": [
+            0.7767756482525366,
+            0.5050732807215332,
+            0.9520856820744081,
+            0.9560315670800451
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 4,
+          "direction": "back",
+          "nominalCell": [
+            0.0,
+            443.5,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            98,
+            453,
+            314,
+            389
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            311,
+            386
+          ],
+          "globalAlphaBounds": [
+            101,
+            456,
+            409,
+            839
+          ],
+          "crop": [
+            0,
+            0,
+            314,
+            389
+          ],
+          "footAnchor": [
+            153.5,
+            386
+          ],
+          "topY": 3,
+          "heightPixels": 383,
+          "uvRect": [
+            0.0552423900789177,
+            0.050732807215332576,
+            0.2322435174746336,
+            0.48928974069898534
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 5,
+          "direction": "screen_left_back",
+          "nominalCell": [
+            443.5,
+            443.5,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            545,
+            454,
+            328,
+            389
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            325,
+            386
+          ],
+          "globalAlphaBounds": [
+            548,
+            457,
+            870,
+            840
+          ],
+          "crop": [
+            0,
+            0,
+            328,
+            389
+          ],
+          "footAnchor": [
+            165.0,
+            386
+          ],
+          "topY": 3,
+          "heightPixels": 383,
+          "uvRect": [
+            0.30721533258173617,
+            0.049605411499436314,
+            0.49210822998872605,
+            0.4881623449830891
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 6,
+          "direction": "screen_left",
+          "nominalCell": [
+            887.0,
+            443.5,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            932,
+            446,
+            357,
+            398
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            354,
+            395
+          ],
+          "globalAlphaBounds": [
+            935,
+            449,
+            1286,
+            841
+          ],
+          "crop": [
+            0,
+            0,
+            357,
+            398
+          ],
+          "footAnchor": [
+            201.0,
+            395
+          ],
+          "topY": 3,
+          "heightPixels": 392,
+          "uvRect": [
+            0.5253664036076663,
+            0.04847801578354005,
+            0.7266065388951521,
+            0.4971815107102593
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        },
+        {
+          "index": 7,
+          "direction": "screen_left_front",
+          "nominalCell": [
+            1330.5,
+            443.5,
+            443.5,
+            443.5
+          ],
+          "cell": [
+            1396,
+            453,
+            322,
+            393
+          ],
+          "alpha128Bounds": [
+            3,
+            3,
+            319,
+            390
+          ],
+          "globalAlphaBounds": [
+            1399,
+            456,
+            1715,
+            843
+          ],
+          "crop": [
+            0,
+            0,
+            322,
+            393
+          ],
+          "footAnchor": [
+            152.5,
+            390
+          ],
+          "topY": 3,
+          "heightPixels": 387,
+          "uvRect": [
+            0.7869222096956031,
+            0.046223224351747416,
+            0.9684329199549042,
+            0.48928974069898534
+          ],
+          "alpha128TouchesCellEdge": false,
+          "boundsMethod": "eight independent alpha-connected silhouettes; original pixels retained"
+        }
+      ],
+      "enabled": true,
+      "status": "low_head_ratio_art_received_visual_runtime_pending",
+      "plannedScale": {
+        "pigReferenceMetres": 1.2,
+        "uniformFactor": 1.1,
+        "startingHeightMetres": 1.32,
+        "aspectRatioPreserved": true,
+        "independentLimbStretch": false
+      },
+      "qualityNotes": [
+        "original atlas unmodified",
+        "GPU edge/colour/direction verification pending GUI access",
+        "walk and overhead art unavailable"
+      ],
+      "supersedesLibraryId": "libfile_805aea41d5e8819194033c561f82aa5b"
+    }
+  ]
+}

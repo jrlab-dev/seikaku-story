@@ -1,0 +1,2001 @@
+{
+  "schema": 1,
+  "status": "素材制作。物語の組み込みは依頼元担当。",
+  "coordinates": "glTF: +Y上、入口+Z、原点は敷地中心の地面。拡大縮小不要。",
+  "houses": {
+    "treehouse": {
+      "static": "assets/TreehouseHouse.glb",
+      "root": "TreehouseHouse",
+      "construction_manifest": "Treehouse_construction.json",
+      "sturdiness": 1,
+      "footprint_m": [
+        5.377,
+        5.788
+      ],
+      "top_m": 7.156,
+      "bounds_local_gltf": {
+        "min": [
+          -2.6124532222747803,
+          -0.06900045275688171,
+          -3.0282998085021973
+        ],
+        "max": [
+          2.764524221420288,
+          7.155642032623291,
+          2.76019024848938
+        ]
+      },
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          2.42,
+          1.3
+        ],
+        "width_m": 1.24,
+        "height_m": 1.78
+      },
+      "reactions": {
+        "Treehouse_BlowAway_v1": {
+          "file": "assets/Treehouse_BlowAway_v1.glb",
+          "clip": "Treehouse_BlowAway_v1",
+          "duration_s": 8,
+          "meaning": "小屋・床・支柱・望遠鏡が飛ぶ。木・葉・ブランコは残り、はしごは支えを失って地面へ倒れる。小屋は終盤に縮んで消える。"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ],
+      "interior": "床は高さ2.42m。はしごで上がる。入口の高さは1.78m。"
+    },
+    "karakuri": {
+      "static": "assets/KarakuriHouse.glb",
+      "root": "KarakuriHouse",
+      "construction_manifest": "Karakuri_construction.json",
+      "sturdiness": 3,
+      "footprint_m": [
+        6.084,
+        6.194
+      ],
+      "top_m": 5.8,
+      "bounds_local_gltf": {
+        "min": [
+          -2.990000009536743,
+          0.0,
+          -2.732328176498413
+        ],
+        "max": [
+          3.0941267013549805,
+          5.799999713897705,
+          3.461622953414917
+        ]
+      },
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          0.28,
+          2.35
+        ],
+        "width_m": 1.56,
+        "height_m": 2.55
+      },
+      "reactions": {
+        "Karakuri_GustHold_v1": {
+          "file": "assets/Karakuri_GustHold_v1.glb",
+          "clip": "Karakuri_GustHold_v1",
+          "duration_s": 8,
+          "meaning": "建物は一度だけ小さく振動。見張りロボの腕が動く。"
+        },
+        "Karakuri_Door_v1": {
+          "file": "assets/Karakuri_Door_v1.glb",
+          "clip": "Karakuri_Door_v1",
+          "duration_s": 8,
+          "meaning": "左右の自動扉が1〜2秒で開き、5〜6秒で閉まる。"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ],
+      "chimney": {
+        "note": "承認済みれんがの家と同じ煙突。開口と経路を継承。",
+        "center_local_gltf": [
+          1.21,
+          5.23,
+          -1.0
+        ]
+      }
+    },
+    "bunker": {
+      "static": "assets/BunkerHouse.glb",
+      "root": "BunkerHouse",
+      "construction_manifest": "Bunker_construction.json",
+      "sturdiness": 4,
+      "footprint_m": [
+        4.319,
+        3.338
+      ],
+      "top_m": 1.14,
+      "bounds_local_gltf": {
+        "min": [
+          -2.2239980697631836,
+          -0.699999988079071,
+          -1.5939230918884277
+        ],
+        "max": [
+          2.0951056480407715,
+          1.1399999856948853,
+          1.7439230680465698
+        ]
+      },
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          0.44,
+          0.5
+        ],
+        "width_m": 1.76,
+        "height_m": null
+      },
+      "reactions": {
+        "Bunker_Hatch_v1": {
+          "file": "assets/Bunker_Hatch_v1.glb",
+          "clip": "Bunker_Hatch_v1",
+          "duration_s": 8,
+          "meaning": "ハッチが開き、待ってから閉まる。"
+        },
+        "Bunker_GustHold_v1": {
+          "file": "assets/Bunker_GustHold_v1.glb",
+          "clip": "Bunker_GustHold_v1",
+          "duration_s": 8,
+          "meaning": "建物は動かず、潜望鏡だけ1回転する。"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ],
+      "terrain_note": "地面の下へ出入りさせる場合、中心[-0.65,0,0.5]・半径0.88mの地面開口が必要。素材には階段と暗い底面がある。閉じた通常表示では地面加工不要。"
+    },
+    "castle": {
+      "static": "assets/CastleHouse.glb",
+      "root": "CastleHouse",
+      "construction_manifest": "Castle_construction.json",
+      "sturdiness": 5,
+      "footprint_m": [
+        6.22,
+        5.73
+      ],
+      "top_m": 6.45,
+      "bounds_local_gltf": {
+        "min": [
+          -3.109999895095825,
+          -0.5199999809265137,
+          -2.6599998474121094
+        ],
+        "max": [
+          3.109999895095825,
+          6.449999809265137,
+          3.069999933242798
+        ]
+      },
+      "entrance": {
+        "center_local_gltf": [
+          -0.65,
+          0.28,
+          1.96
+        ],
+        "width_m": 1.28,
+        "height_m": 2.3
+      },
+      "reactions": {
+        "Castle_GustHold_v1": {
+          "file": "assets/Castle_GustHold_v1.glb",
+          "clip": "Castle_GustHold_v1",
+          "duration_s": 8,
+          "meaning": "建物は動かず、旗だけはためく。"
+        }
+      },
+      "wind_direction_gltf": [
+        0,
+        0,
+        -1
+      ],
+      "interior": "窓の奥に4室（前1室・後3室）。後ろ右の赤い寝具と狼の紋章が客間。"
+    }
+  },
+  "controller": "construction-controller.mjs と house-collapse-controller.mjs を使用。各クリップ8秒。",
+  "files": {
+    "TreehouseHouse": {
+      "name": "TreehouseHouse",
+      "sourceSha256": "b00359e2f5d6470f77e2834daa48447ee7fb9bfbfcfcda6ee3c64c51107ad48a",
+      "sourceBytes": 10879088,
+      "packedSha256": "8a0e93064618a0ba9e82aed58f16557a587e46a1b70c75045302e79fdc9d51d2",
+      "packedBytes": 3152320,
+      "gzipBytes": 1661268,
+      "brotliBytes": 1315717,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 67,
+      "images": [
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        },
+        {
+          "uri": "textures/fd3fb5c2e43e0efacde9555c.webp",
+          "originalSha256": "fd3fb5c2e43e0efacde9555ce36913008b590fbccc4739d343002ad2dd994795"
+        },
+        {
+          "uri": "textures/a1b40d7e153ad26a5f6bc601.webp",
+          "originalSha256": "a1b40d7e153ad26a5f6bc601e329250e454a0ab0dd9988aa8005ee53dc594f00"
+        },
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/TreehouseHouse.glb",
+      "source_bytes": 10879088,
+      "sha256": "b00359e2f5d6470f77e2834daa48447ee7fb9bfbfcfcda6ee3c64c51107ad48a",
+      "web_gz": "animal/delivery/web_J38/assets/TreehouseHouse.glb.gz",
+      "gz_bytes": 1661268,
+      "web_br": "animal/delivery/web_J38/assets/TreehouseHouse.glb.br",
+      "br_bytes": 1315717,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "KarakuriHouse": {
+      "name": "KarakuriHouse",
+      "sourceSha256": "4b7f5ac8a0bdf7dbc9b3e0aa58497804e70645caebe7768299db6b6e5661f9a4",
+      "sourceBytes": 69821560,
+      "packedSha256": "fe5667e1dbeeff51e962a7c83bfb23c88ee564928d27fe2cc205ea5902ab9f15",
+      "packedBytes": 8092800,
+      "gzipBytes": 5968798,
+      "brotliBytes": 4678469,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 366,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/d3475349fe898f1dc924fe24.webp",
+          "originalSha256": "d3475349fe898f1dc924fe243fac26d1f53ac24a1230768bb5af84b861d8c302"
+        },
+        {
+          "uri": "textures/574cd4a470626edf7d33f863.webp",
+          "originalSha256": "574cd4a470626edf7d33f8635dfec18d7e50404d4df90dca1c49b08b252a46ff"
+        },
+        {
+          "uri": "textures/ecbbd1648b675c153852f8ac.webp",
+          "originalSha256": "ecbbd1648b675c153852f8ac1af18da13a9b2623df41d76d6fc5354b79171670"
+        },
+        {
+          "uri": "textures/a7d9924006a2d9084f73f9cb.webp",
+          "originalSha256": "a7d9924006a2d9084f73f9cb6a23fe6908bc2b231e94eca01fabc9f76be97d88"
+        },
+        {
+          "uri": "textures/972a78f020b8d8feef638cf2.webp",
+          "originalSha256": "972a78f020b8d8feef638cf272f0d8356d9bc10060b9510a87d872613605cf8b"
+        },
+        {
+          "uri": "textures/aae95dad99ed9e121640c613.webp",
+          "originalSha256": "aae95dad99ed9e121640c613bc996c986269a89ef3083567ab7e5b629c29c600"
+        },
+        {
+          "uri": "textures/cd26e0601b128efc73bc0b64.webp",
+          "originalSha256": "cd26e0601b128efc73bc0b645d11ced978ffd564dc33ab50dd73f1e52df5db72"
+        },
+        {
+          "uri": "textures/58ca32b1fd1be6717a1935b8.webp",
+          "originalSha256": "58ca32b1fd1be6717a1935b844f7e0f9824e9a01a53b4ea191bbc75c8dfe3116"
+        },
+        {
+          "uri": "textures/b1a7d91dd7a39868e1c7e98b.webp",
+          "originalSha256": "b1a7d91dd7a39868e1c7e98bbc336718b4dbb613060af7eea356fba82ef62bbd"
+        },
+        {
+          "uri": "textures/294e2d63057e4357755a8093.webp",
+          "originalSha256": "294e2d63057e4357755a8093f3f49bc872d05d94e02f32968a8fd092663bd727"
+        },
+        {
+          "uri": "textures/f1532a0ead55cae5365723b6.webp",
+          "originalSha256": "f1532a0ead55cae5365723b627fd74612e47467e1e30c968f03f2e6df701d33e"
+        },
+        {
+          "uri": "textures/c5237a76f74fe42c6f0f46d7.webp",
+          "originalSha256": "c5237a76f74fe42c6f0f46d726a0ed19d45ab30c5131a637f92aa422e5b801dd"
+        },
+        {
+          "uri": "textures/2c41f90a5b12eff1eacaecfe.webp",
+          "originalSha256": "2c41f90a5b12eff1eacaecfe663117e520aa74c43949d3f5c583f0ac86f101c0"
+        },
+        {
+          "uri": "textures/d3f6099e30f93199d298fc96.webp",
+          "originalSha256": "d3f6099e30f93199d298fc9648916d77aa5bb086258f30523f95092fcf266919"
+        },
+        {
+          "uri": "textures/b75453ae00b8723d5fa1ece5.webp",
+          "originalSha256": "b75453ae00b8723d5fa1ece5fe4710945e6e6e4e2a3a11b878ea3817d460105d"
+        },
+        {
+          "uri": "textures/d7748f97eb52760a1369b367.webp",
+          "originalSha256": "d7748f97eb52760a1369b367a06897a7ac0d7aabb97bec81a90da0e02d41ac05"
+        },
+        {
+          "uri": "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+          "originalSha256": "ea9e7ff62ebe4d17be1dc1a27900bbbe60493ceb05b09764c8132567e5049c96"
+        },
+        {
+          "uri": "textures/bc698bedbe52fc30cfa891e2.webp",
+          "originalSha256": "bc698bedbe52fc30cfa891e21651d6df0cd6a241ff24aca95094d243f1b0c7f2"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/fd3fb5c2e43e0efacde9555c.webp",
+          "originalSha256": "fd3fb5c2e43e0efacde9555ce36913008b590fbccc4739d343002ad2dd994795"
+        },
+        {
+          "uri": "textures/a1b40d7e153ad26a5f6bc601.webp",
+          "originalSha256": "a1b40d7e153ad26a5f6bc601e329250e454a0ab0dd9988aa8005ee53dc594f00"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/739b68416d910695653104dc.webp",
+          "originalSha256": "739b68416d910695653104dc2433ce178587ac00df2f988810627fce97b9feed"
+        },
+        {
+          "uri": "textures/ea2fde5bcb89f497d9dd4658.webp",
+          "originalSha256": "ea2fde5bcb89f497d9dd4658308c821ae3157b58bebf1880b14e9f07c10ae2cd"
+        },
+        {
+          "uri": "textures/65d153f46b95cbe0b4ccc016.webp",
+          "originalSha256": "65d153f46b95cbe0b4ccc0167d41ad6c0c0d743460ade311b0098599d0903ae4"
+        },
+        {
+          "uri": "textures/b69f1c434531871127c7227f.webp",
+          "originalSha256": "b69f1c434531871127c7227f8abe3b46ee79c5d471f7a78507884c082de5dbfa"
+        },
+        {
+          "uri": "textures/bdc38afd7f42cd2166d47b05.webp",
+          "originalSha256": "bdc38afd7f42cd2166d47b054faf4b5aea38f5b0068147b3f66915cca310a17e"
+        },
+        {
+          "uri": "textures/9f590afdd7af0033740806fa.webp",
+          "originalSha256": "9f590afdd7af0033740806fa45602ce35cd4690020ed8fb59d691f8d881b7031"
+        },
+        {
+          "uri": "textures/472ab989f878d7657c0767a4.webp",
+          "originalSha256": "472ab989f878d7657c0767a43f7176a5f48527578d476151362c0034ad2c9a38"
+        },
+        {
+          "uri": "textures/7c6889d46fc946292a000abb.webp",
+          "originalSha256": "7c6889d46fc946292a000abb0a56950356c65c5516ba213b8c6ff62ec4e1c912"
+        },
+        {
+          "uri": "textures/df2e4f35636ab295082d8381.webp",
+          "originalSha256": "df2e4f35636ab295082d8381d01720662d8b45efa30b5282e1f5af4b3bb98107"
+        },
+        {
+          "uri": "textures/8cd4309b1a2614b0123d5aa0.webp",
+          "originalSha256": "8cd4309b1a2614b0123d5aa0bf21ce2ea1dd045655bdbf26ea96d4617fc2b534"
+        },
+        {
+          "uri": "textures/dd87fca1fae5b203e2017fe9.webp",
+          "originalSha256": "dd87fca1fae5b203e2017fe9dd7452b90f35deddd341d51931084de00cf5ca41"
+        },
+        {
+          "uri": "textures/f5a7ce0c455eedfb685d6cb5.webp",
+          "originalSha256": "f5a7ce0c455eedfb685d6cb531be55928ebe2570cb98dd7125dfd1edb8072be3"
+        },
+        {
+          "uri": "textures/c9ee13ff0571912c947cc230.webp",
+          "originalSha256": "c9ee13ff0571912c947cc230c397ff6603b66d2ced98d4dd514f131410bb003a"
+        },
+        {
+          "uri": "textures/4f1379ea27135b40d922e4af.webp",
+          "originalSha256": "4f1379ea27135b40d922e4af83e1a891e34dad7579a78eccfea6aa980f751587"
+        },
+        {
+          "uri": "textures/597af1ba0aac3f849ef45cb5.webp",
+          "originalSha256": "597af1ba0aac3f849ef45cb5a76a8849f2e6b02ab2c3887780f2435d66f97d52"
+        },
+        {
+          "uri": "textures/2f1af8ea790e75219a45eaf3.webp",
+          "originalSha256": "2f1af8ea790e75219a45eaf30cc1e243bc9093fb6c7c909d4126b5f7a0caeee2"
+        },
+        {
+          "uri": "textures/8609d86d4ac67741e418cb9c.webp",
+          "originalSha256": "8609d86d4ac67741e418cb9cc0614b9051cd811a94d0fd11305142bc5fc76b4b"
+        },
+        {
+          "uri": "textures/d0c66d334dab8558bf0eb51b.webp",
+          "originalSha256": "d0c66d334dab8558bf0eb51b172e8d61c5c9b03bdacdea342717d6aef25aed12"
+        },
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/KarakuriHouse.glb",
+      "source_bytes": 69821560,
+      "sha256": "4b7f5ac8a0bdf7dbc9b3e0aa58497804e70645caebe7768299db6b6e5661f9a4",
+      "web_gz": "animal/delivery/web_J38/assets/KarakuriHouse.glb.gz",
+      "gz_bytes": 5968798,
+      "web_br": "animal/delivery/web_J38/assets/KarakuriHouse.glb.br",
+      "br_bytes": 4678469,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/294e2d63057e4357755a8093.webp",
+        "textures/2c41f90a5b12eff1eacaecfe.webp",
+        "textures/2f1af8ea790e75219a45eaf3.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/472ab989f878d7657c0767a4.webp",
+        "textures/4f1379ea27135b40d922e4af.webp",
+        "textures/574cd4a470626edf7d33f863.webp",
+        "textures/58ca32b1fd1be6717a1935b8.webp",
+        "textures/597af1ba0aac3f849ef45cb5.webp",
+        "textures/65d153f46b95cbe0b4ccc016.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/739b68416d910695653104dc.webp",
+        "textures/7c6889d46fc946292a000abb.webp",
+        "textures/8609d86d4ac67741e418cb9c.webp",
+        "textures/8cd4309b1a2614b0123d5aa0.webp",
+        "textures/972a78f020b8d8feef638cf2.webp",
+        "textures/9f590afdd7af0033740806fa.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/a7d9924006a2d9084f73f9cb.webp",
+        "textures/aae95dad99ed9e121640c613.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/b1a7d91dd7a39868e1c7e98b.webp",
+        "textures/b69f1c434531871127c7227f.webp",
+        "textures/b75453ae00b8723d5fa1ece5.webp",
+        "textures/bc698bedbe52fc30cfa891e2.webp",
+        "textures/bdc38afd7f42cd2166d47b05.webp",
+        "textures/c5237a76f74fe42c6f0f46d7.webp",
+        "textures/c9ee13ff0571912c947cc230.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/cd26e0601b128efc73bc0b64.webp",
+        "textures/d0c66d334dab8558bf0eb51b.webp",
+        "textures/d3475349fe898f1dc924fe24.webp",
+        "textures/d3f6099e30f93199d298fc96.webp",
+        "textures/d7748f97eb52760a1369b367.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dd87fca1fae5b203e2017fe9.webp",
+        "textures/df2e4f35636ab295082d8381.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/ea2fde5bcb89f497d9dd4658.webp",
+        "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+        "textures/ecbbd1648b675c153852f8ac.webp",
+        "textures/f1532a0ead55cae5365723b6.webp",
+        "textures/f5a7ce0c455eedfb685d6cb5.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "BunkerHouse": {
+      "name": "BunkerHouse",
+      "sourceSha256": "e3e92b02a19883c40eff091f220291b084e9219526ee87a34538e0109525b5b8",
+      "sourceBytes": 4993396,
+      "packedSha256": "4e022c32aa68b26b63ae29c22db86a5dbd2b692a7b032b106f46db2caa79c0f7",
+      "packedBytes": 356360,
+      "gzipBytes": 171715,
+      "brotliBytes": 126051,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 66,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/0320297cc9602394af592d6b.webp",
+          "originalSha256": "0320297cc9602394af592d6bb55df453cefdff4de58a83bb088d48b0c5727c8c"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/904c56d8cb20416245ba1b2d.webp",
+          "originalSha256": "904c56d8cb20416245ba1b2d0b438eefc72667185f42b1227589ca095e1a988c"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/a173fc996b9f982abcb561a5.webp",
+          "originalSha256": "a173fc996b9f982abcb561a527d5c4f1983516dbecbeba2e27618894f3c4c037"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/BunkerHouse.glb",
+      "source_bytes": 4993396,
+      "sha256": "e3e92b02a19883c40eff091f220291b084e9219526ee87a34538e0109525b5b8",
+      "web_gz": "animal/delivery/web_J38/assets/BunkerHouse.glb.gz",
+      "gz_bytes": 171715,
+      "web_br": "animal/delivery/web_J38/assets/BunkerHouse.glb.br",
+      "br_bytes": 126051,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/0320297cc9602394af592d6b.webp",
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/904c56d8cb20416245ba1b2d.webp",
+        "textures/a173fc996b9f982abcb561a5.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp"
+      ]
+    },
+    "CastleHouse": {
+      "name": "CastleHouse",
+      "sourceSha256": "d481be7461f82360d2053ceb25bf7de000de754a24a77fafd5cd81db05b8bc9f",
+      "sourceBytes": 7348772,
+      "packedSha256": "ec42fe159ad37a8051e9a879e39a3694a82d54f0944a8f5924476881ef39b9be",
+      "packedBytes": 1907940,
+      "gzipBytes": 885053,
+      "brotliBytes": 396676,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 144,
+      "images": [
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        },
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/CastleHouse.glb",
+      "source_bytes": 7348772,
+      "sha256": "d481be7461f82360d2053ceb25bf7de000de754a24a77fafd5cd81db05b8bc9f",
+      "web_gz": "animal/delivery/web_J38/assets/CastleHouse.glb.gz",
+      "gz_bytes": 885053,
+      "web_br": "animal/delivery/web_J38/assets/CastleHouse.glb.br",
+      "br_bytes": 396676,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp"
+      ]
+    },
+    "Treehouse_BlowAway_v1": {
+      "name": "Treehouse_BlowAway_v1",
+      "sourceSha256": "f203fe5e6cbc493d3dfadcd1b17f33208c9eb67c7349798b31e2e0d77628d7b2",
+      "sourceBytes": 10895184,
+      "packedSha256": "d9dafec92cc62d39f2c40ec8512c4c83e895039d47e7bdbe83544644756588d0",
+      "packedBytes": 3161064,
+      "gzipBytes": 1667828,
+      "brotliBytes": 1322943,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 73,
+      "images": [
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        },
+        {
+          "uri": "textures/fd3fb5c2e43e0efacde9555c.webp",
+          "originalSha256": "fd3fb5c2e43e0efacde9555ce36913008b590fbccc4739d343002ad2dd994795"
+        },
+        {
+          "uri": "textures/a1b40d7e153ad26a5f6bc601.webp",
+          "originalSha256": "a1b40d7e153ad26a5f6bc601e329250e454a0ab0dd9988aa8005ee53dc594f00"
+        },
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/Treehouse_BlowAway_v1.glb",
+      "source_bytes": 10895184,
+      "sha256": "f203fe5e6cbc493d3dfadcd1b17f33208c9eb67c7349798b31e2e0d77628d7b2",
+      "web_gz": "animal/delivery/web_J38/assets/Treehouse_BlowAway_v1.glb.gz",
+      "gz_bytes": 1667828,
+      "web_br": "animal/delivery/web_J38/assets/Treehouse_BlowAway_v1.glb.br",
+      "br_bytes": 1322943,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "Karakuri_GustHold_v1": {
+      "name": "Karakuri_GustHold_v1",
+      "sourceSha256": "b45ba67beedd0d919fee6a7d7187352e0973db92dce6faad8cf1ac7d6b9e254c",
+      "sourceBytes": 69829216,
+      "packedSha256": "266c8946d0f7040c34f6cfc19c0ebf107c2580c6eb827401ac11455d70ae3ad3",
+      "packedBytes": 8095932,
+      "gzipBytes": 5970222,
+      "brotliBytes": 4672879,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 369,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/d3475349fe898f1dc924fe24.webp",
+          "originalSha256": "d3475349fe898f1dc924fe243fac26d1f53ac24a1230768bb5af84b861d8c302"
+        },
+        {
+          "uri": "textures/574cd4a470626edf7d33f863.webp",
+          "originalSha256": "574cd4a470626edf7d33f8635dfec18d7e50404d4df90dca1c49b08b252a46ff"
+        },
+        {
+          "uri": "textures/ecbbd1648b675c153852f8ac.webp",
+          "originalSha256": "ecbbd1648b675c153852f8ac1af18da13a9b2623df41d76d6fc5354b79171670"
+        },
+        {
+          "uri": "textures/a7d9924006a2d9084f73f9cb.webp",
+          "originalSha256": "a7d9924006a2d9084f73f9cb6a23fe6908bc2b231e94eca01fabc9f76be97d88"
+        },
+        {
+          "uri": "textures/972a78f020b8d8feef638cf2.webp",
+          "originalSha256": "972a78f020b8d8feef638cf272f0d8356d9bc10060b9510a87d872613605cf8b"
+        },
+        {
+          "uri": "textures/aae95dad99ed9e121640c613.webp",
+          "originalSha256": "aae95dad99ed9e121640c613bc996c986269a89ef3083567ab7e5b629c29c600"
+        },
+        {
+          "uri": "textures/cd26e0601b128efc73bc0b64.webp",
+          "originalSha256": "cd26e0601b128efc73bc0b645d11ced978ffd564dc33ab50dd73f1e52df5db72"
+        },
+        {
+          "uri": "textures/58ca32b1fd1be6717a1935b8.webp",
+          "originalSha256": "58ca32b1fd1be6717a1935b844f7e0f9824e9a01a53b4ea191bbc75c8dfe3116"
+        },
+        {
+          "uri": "textures/b1a7d91dd7a39868e1c7e98b.webp",
+          "originalSha256": "b1a7d91dd7a39868e1c7e98bbc336718b4dbb613060af7eea356fba82ef62bbd"
+        },
+        {
+          "uri": "textures/294e2d63057e4357755a8093.webp",
+          "originalSha256": "294e2d63057e4357755a8093f3f49bc872d05d94e02f32968a8fd092663bd727"
+        },
+        {
+          "uri": "textures/f1532a0ead55cae5365723b6.webp",
+          "originalSha256": "f1532a0ead55cae5365723b627fd74612e47467e1e30c968f03f2e6df701d33e"
+        },
+        {
+          "uri": "textures/c5237a76f74fe42c6f0f46d7.webp",
+          "originalSha256": "c5237a76f74fe42c6f0f46d726a0ed19d45ab30c5131a637f92aa422e5b801dd"
+        },
+        {
+          "uri": "textures/2c41f90a5b12eff1eacaecfe.webp",
+          "originalSha256": "2c41f90a5b12eff1eacaecfe663117e520aa74c43949d3f5c583f0ac86f101c0"
+        },
+        {
+          "uri": "textures/d3f6099e30f93199d298fc96.webp",
+          "originalSha256": "d3f6099e30f93199d298fc9648916d77aa5bb086258f30523f95092fcf266919"
+        },
+        {
+          "uri": "textures/b75453ae00b8723d5fa1ece5.webp",
+          "originalSha256": "b75453ae00b8723d5fa1ece5fe4710945e6e6e4e2a3a11b878ea3817d460105d"
+        },
+        {
+          "uri": "textures/d7748f97eb52760a1369b367.webp",
+          "originalSha256": "d7748f97eb52760a1369b367a06897a7ac0d7aabb97bec81a90da0e02d41ac05"
+        },
+        {
+          "uri": "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+          "originalSha256": "ea9e7ff62ebe4d17be1dc1a27900bbbe60493ceb05b09764c8132567e5049c96"
+        },
+        {
+          "uri": "textures/bc698bedbe52fc30cfa891e2.webp",
+          "originalSha256": "bc698bedbe52fc30cfa891e21651d6df0cd6a241ff24aca95094d243f1b0c7f2"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/fd3fb5c2e43e0efacde9555c.webp",
+          "originalSha256": "fd3fb5c2e43e0efacde9555ce36913008b590fbccc4739d343002ad2dd994795"
+        },
+        {
+          "uri": "textures/a1b40d7e153ad26a5f6bc601.webp",
+          "originalSha256": "a1b40d7e153ad26a5f6bc601e329250e454a0ab0dd9988aa8005ee53dc594f00"
+        },
+        {
+          "uri": "textures/739b68416d910695653104dc.webp",
+          "originalSha256": "739b68416d910695653104dc2433ce178587ac00df2f988810627fce97b9feed"
+        },
+        {
+          "uri": "textures/ea2fde5bcb89f497d9dd4658.webp",
+          "originalSha256": "ea2fde5bcb89f497d9dd4658308c821ae3157b58bebf1880b14e9f07c10ae2cd"
+        },
+        {
+          "uri": "textures/65d153f46b95cbe0b4ccc016.webp",
+          "originalSha256": "65d153f46b95cbe0b4ccc0167d41ad6c0c0d743460ade311b0098599d0903ae4"
+        },
+        {
+          "uri": "textures/b69f1c434531871127c7227f.webp",
+          "originalSha256": "b69f1c434531871127c7227f8abe3b46ee79c5d471f7a78507884c082de5dbfa"
+        },
+        {
+          "uri": "textures/bdc38afd7f42cd2166d47b05.webp",
+          "originalSha256": "bdc38afd7f42cd2166d47b054faf4b5aea38f5b0068147b3f66915cca310a17e"
+        },
+        {
+          "uri": "textures/9f590afdd7af0033740806fa.webp",
+          "originalSha256": "9f590afdd7af0033740806fa45602ce35cd4690020ed8fb59d691f8d881b7031"
+        },
+        {
+          "uri": "textures/472ab989f878d7657c0767a4.webp",
+          "originalSha256": "472ab989f878d7657c0767a43f7176a5f48527578d476151362c0034ad2c9a38"
+        },
+        {
+          "uri": "textures/7c6889d46fc946292a000abb.webp",
+          "originalSha256": "7c6889d46fc946292a000abb0a56950356c65c5516ba213b8c6ff62ec4e1c912"
+        },
+        {
+          "uri": "textures/df2e4f35636ab295082d8381.webp",
+          "originalSha256": "df2e4f35636ab295082d8381d01720662d8b45efa30b5282e1f5af4b3bb98107"
+        },
+        {
+          "uri": "textures/8cd4309b1a2614b0123d5aa0.webp",
+          "originalSha256": "8cd4309b1a2614b0123d5aa0bf21ce2ea1dd045655bdbf26ea96d4617fc2b534"
+        },
+        {
+          "uri": "textures/dd87fca1fae5b203e2017fe9.webp",
+          "originalSha256": "dd87fca1fae5b203e2017fe9dd7452b90f35deddd341d51931084de00cf5ca41"
+        },
+        {
+          "uri": "textures/f5a7ce0c455eedfb685d6cb5.webp",
+          "originalSha256": "f5a7ce0c455eedfb685d6cb531be55928ebe2570cb98dd7125dfd1edb8072be3"
+        },
+        {
+          "uri": "textures/c9ee13ff0571912c947cc230.webp",
+          "originalSha256": "c9ee13ff0571912c947cc230c397ff6603b66d2ced98d4dd514f131410bb003a"
+        },
+        {
+          "uri": "textures/4f1379ea27135b40d922e4af.webp",
+          "originalSha256": "4f1379ea27135b40d922e4af83e1a891e34dad7579a78eccfea6aa980f751587"
+        },
+        {
+          "uri": "textures/597af1ba0aac3f849ef45cb5.webp",
+          "originalSha256": "597af1ba0aac3f849ef45cb5a76a8849f2e6b02ab2c3887780f2435d66f97d52"
+        },
+        {
+          "uri": "textures/2f1af8ea790e75219a45eaf3.webp",
+          "originalSha256": "2f1af8ea790e75219a45eaf30cc1e243bc9093fb6c7c909d4126b5f7a0caeee2"
+        },
+        {
+          "uri": "textures/8609d86d4ac67741e418cb9c.webp",
+          "originalSha256": "8609d86d4ac67741e418cb9cc0614b9051cd811a94d0fd11305142bc5fc76b4b"
+        },
+        {
+          "uri": "textures/d0c66d334dab8558bf0eb51b.webp",
+          "originalSha256": "d0c66d334dab8558bf0eb51b172e8d61c5c9b03bdacdea342717d6aef25aed12"
+        },
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/Karakuri_GustHold_v1.glb",
+      "source_bytes": 69829216,
+      "sha256": "b45ba67beedd0d919fee6a7d7187352e0973db92dce6faad8cf1ac7d6b9e254c",
+      "web_gz": "animal/delivery/web_J38/assets/Karakuri_GustHold_v1.glb.gz",
+      "gz_bytes": 5970222,
+      "web_br": "animal/delivery/web_J38/assets/Karakuri_GustHold_v1.glb.br",
+      "br_bytes": 4672879,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/294e2d63057e4357755a8093.webp",
+        "textures/2c41f90a5b12eff1eacaecfe.webp",
+        "textures/2f1af8ea790e75219a45eaf3.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/472ab989f878d7657c0767a4.webp",
+        "textures/4f1379ea27135b40d922e4af.webp",
+        "textures/574cd4a470626edf7d33f863.webp",
+        "textures/58ca32b1fd1be6717a1935b8.webp",
+        "textures/597af1ba0aac3f849ef45cb5.webp",
+        "textures/65d153f46b95cbe0b4ccc016.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/739b68416d910695653104dc.webp",
+        "textures/7c6889d46fc946292a000abb.webp",
+        "textures/8609d86d4ac67741e418cb9c.webp",
+        "textures/8cd4309b1a2614b0123d5aa0.webp",
+        "textures/972a78f020b8d8feef638cf2.webp",
+        "textures/9f590afdd7af0033740806fa.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/a7d9924006a2d9084f73f9cb.webp",
+        "textures/aae95dad99ed9e121640c613.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/b1a7d91dd7a39868e1c7e98b.webp",
+        "textures/b69f1c434531871127c7227f.webp",
+        "textures/b75453ae00b8723d5fa1ece5.webp",
+        "textures/bc698bedbe52fc30cfa891e2.webp",
+        "textures/bdc38afd7f42cd2166d47b05.webp",
+        "textures/c5237a76f74fe42c6f0f46d7.webp",
+        "textures/c9ee13ff0571912c947cc230.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/cd26e0601b128efc73bc0b64.webp",
+        "textures/d0c66d334dab8558bf0eb51b.webp",
+        "textures/d3475349fe898f1dc924fe24.webp",
+        "textures/d3f6099e30f93199d298fc96.webp",
+        "textures/d7748f97eb52760a1369b367.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dd87fca1fae5b203e2017fe9.webp",
+        "textures/df2e4f35636ab295082d8381.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/ea2fde5bcb89f497d9dd4658.webp",
+        "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+        "textures/ecbbd1648b675c153852f8ac.webp",
+        "textures/f1532a0ead55cae5365723b6.webp",
+        "textures/f5a7ce0c455eedfb685d6cb5.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "Karakuri_Door_v1": {
+      "name": "Karakuri_Door_v1",
+      "sourceSha256": "d06e52638728115df6018cd7028cd083912609a1e27827810d2216acd0fee6b5",
+      "sourceBytes": 69827628,
+      "packedSha256": "f13c455f15648a6b305120d090222b41f8614f0e706a9f14687ba09fb4ed56cb",
+      "packedBytes": 8095028,
+      "gzipBytes": 5969357,
+      "brotliBytes": 4679831,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 369,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/d3475349fe898f1dc924fe24.webp",
+          "originalSha256": "d3475349fe898f1dc924fe243fac26d1f53ac24a1230768bb5af84b861d8c302"
+        },
+        {
+          "uri": "textures/574cd4a470626edf7d33f863.webp",
+          "originalSha256": "574cd4a470626edf7d33f8635dfec18d7e50404d4df90dca1c49b08b252a46ff"
+        },
+        {
+          "uri": "textures/ecbbd1648b675c153852f8ac.webp",
+          "originalSha256": "ecbbd1648b675c153852f8ac1af18da13a9b2623df41d76d6fc5354b79171670"
+        },
+        {
+          "uri": "textures/a7d9924006a2d9084f73f9cb.webp",
+          "originalSha256": "a7d9924006a2d9084f73f9cb6a23fe6908bc2b231e94eca01fabc9f76be97d88"
+        },
+        {
+          "uri": "textures/972a78f020b8d8feef638cf2.webp",
+          "originalSha256": "972a78f020b8d8feef638cf272f0d8356d9bc10060b9510a87d872613605cf8b"
+        },
+        {
+          "uri": "textures/aae95dad99ed9e121640c613.webp",
+          "originalSha256": "aae95dad99ed9e121640c613bc996c986269a89ef3083567ab7e5b629c29c600"
+        },
+        {
+          "uri": "textures/cd26e0601b128efc73bc0b64.webp",
+          "originalSha256": "cd26e0601b128efc73bc0b645d11ced978ffd564dc33ab50dd73f1e52df5db72"
+        },
+        {
+          "uri": "textures/58ca32b1fd1be6717a1935b8.webp",
+          "originalSha256": "58ca32b1fd1be6717a1935b844f7e0f9824e9a01a53b4ea191bbc75c8dfe3116"
+        },
+        {
+          "uri": "textures/b1a7d91dd7a39868e1c7e98b.webp",
+          "originalSha256": "b1a7d91dd7a39868e1c7e98bbc336718b4dbb613060af7eea356fba82ef62bbd"
+        },
+        {
+          "uri": "textures/294e2d63057e4357755a8093.webp",
+          "originalSha256": "294e2d63057e4357755a8093f3f49bc872d05d94e02f32968a8fd092663bd727"
+        },
+        {
+          "uri": "textures/f1532a0ead55cae5365723b6.webp",
+          "originalSha256": "f1532a0ead55cae5365723b627fd74612e47467e1e30c968f03f2e6df701d33e"
+        },
+        {
+          "uri": "textures/c5237a76f74fe42c6f0f46d7.webp",
+          "originalSha256": "c5237a76f74fe42c6f0f46d726a0ed19d45ab30c5131a637f92aa422e5b801dd"
+        },
+        {
+          "uri": "textures/2c41f90a5b12eff1eacaecfe.webp",
+          "originalSha256": "2c41f90a5b12eff1eacaecfe663117e520aa74c43949d3f5c583f0ac86f101c0"
+        },
+        {
+          "uri": "textures/d3f6099e30f93199d298fc96.webp",
+          "originalSha256": "d3f6099e30f93199d298fc9648916d77aa5bb086258f30523f95092fcf266919"
+        },
+        {
+          "uri": "textures/b75453ae00b8723d5fa1ece5.webp",
+          "originalSha256": "b75453ae00b8723d5fa1ece5fe4710945e6e6e4e2a3a11b878ea3817d460105d"
+        },
+        {
+          "uri": "textures/d7748f97eb52760a1369b367.webp",
+          "originalSha256": "d7748f97eb52760a1369b367a06897a7ac0d7aabb97bec81a90da0e02d41ac05"
+        },
+        {
+          "uri": "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+          "originalSha256": "ea9e7ff62ebe4d17be1dc1a27900bbbe60493ceb05b09764c8132567e5049c96"
+        },
+        {
+          "uri": "textures/bc698bedbe52fc30cfa891e2.webp",
+          "originalSha256": "bc698bedbe52fc30cfa891e21651d6df0cd6a241ff24aca95094d243f1b0c7f2"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/fd3fb5c2e43e0efacde9555c.webp",
+          "originalSha256": "fd3fb5c2e43e0efacde9555ce36913008b590fbccc4739d343002ad2dd994795"
+        },
+        {
+          "uri": "textures/a1b40d7e153ad26a5f6bc601.webp",
+          "originalSha256": "a1b40d7e153ad26a5f6bc601e329250e454a0ab0dd9988aa8005ee53dc594f00"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/739b68416d910695653104dc.webp",
+          "originalSha256": "739b68416d910695653104dc2433ce178587ac00df2f988810627fce97b9feed"
+        },
+        {
+          "uri": "textures/ea2fde5bcb89f497d9dd4658.webp",
+          "originalSha256": "ea2fde5bcb89f497d9dd4658308c821ae3157b58bebf1880b14e9f07c10ae2cd"
+        },
+        {
+          "uri": "textures/65d153f46b95cbe0b4ccc016.webp",
+          "originalSha256": "65d153f46b95cbe0b4ccc0167d41ad6c0c0d743460ade311b0098599d0903ae4"
+        },
+        {
+          "uri": "textures/b69f1c434531871127c7227f.webp",
+          "originalSha256": "b69f1c434531871127c7227f8abe3b46ee79c5d471f7a78507884c082de5dbfa"
+        },
+        {
+          "uri": "textures/bdc38afd7f42cd2166d47b05.webp",
+          "originalSha256": "bdc38afd7f42cd2166d47b054faf4b5aea38f5b0068147b3f66915cca310a17e"
+        },
+        {
+          "uri": "textures/9f590afdd7af0033740806fa.webp",
+          "originalSha256": "9f590afdd7af0033740806fa45602ce35cd4690020ed8fb59d691f8d881b7031"
+        },
+        {
+          "uri": "textures/472ab989f878d7657c0767a4.webp",
+          "originalSha256": "472ab989f878d7657c0767a43f7176a5f48527578d476151362c0034ad2c9a38"
+        },
+        {
+          "uri": "textures/7c6889d46fc946292a000abb.webp",
+          "originalSha256": "7c6889d46fc946292a000abb0a56950356c65c5516ba213b8c6ff62ec4e1c912"
+        },
+        {
+          "uri": "textures/df2e4f35636ab295082d8381.webp",
+          "originalSha256": "df2e4f35636ab295082d8381d01720662d8b45efa30b5282e1f5af4b3bb98107"
+        },
+        {
+          "uri": "textures/8cd4309b1a2614b0123d5aa0.webp",
+          "originalSha256": "8cd4309b1a2614b0123d5aa0bf21ce2ea1dd045655bdbf26ea96d4617fc2b534"
+        },
+        {
+          "uri": "textures/dd87fca1fae5b203e2017fe9.webp",
+          "originalSha256": "dd87fca1fae5b203e2017fe9dd7452b90f35deddd341d51931084de00cf5ca41"
+        },
+        {
+          "uri": "textures/f5a7ce0c455eedfb685d6cb5.webp",
+          "originalSha256": "f5a7ce0c455eedfb685d6cb531be55928ebe2570cb98dd7125dfd1edb8072be3"
+        },
+        {
+          "uri": "textures/c9ee13ff0571912c947cc230.webp",
+          "originalSha256": "c9ee13ff0571912c947cc230c397ff6603b66d2ced98d4dd514f131410bb003a"
+        },
+        {
+          "uri": "textures/4f1379ea27135b40d922e4af.webp",
+          "originalSha256": "4f1379ea27135b40d922e4af83e1a891e34dad7579a78eccfea6aa980f751587"
+        },
+        {
+          "uri": "textures/597af1ba0aac3f849ef45cb5.webp",
+          "originalSha256": "597af1ba0aac3f849ef45cb5a76a8849f2e6b02ab2c3887780f2435d66f97d52"
+        },
+        {
+          "uri": "textures/2f1af8ea790e75219a45eaf3.webp",
+          "originalSha256": "2f1af8ea790e75219a45eaf30cc1e243bc9093fb6c7c909d4126b5f7a0caeee2"
+        },
+        {
+          "uri": "textures/8609d86d4ac67741e418cb9c.webp",
+          "originalSha256": "8609d86d4ac67741e418cb9cc0614b9051cd811a94d0fd11305142bc5fc76b4b"
+        },
+        {
+          "uri": "textures/d0c66d334dab8558bf0eb51b.webp",
+          "originalSha256": "d0c66d334dab8558bf0eb51b172e8d61c5c9b03bdacdea342717d6aef25aed12"
+        },
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/Karakuri_Door_v1.glb",
+      "source_bytes": 69827628,
+      "sha256": "d06e52638728115df6018cd7028cd083912609a1e27827810d2216acd0fee6b5",
+      "web_gz": "animal/delivery/web_J38/assets/Karakuri_Door_v1.glb.gz",
+      "gz_bytes": 5969357,
+      "web_br": "animal/delivery/web_J38/assets/Karakuri_Door_v1.glb.br",
+      "br_bytes": 4679831,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/294e2d63057e4357755a8093.webp",
+        "textures/2c41f90a5b12eff1eacaecfe.webp",
+        "textures/2f1af8ea790e75219a45eaf3.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/472ab989f878d7657c0767a4.webp",
+        "textures/4f1379ea27135b40d922e4af.webp",
+        "textures/574cd4a470626edf7d33f863.webp",
+        "textures/58ca32b1fd1be6717a1935b8.webp",
+        "textures/597af1ba0aac3f849ef45cb5.webp",
+        "textures/65d153f46b95cbe0b4ccc016.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/739b68416d910695653104dc.webp",
+        "textures/7c6889d46fc946292a000abb.webp",
+        "textures/8609d86d4ac67741e418cb9c.webp",
+        "textures/8cd4309b1a2614b0123d5aa0.webp",
+        "textures/972a78f020b8d8feef638cf2.webp",
+        "textures/9f590afdd7af0033740806fa.webp",
+        "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/a7d9924006a2d9084f73f9cb.webp",
+        "textures/aae95dad99ed9e121640c613.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/b1a7d91dd7a39868e1c7e98b.webp",
+        "textures/b69f1c434531871127c7227f.webp",
+        "textures/b75453ae00b8723d5fa1ece5.webp",
+        "textures/bc698bedbe52fc30cfa891e2.webp",
+        "textures/bdc38afd7f42cd2166d47b05.webp",
+        "textures/c5237a76f74fe42c6f0f46d7.webp",
+        "textures/c9ee13ff0571912c947cc230.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/cd26e0601b128efc73bc0b64.webp",
+        "textures/d0c66d334dab8558bf0eb51b.webp",
+        "textures/d3475349fe898f1dc924fe24.webp",
+        "textures/d3f6099e30f93199d298fc96.webp",
+        "textures/d7748f97eb52760a1369b367.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dd87fca1fae5b203e2017fe9.webp",
+        "textures/df2e4f35636ab295082d8381.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp",
+        "textures/ea2fde5bcb89f497d9dd4658.webp",
+        "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+        "textures/ecbbd1648b675c153852f8ac.webp",
+        "textures/f1532a0ead55cae5365723b6.webp",
+        "textures/f5a7ce0c455eedfb685d6cb5.webp",
+        "textures/fd3fb5c2e43e0efacde9555c.webp"
+      ]
+    },
+    "Bunker_Hatch_v1": {
+      "name": "Bunker_Hatch_v1",
+      "sourceSha256": "1510a952eb356f87196127c34360b8648fe9cec995e1fec96be95346c2cbd817",
+      "sourceBytes": 4997684,
+      "packedSha256": "2fbc6bea0d719345d91c56654f7ca6f3191d6a8d296cff3ba2c7e76bcefd02ec",
+      "packedBytes": 358228,
+      "gzipBytes": 172471,
+      "brotliBytes": 126802,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 68,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/0320297cc9602394af592d6b.webp",
+          "originalSha256": "0320297cc9602394af592d6bb55df453cefdff4de58a83bb088d48b0c5727c8c"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/904c56d8cb20416245ba1b2d.webp",
+          "originalSha256": "904c56d8cb20416245ba1b2d0b438eefc72667185f42b1227589ca095e1a988c"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/a173fc996b9f982abcb561a5.webp",
+          "originalSha256": "a173fc996b9f982abcb561a527d5c4f1983516dbecbeba2e27618894f3c4c037"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/Bunker_Hatch_v1.glb",
+      "source_bytes": 4997684,
+      "sha256": "1510a952eb356f87196127c34360b8648fe9cec995e1fec96be95346c2cbd817",
+      "web_gz": "animal/delivery/web_J38/assets/Bunker_Hatch_v1.glb.gz",
+      "gz_bytes": 172471,
+      "web_br": "animal/delivery/web_J38/assets/Bunker_Hatch_v1.glb.br",
+      "br_bytes": 126802,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/0320297cc9602394af592d6b.webp",
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/904c56d8cb20416245ba1b2d.webp",
+        "textures/a173fc996b9f982abcb561a5.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp"
+      ]
+    },
+    "Bunker_GustHold_v1": {
+      "name": "Bunker_GustHold_v1",
+      "sourceSha256": "2b416a801a49cb3883b5ea8a5e9dc13b96dfbdb1aa0dd5a50305662ffa0d331c",
+      "sourceBytes": 4997692,
+      "packedSha256": "a2f963ed8174c391dd8c7248064896b2f3cd09a2317a81cd5b91548af4f772b4",
+      "packedBytes": 358264,
+      "gzipBytes": 172517,
+      "brotliBytes": 126005,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 68,
+      "images": [
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/0320297cc9602394af592d6b.webp",
+          "originalSha256": "0320297cc9602394af592d6bb55df453cefdff4de58a83bb088d48b0c5727c8c"
+        },
+        {
+          "uri": "textures/04def6bc617610c7487d6a57.webp",
+          "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/904c56d8cb20416245ba1b2d.webp",
+          "originalSha256": "904c56d8cb20416245ba1b2d0b438eefc72667185f42b1227589ca095e1a988c"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/a173fc996b9f982abcb561a5.webp",
+          "originalSha256": "a173fc996b9f982abcb561a527d5c4f1983516dbecbeba2e27618894f3c4c037"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/Bunker_GustHold_v1.glb",
+      "source_bytes": 4997692,
+      "sha256": "2b416a801a49cb3883b5ea8a5e9dc13b96dfbdb1aa0dd5a50305662ffa0d331c",
+      "web_gz": "animal/delivery/web_J38/assets/Bunker_GustHold_v1.glb.gz",
+      "gz_bytes": 172517,
+      "web_br": "animal/delivery/web_J38/assets/Bunker_GustHold_v1.glb.br",
+      "br_bytes": 126005,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/0320297cc9602394af592d6b.webp",
+        "textures/04def6bc617610c7487d6a57.webp",
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/904c56d8cb20416245ba1b2d.webp",
+        "textures/a173fc996b9f982abcb561a5.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp"
+      ]
+    },
+    "Castle_GustHold_v1": {
+      "name": "Castle_GustHold_v1",
+      "sourceSha256": "0a1ba0894edbde5da90a17af5df89d23b7bcb1a029c36ce4a5348b209d50a0ad",
+      "sourceBytes": 7374216,
+      "packedSha256": "d371d606058d47aa08951020c21d6d406ac31f17b8325d7886b61ce370f38d96",
+      "packedBytes": 1920900,
+      "gzipBytes": 894034,
+      "brotliBytes": 403357,
+      "decodedGeometryExact": true,
+      "checkedBufferViews": 150,
+      "images": [
+        {
+          "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+          "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+        },
+        {
+          "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+          "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+        },
+        {
+          "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+          "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+        },
+        {
+          "uri": "textures/e2975462a8682f18967eb4db.webp",
+          "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/457e5059093fee5ab7b14290.webp",
+          "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+        },
+        {
+          "uri": "textures/a5985c525405dbbab47670b6.webp",
+          "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+          "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/ac8e436235110a8b6733599c.webp",
+          "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+          "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/a52097e206cdea67a5a798e1.webp",
+          "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+        },
+        {
+          "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+          "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+        },
+        {
+          "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+          "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+        }
+      ],
+      "source_glb": "残りの家4軒/glb/Castle_GustHold_v1.glb",
+      "source_bytes": 7374216,
+      "sha256": "0a1ba0894edbde5da90a17af5df89d23b7bcb1a029c36ce4a5348b209d50a0ad",
+      "web_gz": "animal/delivery/web_J38/assets/Castle_GustHold_v1.glb.gz",
+      "gz_bytes": 894034,
+      "web_br": "animal/delivery/web_J38/assets/Castle_GustHold_v1.glb.br",
+      "br_bytes": 403357,
+      "packing": "EXT_meshopt_compression + EXT_texture_webp; byte-exact decoding",
+      "textures": [
+        "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "textures/34c0a9b2f6686b6dac377940.webp",
+        "textures/457e5059093fee5ab7b14290.webp",
+        "textures/6cd00a8e799b815ff44d6539.webp",
+        "textures/a52097e206cdea67a5a798e1.webp",
+        "textures/a5985c525405dbbab47670b6.webp",
+        "textures/ac8e436235110a8b6733599c.webp",
+        "textures/ca75253ea173cdf0ff93f979.webp",
+        "textures/db0ad2984d71b4b18ec67c65.webp",
+        "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "textures/e2975462a8682f18967eb4db.webp",
+        "textures/e5fa31a3663436cbc4619d0f.webp"
+      ]
+    }
+  },
+  "clips": {
+    "Treehouse_BlowAway_v1": {
+      "clip": "Treehouse_BlowAway_v1",
+      "duration_s": 8,
+      "channels": 12
+    },
+    "Karakuri_GustHold_v1": {
+      "clip": "Karakuri_GustHold_v1",
+      "duration_s": 8,
+      "channels": 2
+    },
+    "Karakuri_Door_v1": {
+      "clip": "Karakuri_Door_v1",
+      "duration_s": 8,
+      "channels": 2
+    },
+    "Bunker_Hatch_v1": {
+      "clip": "Bunker_Hatch_v1",
+      "duration_s": 8,
+      "channels": 1
+    },
+    "Bunker_GustHold_v1": {
+      "clip": "Bunker_GustHold_v1",
+      "duration_s": 8,
+      "channels": 1
+    },
+    "Castle_GustHold_v1": {
+      "clip": "Castle_GustHold_v1",
+      "duration_s": 8,
+      "channels": 1
+    }
+  },
+  "textures": [
+    "textures/0320297cc9602394af592d6b.webp",
+    "textures/04def6bc617610c7487d6a57.webp",
+    "textures/0c20f40fa5aa922bb1e68d07.webp",
+    "textures/294e2d63057e4357755a8093.webp",
+    "textures/2c41f90a5b12eff1eacaecfe.webp",
+    "textures/2f1af8ea790e75219a45eaf3.webp",
+    "textures/34c0a9b2f6686b6dac377940.webp",
+    "textures/457e5059093fee5ab7b14290.webp",
+    "textures/472ab989f878d7657c0767a4.webp",
+    "textures/4f1379ea27135b40d922e4af.webp",
+    "textures/574cd4a470626edf7d33f863.webp",
+    "textures/58ca32b1fd1be6717a1935b8.webp",
+    "textures/597af1ba0aac3f849ef45cb5.webp",
+    "textures/65d153f46b95cbe0b4ccc016.webp",
+    "textures/6cd00a8e799b815ff44d6539.webp",
+    "textures/739b68416d910695653104dc.webp",
+    "textures/7c6889d46fc946292a000abb.webp",
+    "textures/8609d86d4ac67741e418cb9c.webp",
+    "textures/8cd4309b1a2614b0123d5aa0.webp",
+    "textures/904c56d8cb20416245ba1b2d.webp",
+    "textures/972a78f020b8d8feef638cf2.webp",
+    "textures/9f590afdd7af0033740806fa.webp",
+    "textures/a173fc996b9f982abcb561a5.webp",
+    "textures/a1b40d7e153ad26a5f6bc601.webp",
+    "textures/a52097e206cdea67a5a798e1.webp",
+    "textures/a5985c525405dbbab47670b6.webp",
+    "textures/a7d9924006a2d9084f73f9cb.webp",
+    "textures/aae95dad99ed9e121640c613.webp",
+    "textures/ac8e436235110a8b6733599c.webp",
+    "textures/b1a7d91dd7a39868e1c7e98b.webp",
+    "textures/b69f1c434531871127c7227f.webp",
+    "textures/b75453ae00b8723d5fa1ece5.webp",
+    "textures/bc698bedbe52fc30cfa891e2.webp",
+    "textures/bdc38afd7f42cd2166d47b05.webp",
+    "textures/c5237a76f74fe42c6f0f46d7.webp",
+    "textures/c9ee13ff0571912c947cc230.webp",
+    "textures/ca75253ea173cdf0ff93f979.webp",
+    "textures/cd26e0601b128efc73bc0b64.webp",
+    "textures/d0c66d334dab8558bf0eb51b.webp",
+    "textures/d3475349fe898f1dc924fe24.webp",
+    "textures/d3f6099e30f93199d298fc96.webp",
+    "textures/d7748f97eb52760a1369b367.webp",
+    "textures/db0ad2984d71b4b18ec67c65.webp",
+    "textures/dd87fca1fae5b203e2017fe9.webp",
+    "textures/df2e4f35636ab295082d8381.webp",
+    "textures/dff61c452a5ca0b8a8d8d170.webp",
+    "textures/e2975462a8682f18967eb4db.webp",
+    "textures/e5fa31a3663436cbc4619d0f.webp",
+    "textures/ea2fde5bcb89f497d9dd4658.webp",
+    "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+    "textures/ecbbd1648b675c153852f8ac.webp",
+    "textures/f1532a0ead55cae5365723b6.webp",
+    "textures/f5a7ce0c455eedfb685d6cb5.webp",
+    "textures/fd3fb5c2e43e0efacde9555c.webp"
+  ],
+  "loader_note": "GLTFLoader + MeshoptDecoder。可逆WebPはassets/textures。village_assets.jsonは変更していない。"
+}

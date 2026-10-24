@@ -1,0 +1,356 @@
+{
+  "schema": 1,
+  "kind": "KarakuriFort",
+  "source_file": "からくり要塞と爆発/glb/KarakuriFortHouse.glb",
+  "source_sha256": "2ae03fdba0ef67aa45a176d9748b40fdb1871a3a521d8037dec1984c8919e904",
+  "source_bytes": 9242468,
+  "root_name": "KarakuriFortHouse",
+  "method": "visibility_only_on_fresh_static_scene_clone",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "entrance": "+Z",
+    "local_origin": [
+      0,
+      0,
+      0
+    ],
+    "placement": "retain current village placement parent; do not recenter or rescale"
+  },
+  "duration": null,
+  "personality": null,
+  "stages": [
+    {
+      "index": 0,
+      "id": "ground",
+      "label": "Ground / empty plot",
+      "adds": [],
+      "visible": []
+    },
+    {
+      "index": 1,
+      "id": "foundation",
+      "label": "Iron plinth with underground iron floor",
+      "adds": [
+        "KarakuriFort__Floor",
+        "KarakuriFort__Foundation"
+      ],
+      "visible": [
+        "KarakuriFort__Floor",
+        "KarakuriFort__Foundation"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "structure",
+      "label": "Corner turrets and wall columns",
+      "adds": [
+        "KarakuriFort__Frame"
+      ],
+      "visible": [
+        "KarakuriFort__Floor",
+        "KarakuriFort__Foundation",
+        "KarakuriFort__Frame"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walls",
+      "label": "Riveted iron plates and barred portholes",
+      "adds": [
+        "KarakuriFort__Wall_Back",
+        "KarakuriFort__Wall_Front",
+        "KarakuriFort__Wall_Left",
+        "KarakuriFort__Wall_Right",
+        "KarakuriFort__Window_Back",
+        "KarakuriFort__Window_Front",
+        "KarakuriFort__Window_Left",
+        "KarakuriFort__Window_Right"
+      ],
+      "visible": [
+        "KarakuriFort__Floor",
+        "KarakuriFort__Foundation",
+        "KarakuriFort__Frame",
+        "KarakuriFort__Wall_Back",
+        "KarakuriFort__Wall_Front",
+        "KarakuriFort__Wall_Left",
+        "KarakuriFort__Wall_Right",
+        "KarakuriFort__Window_Back",
+        "KarakuriFort__Window_Front",
+        "KarakuriFort__Window_Left",
+        "KarakuriFort__Window_Right"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "roof",
+      "label": "Roof, battlements and turret caps (no chimney)",
+      "adds": [
+        "KarakuriFort__Battlements",
+        "KarakuriFort__Roof",
+        "KarakuriFort__Turret_Caps"
+      ],
+      "visible": [
+        "KarakuriFort__Battlements",
+        "KarakuriFort__Floor",
+        "KarakuriFort__Foundation",
+        "KarakuriFort__Frame",
+        "KarakuriFort__Roof",
+        "KarakuriFort__Turret_Caps",
+        "KarakuriFort__Wall_Back",
+        "KarakuriFort__Wall_Front",
+        "KarakuriFort__Wall_Left",
+        "KarakuriFort__Wall_Right",
+        "KarakuriFort__Window_Back",
+        "KarakuriFort__Window_Front",
+        "KarakuriFort__Window_Left",
+        "KarakuriFort__Window_Right"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "complete",
+      "label": "Locked iron door, steps and pennant",
+      "adds": [
+        "KarakuriFort__Alarm",
+        "KarakuriFort__AlarmBase",
+        "KarakuriFort__Door",
+        "KarakuriFort__Flag",
+        "KarakuriFort__Gears",
+        "KarakuriFort__Locks",
+        "KarakuriFort__PunchGlove",
+        "KarakuriFort__PunchMount",
+        "KarakuriFort__PunchSpring",
+        "KarakuriFort__Radar",
+        "KarakuriFort__Robot_1",
+        "KarakuriFort__Robot_2",
+        "KarakuriFort__Steps"
+      ],
+      "visible": [
+        "KarakuriFort__Alarm",
+        "KarakuriFort__AlarmBase",
+        "KarakuriFort__Battlements",
+        "KarakuriFort__Door",
+        "KarakuriFort__Flag",
+        "KarakuriFort__Floor",
+        "KarakuriFort__Foundation",
+        "KarakuriFort__Frame",
+        "KarakuriFort__Gears",
+        "KarakuriFort__Locks",
+        "KarakuriFort__PunchGlove",
+        "KarakuriFort__PunchMount",
+        "KarakuriFort__PunchSpring",
+        "KarakuriFort__Radar",
+        "KarakuriFort__Robot_1",
+        "KarakuriFort__Robot_2",
+        "KarakuriFort__Roof",
+        "KarakuriFort__Steps",
+        "KarakuriFort__Turret_Caps",
+        "KarakuriFort__Wall_Back",
+        "KarakuriFort__Wall_Front",
+        "KarakuriFort__Wall_Left",
+        "KarakuriFort__Wall_Right",
+        "KarakuriFort__Window_Back",
+        "KarakuriFort__Window_Front",
+        "KarakuriFort__Window_Left",
+        "KarakuriFort__Window_Right"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node_index": 0,
+      "node_name": "KarakuriFort__Alarm",
+      "source_mesh_index": 0,
+      "component": "Alarm",
+      "first_stage": 5
+    },
+    {
+      "node_index": 1,
+      "node_name": "KarakuriFort__AlarmBase",
+      "source_mesh_index": 1,
+      "component": "AlarmBase",
+      "first_stage": 5
+    },
+    {
+      "node_index": 2,
+      "node_name": "KarakuriFort__Battlements",
+      "source_mesh_index": 2,
+      "component": "Battlements",
+      "first_stage": 4
+    },
+    {
+      "node_index": 3,
+      "node_name": "KarakuriFort__Door",
+      "source_mesh_index": 3,
+      "component": "Door",
+      "first_stage": 5
+    },
+    {
+      "node_index": 4,
+      "node_name": "KarakuriFort__Flag",
+      "source_mesh_index": 4,
+      "component": "Flag",
+      "first_stage": 5
+    },
+    {
+      "node_index": 5,
+      "node_name": "KarakuriFort__Floor",
+      "source_mesh_index": 5,
+      "component": "Floor",
+      "first_stage": 1
+    },
+    {
+      "node_index": 6,
+      "node_name": "KarakuriFort__Foundation",
+      "source_mesh_index": 6,
+      "component": "Foundation",
+      "first_stage": 1
+    },
+    {
+      "node_index": 7,
+      "node_name": "KarakuriFort__Frame",
+      "source_mesh_index": 7,
+      "component": "Frame",
+      "first_stage": 2
+    },
+    {
+      "node_index": 8,
+      "node_name": "KarakuriFort__Gears",
+      "source_mesh_index": 8,
+      "component": "Gears",
+      "first_stage": 5
+    },
+    {
+      "node_index": 9,
+      "node_name": "KarakuriFort__Locks",
+      "source_mesh_index": 9,
+      "component": "Locks",
+      "first_stage": 5
+    },
+    {
+      "node_index": 10,
+      "node_name": "KarakuriFort__PunchGlove",
+      "source_mesh_index": 10,
+      "component": "PunchGlove",
+      "first_stage": 5
+    },
+    {
+      "node_index": 11,
+      "node_name": "KarakuriFort__PunchMount",
+      "source_mesh_index": 11,
+      "component": "PunchMount",
+      "first_stage": 5
+    },
+    {
+      "node_index": 12,
+      "node_name": "KarakuriFort__PunchSpring",
+      "source_mesh_index": 12,
+      "component": "PunchSpring",
+      "first_stage": 5
+    },
+    {
+      "node_index": 13,
+      "node_name": "KarakuriFort__Radar",
+      "source_mesh_index": 13,
+      "component": "Radar",
+      "first_stage": 5
+    },
+    {
+      "node_index": 14,
+      "node_name": "KarakuriFort__Robot_1",
+      "source_mesh_index": 14,
+      "component": "Robot_1",
+      "first_stage": 5
+    },
+    {
+      "node_index": 15,
+      "node_name": "KarakuriFort__Robot_2",
+      "source_mesh_index": 15,
+      "component": "Robot_2",
+      "first_stage": 5
+    },
+    {
+      "node_index": 16,
+      "node_name": "KarakuriFort__Roof",
+      "source_mesh_index": 16,
+      "component": "Roof",
+      "first_stage": 4
+    },
+    {
+      "node_index": 17,
+      "node_name": "KarakuriFort__Steps",
+      "source_mesh_index": 17,
+      "component": "Steps",
+      "first_stage": 5
+    },
+    {
+      "node_index": 18,
+      "node_name": "KarakuriFort__Turret_Caps",
+      "source_mesh_index": 18,
+      "component": "Turret_Caps",
+      "first_stage": 4
+    },
+    {
+      "node_index": 19,
+      "node_name": "KarakuriFort__Wall_Back",
+      "source_mesh_index": 19,
+      "component": "Wall_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 20,
+      "node_name": "KarakuriFort__Wall_Front",
+      "source_mesh_index": 20,
+      "component": "Wall_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 21,
+      "node_name": "KarakuriFort__Wall_Left",
+      "source_mesh_index": 21,
+      "component": "Wall_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 22,
+      "node_name": "KarakuriFort__Wall_Right",
+      "source_mesh_index": 22,
+      "component": "Wall_Right",
+      "first_stage": 3
+    },
+    {
+      "node_index": 23,
+      "node_name": "KarakuriFort__Window_Back",
+      "source_mesh_index": 23,
+      "component": "Window_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 24,
+      "node_name": "KarakuriFort__Window_Front",
+      "source_mesh_index": 24,
+      "component": "Window_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 25,
+      "node_name": "KarakuriFort__Window_Left",
+      "source_mesh_index": 25,
+      "component": "Window_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 26,
+      "node_name": "KarakuriFort__Window_Right",
+      "source_mesh_index": 26,
+      "component": "Window_Right",
+      "first_stage": 3
+    }
+  ],
+  "brick_structure_note": "Fortress: stage 2 is the four corner turret shafts and wall columns, the iron counterpart of the brick corner piers. Fortress__Foundation also contains an iron floor 0.42-0.57 m below ground.",
+  "limits": [
+    "Discrete assembly snapshots, not worker hand placement or continuous construction animation",
+    "Construction site character blocking must be supplied by story integrator"
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "image": "pig-leg-hoof-atlas-v2.png",
+  "canvas_px": [
+    1536,
+    1024
+  ],
+  "format": "RGBA",
+  "coordinates": "absolute source pixels; origin top-left; rects use exclusive right/bottom",
+  "alpha_discard_lte": 7,
+  "alpha_discard_normalized": 0.027450980392156862,
+  "alpha_max": 254,
+  "recommended_initial_pixels_per_meter": 1350,
+  "scale_confidence": "medium: visual design starting point, adjust placement against actor",
+  "parts": [
+    {
+      "id": "near_forward_toe_up",
+      "rect_xywh": [
+        0,
+        0,
+        448,
+        512
+      ],
+      "natural_bounds_xywh": [
+        55,
+        104,
+        344,
+        302
+      ],
+      "upper_attachment_pivot_xy": [
+        177,
+        165
+      ],
+      "hoof_bottom_xy": [
+        249.5,
+        405
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "near_low_contact",
+      "rect_xywh": [
+        448,
+        0,
+        336,
+        512
+      ],
+      "natural_bounds_xywh": [
+        479,
+        131,
+        272,
+        316
+      ],
+      "upper_attachment_pivot_xy": [
+        575,
+        186
+      ],
+      "hoof_bottom_xy": [
+        654.7,
+        446
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "near_rear_push",
+      "rect_xywh": [
+        784,
+        0,
+        420,
+        512
+      ],
+      "natural_bounds_xywh": [
+        816,
+        105,
+        358,
+        341
+      ],
+      "upper_attachment_pivot_xy": [
+        1071,
+        165
+      ],
+      "hoof_bottom_xy": [
+        875.0,
+        445
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "near_compact_return",
+      "rect_xywh": [
+        1204,
+        0,
+        332,
+        512
+      ],
+      "natural_bounds_xywh": [
+        1231,
+        129,
+        271,
+        284
+      ],
+      "upper_attachment_pivot_xy": [
+        1392,
+        182
+      ],
+      "hoof_bottom_xy": [
+        1376.5,
+        412
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "far_forward_toe_up",
+      "rect_xywh": [
+        0,
+        512,
+        448,
+        512
+      ],
+      "natural_bounds_xywh": [
+        65,
+        569,
+        356,
+        288
+      ],
+      "upper_attachment_pivot_xy": [
+        177,
+        624
+      ],
+      "hoof_bottom_xy": [
+        284.7,
+        856
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "far_low_contact",
+      "rect_xywh": [
+        448,
+        512,
+        336,
+        512
+      ],
+      "natural_bounds_xywh": [
+        489,
+        594,
+        273,
+        304
+      ],
+      "upper_attachment_pivot_xy": [
+        587,
+        648
+      ],
+      "hoof_bottom_xy": [
+        651.5,
+        897
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "far_rear_push",
+      "rect_xywh": [
+        784,
+        512,
+        420,
+        512
+      ],
+      "natural_bounds_xywh": [
+        836,
+        568,
+        314,
+        337
+      ],
+      "upper_attachment_pivot_xy": [
+        1044,
+        620
+      ],
+      "hoof_bottom_xy": [
+        891.0,
+        904
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    },
+    {
+      "id": "far_compact_return",
+      "rect_xywh": [
+        1204,
+        512,
+        332,
+        512
+      ],
+      "natural_bounds_xywh": [
+        1235,
+        599,
+        267,
+        279
+      ],
+      "upper_attachment_pivot_xy": [
+        1400,
+        650
+      ],
+      "hoof_bottom_xy": [
+        1391.7,
+        877
+      ],
+      "pivot_confidence": "medium: visually estimated inside rounded upper pink attachment",
+      "bounds_confidence": "high: connected component measured at alpha > 2/255",
+      "hoof_bottom_confidence": "high: bottommost component row measured; contact relevance varies by pose"
+    }
+  ],
+  "notes": [
+    "Do not use uniform 4-column UV cells: first forward sprite crosses x=384. Use supplied rects.",
+    "All sprites retain hidden upper pink attachment length intended to overlap behind the body.",
+    "Far and near have slight shading/perspective variation, not dramatic depth changes.",
+    "Natural bounds are connected-main-part bounds, excluding isolated low-alpha residue.",
+    "No image pixel editing performed; runtime threshold and UV extraction recommended.",
+    "Final QA found 1076 isolated pixels above alpha 2, all alpha <=7. Discard <=7/255 removes every isolated residue component while keeping exactly eight principal parts. Natural bounds remain measured at alpha >2 and are conservative."
+  ]
+}

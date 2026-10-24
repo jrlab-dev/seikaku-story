@@ -1,0 +1,368 @@
+{
+  "schema": 1,
+  "kind": "Straw",
+  "source_file": "StrawHouse.glb",
+  "source_sha256": "3d411ad7558071d73690abc724ab52c9c33745b68d250dbc8f027095cc859f3b",
+  "source_bytes": 47710504,
+  "root_name": "StrawHouse",
+  "method": "visibility_only_on_fresh_static_scene_clone",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "entrance": "+Z",
+    "local_origin": [
+      0,
+      0,
+      0
+    ],
+    "placement": "retain current village placement parent; do not recenter or rescale"
+  },
+  "duration": null,
+  "personality": null,
+  "stages": [
+    {
+      "index": 0,
+      "id": "ground",
+      "label": "Ground / empty plot",
+      "adds": [],
+      "visible": []
+    },
+    {
+      "index": 1,
+      "id": "foundation",
+      "label": "Foundation and floor",
+      "adds": [
+        "Straw__Floor",
+        "Straw__Foundation"
+      ],
+      "visible": [
+        "Straw__Floor",
+        "Straw__Foundation"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "structure",
+      "label": "Posts and frame / masonry corner piers",
+      "adds": [
+        "Straw__Frame"
+      ],
+      "visible": [
+        "Straw__Floor",
+        "Straw__Foundation",
+        "Straw__Frame"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walls",
+      "label": "Walls and windows",
+      "adds": [
+        "Straw__Wall_Back",
+        "Straw__Wall_Bindings",
+        "Straw__Wall_Front",
+        "Straw__Wall_Left",
+        "Straw__Wall_Right",
+        "Straw__Window_Back",
+        "Straw__Window_Front",
+        "Straw__Window_Left",
+        "Straw__Window_Right"
+      ],
+      "visible": [
+        "Straw__Floor",
+        "Straw__Foundation",
+        "Straw__Frame",
+        "Straw__Wall_Back",
+        "Straw__Wall_Bindings",
+        "Straw__Wall_Front",
+        "Straw__Wall_Left",
+        "Straw__Wall_Right",
+        "Straw__Window_Back",
+        "Straw__Window_Front",
+        "Straw__Window_Left",
+        "Straw__Window_Right"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "roof",
+      "label": "Roof and chimney",
+      "adds": [
+        "Straw__Gable",
+        "Straw__Rafters",
+        "Straw__Roof_Entrance_Gable",
+        "Straw__Roof_Entrance_Thatch_Left",
+        "Straw__Roof_Entrance_Thatch_Right",
+        "Straw__Roof_Main_Hip",
+        "Straw__Roof_Ridge",
+        "Straw__Roof_Thatch_Back",
+        "Straw__Roof_Thatch_Front",
+        "Straw__Roof_Thatch_Left",
+        "Straw__Roof_Thatch_Right"
+      ],
+      "visible": [
+        "Straw__Floor",
+        "Straw__Foundation",
+        "Straw__Frame",
+        "Straw__Gable",
+        "Straw__Rafters",
+        "Straw__Roof_Entrance_Gable",
+        "Straw__Roof_Entrance_Thatch_Left",
+        "Straw__Roof_Entrance_Thatch_Right",
+        "Straw__Roof_Main_Hip",
+        "Straw__Roof_Ridge",
+        "Straw__Roof_Thatch_Back",
+        "Straw__Roof_Thatch_Front",
+        "Straw__Roof_Thatch_Left",
+        "Straw__Roof_Thatch_Right",
+        "Straw__Wall_Back",
+        "Straw__Wall_Bindings",
+        "Straw__Wall_Front",
+        "Straw__Wall_Left",
+        "Straw__Wall_Right",
+        "Straw__Window_Back",
+        "Straw__Window_Front",
+        "Straw__Window_Left",
+        "Straw__Window_Right"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "complete",
+      "label": "Door, steps and finish",
+      "adds": [
+        "Straw__Artisan_details",
+        "Straw__Door",
+        "Straw__Steps",
+        "Straw__Timber_details"
+      ],
+      "visible": [
+        "Straw__Artisan_details",
+        "Straw__Door",
+        "Straw__Floor",
+        "Straw__Foundation",
+        "Straw__Frame",
+        "Straw__Gable",
+        "Straw__Rafters",
+        "Straw__Roof_Entrance_Gable",
+        "Straw__Roof_Entrance_Thatch_Left",
+        "Straw__Roof_Entrance_Thatch_Right",
+        "Straw__Roof_Main_Hip",
+        "Straw__Roof_Ridge",
+        "Straw__Roof_Thatch_Back",
+        "Straw__Roof_Thatch_Front",
+        "Straw__Roof_Thatch_Left",
+        "Straw__Roof_Thatch_Right",
+        "Straw__Steps",
+        "Straw__Timber_details",
+        "Straw__Wall_Back",
+        "Straw__Wall_Bindings",
+        "Straw__Wall_Front",
+        "Straw__Wall_Left",
+        "Straw__Wall_Right",
+        "Straw__Window_Back",
+        "Straw__Window_Front",
+        "Straw__Window_Left",
+        "Straw__Window_Right"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node_index": 0,
+      "node_name": "Straw__Artisan_details",
+      "source_mesh_index": 0,
+      "component": "Artisan_details",
+      "first_stage": 5
+    },
+    {
+      "node_index": 1,
+      "node_name": "Straw__Door",
+      "source_mesh_index": 1,
+      "component": "Door",
+      "first_stage": 5
+    },
+    {
+      "node_index": 2,
+      "node_name": "Straw__Floor",
+      "source_mesh_index": 2,
+      "component": "Floor",
+      "first_stage": 1
+    },
+    {
+      "node_index": 3,
+      "node_name": "Straw__Foundation",
+      "source_mesh_index": 3,
+      "component": "Foundation",
+      "first_stage": 1
+    },
+    {
+      "node_index": 4,
+      "node_name": "Straw__Frame",
+      "source_mesh_index": 4,
+      "component": "Frame",
+      "first_stage": 2
+    },
+    {
+      "node_index": 5,
+      "node_name": "Straw__Gable",
+      "source_mesh_index": 5,
+      "component": "Gable",
+      "first_stage": 4
+    },
+    {
+      "node_index": 6,
+      "node_name": "Straw__Rafters",
+      "source_mesh_index": 6,
+      "component": "Rafters",
+      "first_stage": 4
+    },
+    {
+      "node_index": 7,
+      "node_name": "Straw__Roof_Entrance_Gable",
+      "source_mesh_index": 7,
+      "component": "Roof_Entrance_Gable",
+      "first_stage": 4
+    },
+    {
+      "node_index": 8,
+      "node_name": "Straw__Roof_Entrance_Thatch_Left",
+      "source_mesh_index": 8,
+      "component": "Roof_Entrance_Thatch_Left",
+      "first_stage": 4
+    },
+    {
+      "node_index": 9,
+      "node_name": "Straw__Roof_Entrance_Thatch_Right",
+      "source_mesh_index": 9,
+      "component": "Roof_Entrance_Thatch_Right",
+      "first_stage": 4
+    },
+    {
+      "node_index": 10,
+      "node_name": "Straw__Roof_Main_Hip",
+      "source_mesh_index": 10,
+      "component": "Roof_Main_Hip",
+      "first_stage": 4
+    },
+    {
+      "node_index": 11,
+      "node_name": "Straw__Roof_Ridge",
+      "source_mesh_index": 11,
+      "component": "Roof_Ridge",
+      "first_stage": 4
+    },
+    {
+      "node_index": 12,
+      "node_name": "Straw__Roof_Thatch_Back",
+      "source_mesh_index": 12,
+      "component": "Roof_Thatch_Back",
+      "first_stage": 4
+    },
+    {
+      "node_index": 13,
+      "node_name": "Straw__Roof_Thatch_Front",
+      "source_mesh_index": 13,
+      "component": "Roof_Thatch_Front",
+      "first_stage": 4
+    },
+    {
+      "node_index": 14,
+      "node_name": "Straw__Roof_Thatch_Left",
+      "source_mesh_index": 14,
+      "component": "Roof_Thatch_Left",
+      "first_stage": 4
+    },
+    {
+      "node_index": 15,
+      "node_name": "Straw__Roof_Thatch_Right",
+      "source_mesh_index": 15,
+      "component": "Roof_Thatch_Right",
+      "first_stage": 4
+    },
+    {
+      "node_index": 16,
+      "node_name": "Straw__Steps",
+      "source_mesh_index": 16,
+      "component": "Steps",
+      "first_stage": 5
+    },
+    {
+      "node_index": 17,
+      "node_name": "Straw__Timber_details",
+      "source_mesh_index": 17,
+      "component": "Timber_details",
+      "first_stage": 5
+    },
+    {
+      "node_index": 18,
+      "node_name": "Straw__Wall_Back",
+      "source_mesh_index": 18,
+      "component": "Wall_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 19,
+      "node_name": "Straw__Wall_Bindings",
+      "source_mesh_index": 19,
+      "component": "Wall_Bindings",
+      "first_stage": 3
+    },
+    {
+      "node_index": 20,
+      "node_name": "Straw__Wall_Front",
+      "source_mesh_index": 20,
+      "component": "Wall_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 21,
+      "node_name": "Straw__Wall_Left",
+      "source_mesh_index": 21,
+      "component": "Wall_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 22,
+      "node_name": "Straw__Wall_Right",
+      "source_mesh_index": 22,
+      "component": "Wall_Right",
+      "first_stage": 3
+    },
+    {
+      "node_index": 23,
+      "node_name": "Straw__Window_Back",
+      "source_mesh_index": 23,
+      "component": "Window_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 24,
+      "node_name": "Straw__Window_Front",
+      "source_mesh_index": 24,
+      "component": "Window_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 25,
+      "node_name": "Straw__Window_Left",
+      "source_mesh_index": 25,
+      "component": "Window_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 26,
+      "node_name": "Straw__Window_Right",
+      "source_mesh_index": 26,
+      "component": "Window_Right",
+      "first_stage": 3
+    }
+  ],
+  "brick_structure_note": null,
+  "limits": [
+    "Discrete assembly snapshots, not worker hand placement or continuous construction animation",
+    "No collapse clip or reversed playback",
+    "Materials, geometry, transforms and source files unchanged",
+    "Construction site character blocking must be supplied by story integrator"
+  ]
+}

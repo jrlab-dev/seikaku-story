@@ -1,0 +1,288 @@
+{
+  "schema": 1,
+  "kind": "Wood",
+  "source_file": "WoodHouse.glb",
+  "source_sha256": "4e387402ddc44b447aff2089a56075c1ca62b920f1a06ff2793838616e9d9f89",
+  "source_bytes": 26229392,
+  "root_name": "WoodHouse",
+  "method": "visibility_only_on_fresh_static_scene_clone",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "entrance": "+Z",
+    "local_origin": [
+      0,
+      0,
+      0
+    ],
+    "placement": "retain current village placement parent; do not recenter or rescale"
+  },
+  "duration": null,
+  "personality": null,
+  "stages": [
+    {
+      "index": 0,
+      "id": "ground",
+      "label": "Ground / empty plot",
+      "adds": [],
+      "visible": []
+    },
+    {
+      "index": 1,
+      "id": "foundation",
+      "label": "Foundation and floor",
+      "adds": [
+        "Wood__Floor",
+        "Wood__Foundation"
+      ],
+      "visible": [
+        "Wood__Floor",
+        "Wood__Foundation"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "structure",
+      "label": "Posts and frame / masonry corner piers",
+      "adds": [
+        "Wood__Frame"
+      ],
+      "visible": [
+        "Wood__Floor",
+        "Wood__Foundation",
+        "Wood__Frame"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "walls",
+      "label": "Walls and windows",
+      "adds": [
+        "Wood__Wall_Back",
+        "Wood__Wall_Front",
+        "Wood__Wall_Left",
+        "Wood__Wall_Right",
+        "Wood__Window_Back",
+        "Wood__Window_Front",
+        "Wood__Window_Left",
+        "Wood__Window_Right"
+      ],
+      "visible": [
+        "Wood__Floor",
+        "Wood__Foundation",
+        "Wood__Frame",
+        "Wood__Wall_Back",
+        "Wood__Wall_Front",
+        "Wood__Wall_Left",
+        "Wood__Wall_Right",
+        "Wood__Window_Back",
+        "Wood__Window_Front",
+        "Wood__Window_Left",
+        "Wood__Window_Right"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "roof",
+      "label": "Roof and chimney",
+      "adds": [
+        "Wood__Chimney",
+        "Wood__Gable",
+        "Wood__Roof_Left",
+        "Wood__Roof_Ridge",
+        "Wood__Roof_Right"
+      ],
+      "visible": [
+        "Wood__Chimney",
+        "Wood__Floor",
+        "Wood__Foundation",
+        "Wood__Frame",
+        "Wood__Gable",
+        "Wood__Roof_Left",
+        "Wood__Roof_Ridge",
+        "Wood__Roof_Right",
+        "Wood__Wall_Back",
+        "Wood__Wall_Front",
+        "Wood__Wall_Left",
+        "Wood__Wall_Right",
+        "Wood__Window_Back",
+        "Wood__Window_Front",
+        "Wood__Window_Left",
+        "Wood__Window_Right"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "complete",
+      "label": "Door, steps and finish",
+      "adds": [
+        "Wood__Carpentry",
+        "Wood__Door",
+        "Wood__Steps"
+      ],
+      "visible": [
+        "Wood__Carpentry",
+        "Wood__Chimney",
+        "Wood__Door",
+        "Wood__Floor",
+        "Wood__Foundation",
+        "Wood__Frame",
+        "Wood__Gable",
+        "Wood__Roof_Left",
+        "Wood__Roof_Ridge",
+        "Wood__Roof_Right",
+        "Wood__Steps",
+        "Wood__Wall_Back",
+        "Wood__Wall_Front",
+        "Wood__Wall_Left",
+        "Wood__Wall_Right",
+        "Wood__Window_Back",
+        "Wood__Window_Front",
+        "Wood__Window_Left",
+        "Wood__Window_Right"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node_index": 0,
+      "node_name": "Wood__Carpentry",
+      "source_mesh_index": 0,
+      "component": "Carpentry",
+      "first_stage": 5
+    },
+    {
+      "node_index": 1,
+      "node_name": "Wood__Chimney",
+      "source_mesh_index": 1,
+      "component": "Chimney",
+      "first_stage": 4
+    },
+    {
+      "node_index": 2,
+      "node_name": "Wood__Door",
+      "source_mesh_index": 2,
+      "component": "Door",
+      "first_stage": 5
+    },
+    {
+      "node_index": 3,
+      "node_name": "Wood__Floor",
+      "source_mesh_index": 3,
+      "component": "Floor",
+      "first_stage": 1
+    },
+    {
+      "node_index": 4,
+      "node_name": "Wood__Foundation",
+      "source_mesh_index": 4,
+      "component": "Foundation",
+      "first_stage": 1
+    },
+    {
+      "node_index": 5,
+      "node_name": "Wood__Frame",
+      "source_mesh_index": 5,
+      "component": "Frame",
+      "first_stage": 2
+    },
+    {
+      "node_index": 6,
+      "node_name": "Wood__Gable",
+      "source_mesh_index": 6,
+      "component": "Gable",
+      "first_stage": 4
+    },
+    {
+      "node_index": 7,
+      "node_name": "Wood__Roof_Left",
+      "source_mesh_index": 7,
+      "component": "Roof_Left",
+      "first_stage": 4
+    },
+    {
+      "node_index": 8,
+      "node_name": "Wood__Roof_Ridge",
+      "source_mesh_index": 8,
+      "component": "Roof_Ridge",
+      "first_stage": 4
+    },
+    {
+      "node_index": 9,
+      "node_name": "Wood__Roof_Right",
+      "source_mesh_index": 9,
+      "component": "Roof_Right",
+      "first_stage": 4
+    },
+    {
+      "node_index": 10,
+      "node_name": "Wood__Steps",
+      "source_mesh_index": 10,
+      "component": "Steps",
+      "first_stage": 5
+    },
+    {
+      "node_index": 11,
+      "node_name": "Wood__Wall_Back",
+      "source_mesh_index": 11,
+      "component": "Wall_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 12,
+      "node_name": "Wood__Wall_Front",
+      "source_mesh_index": 12,
+      "component": "Wall_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 13,
+      "node_name": "Wood__Wall_Left",
+      "source_mesh_index": 13,
+      "component": "Wall_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 14,
+      "node_name": "Wood__Wall_Right",
+      "source_mesh_index": 14,
+      "component": "Wall_Right",
+      "first_stage": 3
+    },
+    {
+      "node_index": 15,
+      "node_name": "Wood__Window_Back",
+      "source_mesh_index": 15,
+      "component": "Window_Back",
+      "first_stage": 3
+    },
+    {
+      "node_index": 16,
+      "node_name": "Wood__Window_Front",
+      "source_mesh_index": 16,
+      "component": "Window_Front",
+      "first_stage": 3
+    },
+    {
+      "node_index": 17,
+      "node_name": "Wood__Window_Left",
+      "source_mesh_index": 17,
+      "component": "Window_Left",
+      "first_stage": 3
+    },
+    {
+      "node_index": 18,
+      "node_name": "Wood__Window_Right",
+      "source_mesh_index": 18,
+      "component": "Window_Right",
+      "first_stage": 3
+    }
+  ],
+  "brick_structure_note": null,
+  "limits": [
+    "Discrete assembly snapshots, not worker hand placement or continuous construction animation",
+    "No collapse clip or reversed playback",
+    "Materials, geometry, transforms and source files unchanged",
+    "Construction site character blocking must be supplied by story integrator"
+  ]
+}

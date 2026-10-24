@@ -1,0 +1,163 @@
+{
+  "pig_straw_build_hammer": {
+    "url": "./build_straw.png",
+    "size": [
+      1774,
+      887
+    ],
+    "bodyHeightPixels": 835,
+    "frames": [
+      {
+        "cell": [
+          0,
+          0,
+          887,
+          887
+        ],
+        "anchor": [
+          510,
+          850
+        ]
+      },
+      {
+        "cell": [
+          887,
+          0,
+          887,
+          887
+        ],
+        "anchor": [
+          405,
+          850
+        ]
+      }
+    ]
+  },
+  "pig_wood_build_hammer": {
+    "url": "./build_wood.png",
+    "size": [
+      1774,
+      887
+    ],
+    "bodyHeightPixels": 835,
+    "frames": [
+      {
+        "cell": [
+          0,
+          0,
+          887,
+          887
+        ],
+        "anchor": [
+          510,
+          850
+        ]
+      },
+      {
+        "cell": [
+          887,
+          0,
+          887,
+          887
+        ],
+        "anchor": [
+          395,
+          850
+        ]
+      }
+    ]
+  },
+  "pig_brick_build_hammer": {
+    "url": "./build_brick_clean.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "bodyHeightPixels": 910,
+    "frames": [
+      {
+        "cell": [
+          0,
+          0,
+          768,
+          1024
+        ],
+        "anchor": [
+          430,
+          940
+        ]
+      },
+      {
+        "cell": [
+          768,
+          0,
+          768,
+          1024
+        ],
+        "anchor": [
+          310,
+          940
+        ]
+      }
+    ]
+  },
+  "wolf_walk": {
+    "url": "./walk_wolf.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "bodyHeightPixels": 460,
+    "fps": 5,
+    "frames": [
+      {
+        "cell": [
+          0,
+          0,
+          768,
+          512
+        ],
+        "anchor": [
+          490,
+          483
+        ]
+      },
+      {
+        "cell": [
+          768,
+          0,
+          768,
+          512
+        ],
+        "anchor": [
+          330,
+          483
+        ]
+      },
+      {
+        "cell": [
+          0,
+          512,
+          768,
+          512
+        ],
+        "anchor": [
+          490,
+          480
+        ]
+      },
+      {
+        "cell": [
+          768,
+          512,
+          768,
+          512
+        ],
+        "anchor": [
+          330,
+          480
+        ]
+      }
+    ]
+  }
+}

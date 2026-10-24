@@ -1,0 +1,150 @@
+{
+  "config": {
+    "torso": "brick_torso.png",
+    "scale": 0.55,
+    "hem_y": 1190,
+    "hips_x": 550,
+    "ground": [
+      512,
+      920
+    ],
+    "ring_h": 180,
+    "ring_w": 410,
+    "overlap": 62,
+    "rot": 0.1,
+    "ring_dx": 0,
+    "bob": 5,
+    "frames": 8,
+    "fill": 0
+  },
+  "frames": [
+    {
+      "index": 0,
+      "image": "run_00.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        762
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "contact"
+    },
+    {
+      "index": 1,
+      "image": "run_01.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        758
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "flight"
+    },
+    {
+      "index": 2,
+      "image": "run_02.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        757
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "flight"
+    },
+    {
+      "index": 3,
+      "image": "run_03.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        758
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "flight"
+    },
+    {
+      "index": 4,
+      "image": "run_04.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        762
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "contact"
+    },
+    {
+      "index": 5,
+      "image": "run_05.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        758
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "flight"
+    },
+    {
+      "index": 6,
+      "image": "run_06.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        757
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "flight"
+    },
+    {
+      "index": 7,
+      "image": "run_07.png",
+      "crop_xywh": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "hip_pivot_px": [
+        512,
+        758
+      ],
+      "head_top_y_px": null,
+      "contact_phase": "flight"
+    }
+  ]
+}

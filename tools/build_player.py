@@ -87,3 +87,26 @@ old = "async function fetchAssetBuffer(url,signal){const response=await fetch(ur
 assert old in v
 v = v.replace(old, "const SPLIT_ASSETS=" + json.dumps(['./' + p[len('web_J38/'):] for p in parts]) + ";async function fetchAssetBuffer(url,signal){if(!SPLIT_ASSETS.includes(url)){const response=await fetch(url,{signal});if(!response.ok)throw Error('Asset '+response.status+' '+url);return response.arrayBuffer();}const m=await fetch(url+'.parts.json',{signal});if(!m.ok)throw Error('Asset parts '+m.status+' '+url);")
 open(vj, 'w', encoding='utf-8').write(v); print('viewer public ok', parts)
+
+# 公開版の入口：物語が始まるまで3Dの村（元の3軒が建っている準備中の画面）を見せない。
+# 読み込みの進みを出し、準備ができたら「お話をはじめる」ボタン（音を鳴らすには押す操作が要る）。押したあとも、最初の字幕が出るまで覆いを残す。
+h = open(idx, encoding='utf-8').read()
+cover = '''<div id="cover"><div class="box"><h2>三びきのこぶた</h2><p id="cover-msg">3Dの絵本劇を読み込んでいます…</p><div class="bar"><i id="cover-bar"></i></div><p id="cover-mb" class="small"></p><button id="cover-go" hidden>▶ お話をはじめる</button><p class="small">はじめは読み込みに時間がかかります（Wi-Fiがおすすめ）。</p></div></div>
+<style>#cover{position:fixed;inset:0;z-index:30;background:#f6f1e3;display:grid;place-items:center;font-family:"Hiragino Maru Gothic ProN",system-ui,sans-serif;color:#2f3a2c}#cover[hidden]{display:none}#cover .box{width:min(420px,86vw);text-align:center}#cover h2{font-size:26px;margin:0 0 10px}#cover .bar{height:10px;background:#e3dac3;border-radius:99px;overflow:hidden;margin:14px 0 6px}#cover .bar i{display:block;height:100%;width:0;background:#5b8c51;transition:width .4s}#cover .small{font-size:12px;color:#6b705c}#cover button{margin:16px 0 6px;border:0;border-radius:999px;padding:14px 30px;background:#c8553d;color:#fff;font:inherit;font-size:18px;font-weight:700;box-shadow:0 4px 0 #9b3f2c}</style>
+<script>
+(()=>{const $=id=>document.getElementById(id),TOTAL=330*2**20;let phase='load',start=performance.now();
+ const got=()=>performance.getEntriesByType('resource').reduce((s,e)=>s+(e.transferSize||e.encodedBodySize||0),0);
+ const tick=()=>{const mb=got(),u=Math.min(.98,mb/TOTAL);$('cover-bar').style.width=(u*100).toFixed(0)+'%';$('cover-mb').textContent=Math.round(mb/2**20)+' MB 読み込み済み';
+  const play=$('story-play'),cap=$('story-caption');
+  if(phase==='load'&&play&&!play.disabled){phase='ready';$('cover-go').hidden=false;$('cover-msg').textContent='準備ができました';}
+  if(phase==='starting'&&cap&&!cap.hidden&&cap.textContent){phase='on';$('cover').hidden=true;return;}
+  if(phase==='starting')$('cover-msg').textContent='家と人形を準備しています…';
+  requestAnimationFrame(()=>setTimeout(tick,300));};
+ addEventListener('DOMContentLoaded',()=>{$('cover-go').onclick=()=>{phase='starting';$('cover-go').hidden=true;$('story-play').click();};tick();});
+ // 最後まで見たら、性格を選びなおす案内を出す
+ addEventListener('DOMContentLoaded',()=>{const iv=setInterval(()=>{const r=$('story-time');if(phase==='on'&&r&&+r.value>=+r.max-.2){clearInterval(iv);const c=$('cover');c.hidden=false;c.querySelector('.box').innerHTML='<h2>おしまい</h2><p>性格を変えると、ちがうお話になります。</p><button onclick="location.href=\\'../../\\'">性格を選びなおす</button><p><a href="" onclick="location.reload();return false">もう一度見る</a></p>';}},1000);});
+})();
+</script>'''
+h = h.replace('<a id="back" href="../../">← 性格を選びなおす</a>', '<a id="back" href="../../">← 性格を選びなおす</a>' + cover, 1)
+open(idx, 'w', encoding='utf-8').write(h)
+print('cover ok')

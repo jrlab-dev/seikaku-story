@@ -447,3 +447,5 @@ if(new URLSearchParams(location.search).has('qa'))window.__storyTest.hillView=(i
 };
 
 if(new URLSearchParams(location.search).has('qa'))window.__storyTest.travelSurfaceAudit=()=>characterLayer.actors.filter(a=>a.requestedVisible&&a.data.id!=='wolf').map(a=>({...inspectTravelActor(a,camera,travelWalkSurface||villageGround,[qaContactTerrain,...travelWalkMeshes]),baseTerrain:villageGround(a.root.position.x,a.root.position.z),walkSurface:travelWalkSurface?.(a.root.position.x,a.root.position.z),walkTriangles:travelWalkSurface?.triangles}));
+
+window.__prepareStory=()=>storyPlayer?.initialize?.();

@@ -18,7 +18,7 @@ export function siteHouses(cast){
 export const NAME={straw:'わらの家',wood:'木の家',brick:'れんがの家',tent:'テント',fortress:'鉄の要塞',treehouse:'ツリーハウス',karakuri:'発明の家',bunker:'地下シェルター',castle:'お城',karakuri_fort:'からくり要塞'};
 const MODEL={straw:'StrawHouse',wood:'WoodHouse',brick:'BrickHouse',tent:'TentHouse',fortress:'FortressHouse',treehouse:'TreehouseHouse',karakuri:'KarakuriHouse',bunker:'BunkerHouse',castle:'CastleHouse',karakuri_fort:'KarakuriFortHouse'};
 const MANIFEST={straw:'Straw',wood:'Wood',brick:'Brick',tent:'Tent',fortress:'Fortress',treehouse:'Treehouse',karakuri:'Karakuri',bunker:'Bunker',castle:'Castle',karakuri_fort:'KarakuriFort'};
-const FALL={straw:['Straw_BlowAway_v2.glb','Straw_BlowAway_v2'],wood:['Wood_BlowAway_v2.glb','Wood_BlowAway_v2'],tent:['Tent_BlowAway_v1.glb','Tent_BlowAway_v1'],treehouse:['Treehouse_BlowAway_v1.glb','Treehouse_BlowAway_v1']};
+const FALL={straw:['Straw_VillageTopple_J59.glb','Straw_VillageTopple_J59'],wood:['Wood_VillageTopple_J59.glb','Wood_VillageTopple_J59'],tent:['Tent_BlowAway_v1.glb','Tent_BlowAway_v1'],treehouse:['Treehouse_BlowAway_v1.glb','Treehouse_BlowAway_v1']};
 
 export async function preparePuzzleSites({THREE,loadAsset,prepare,cast,placements,sources}){
  const sites=siteHouses(cast),swapped={},manifests={};
@@ -33,9 +33,10 @@ export async function preparePuzzleSites({THREE,loadAsset,prepare,cast,placement
    const clip=g.animations.find(c=>c.name===FALL[v][1]);const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
    fall={scene:g.scene,seek(t){action.reset().play();action.paused=false;mixer.setTime(Math.max(0,Math.min(clip.duration,t)));action.paused=true;}};}
   let hatch=null;
-  if(v==='bunker'){const g=await loadAsset('./assets/Bunker_Hatch_v1.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
-   const clip=g.animations.find(c=>c.name==='Bunker_Hatch_v1');const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
-   hatch={scene:g.scene,seek(t){action.reset().play();action.paused=false;mixer.setTime(t);action.paused=true;}};}
+  const DOOR_CLIP={bunker:['Bunker_Hatch_v1',1.2,1.8],karakuri:['Karakuri_Door_v1',1.0,1.0]};
+  if(DOOR_CLIP[v]){const[dn,d0,d1]=DOOR_CLIP[v];const g=await loadAsset('./assets/'+dn+'.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
+   const clip=g.animations.find(c=>c.name===dn);const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
+   hatch={scene:g.scene,d0,d1,seek(t){action.reset().play();action.paused=false;mixer.setTime(t);action.paused=true;}};}
   swapped[site]={visual:v,staticScene,fall,hatch,detached};
  }
  return{sites,swapped,manifests};
@@ -47,7 +48,7 @@ export function wrapPuzzleBuildings(buildings,{swapped}){
  function show(){for(const[site,s]of Object.entries(swapped)){const st=last[site]||{},stage=st.constructionStage??5;
   if(stage<5||busy===site){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;continue;}
   if(st.intact===false&&s.fall){s.staticScene.visible=false;s.fall.scene.visible=true;s.fall.seek(st.time||0);}
-  else if(s.hatch&&(st.doorOpen??0)>.05){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;s.hatch.scene.visible=true;s.hatch.seek(1.2+1.8*Math.min(1,st.doorOpen));}// ふたが開いた姿
+  else if(s.hatch&&(st.doorOpen??0)>.05){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;s.hatch.scene.visible=true;s.hatch.seek(s.hatch.d0+s.hatch.d1*Math.min(1,st.doorOpen));}// 扉・ふたが開いた姿
   else{s.staticScene.visible=true;if(s.fall)s.fall.scene.visible=false;if(s.hatch)s.hatch.scene.visible=false;}
   if(s.hatch&&(stage<5||busy===site||st.intact===false||(st.doorOpen??0)<=.05))s.hatch.scene.visible=false;}}
  return{...buildings,

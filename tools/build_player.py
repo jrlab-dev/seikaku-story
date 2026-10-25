@@ -17,7 +17,7 @@ base = os.path.join(SRC, 'animal', 'delivery')
 W = os.path.join(base, 'web_J38')
 listed = set()
 fetched0 = set(used)
-KEEP_DIRS = {'assets/prologue', 'assets/characters', 'reactions', 'assets/portraits', 'assets/endings', 'assets/textures', 'endings'}
+KEEP_DIRS = {'intro', 'assets/prologue', 'assets/characters', 'reactions', 'assets/portraits', 'assets/endings', 'assets/textures', 'endings'}
 for j in ['puzzle_houses_more.json', 'tent_fortress_houses.json', 'puzzle_effects.json', 'puzzle_houses_karakuri_fort.json']:
     t = open(os.path.join(W, j)).read()
     import re
@@ -89,20 +89,20 @@ v = v.replace(old, "const SPLIT_ASSETS=" + json.dumps(['./' + p[len('web_J38/'):
 v += '\nwindow.__prepareStory=()=>storyPlayer?.initialize?.();\n'
 open(vj, 'w', encoding='utf-8').write(v); print('viewer public ok', parts)
 
-# 公開版の入口：3Dを読み込んでいるあいだに、お話の始まり（元の家を出る）と4人の性格の紹介を、絵と文字で読んでもらう。
-# 読み終えて準備ができたら「お話をはじめる」。3Dは紹介の場面のあと（START秒）から始める。下に読み込みの進みを常に出す。
+# 公開版の入口：3Dを読み込んでいるあいだは、お話の始まり（家を出る・到着）を動画で流し、4人の性格紹介を動画の下に出す。
+# 狼が登場する場面（35〜41秒）は狼の性格の型ごとの動画。41秒から3Dに切り替える。最初の「はじめる」で音の許可と3Dの準備を始める。
+# 動画は intro/pigs.mp4（0〜35秒）と intro/wolf<型>.mp4（35〜41秒）。字幕と性格紹介はここで重ねる（動画には焼き込まない）。
 h = open(idx, encoding='utf-8').read()
-cover = """<div id="cover"><div class="box" id="pro"></div><div class="load"><div class="bar"><i id="cover-bar"></i></div><span id="cover-mb">3Dの絵本劇を読み込んでいます…</span></div></div>
+cover = """<div id="cover"><div class="stage"><div class="vbox"><video id="iv" playsinline preload="auto"></video><div id="icap"></div><div id="tap"><button id="tap-go">▶ お話をはじめる</button><p class="small">音が出ます</p></div></div><div id="card"></div></div><div class="load"><div class="bar"><i id="cover-bar"></i></div><span id="cover-mb">3Dの絵本劇を読み込んでいます…</span></div></div>
 <style>#cover{position:fixed;inset:0;z-index:30;background:#f6f1e3;display:flex;flex-direction:column;font-family:"Hiragino Maru Gothic ProN",system-ui,sans-serif;color:#2f3a2c;overflow:auto}#cover[hidden]{display:none}
-#cover .box{flex:1;width:min(560px,92vw);margin:0 auto;padding:54px 0 16px;display:flex;flex-direction:column;align-items:center;text-align:center}
-#cover h2{font-size:24px;margin:0 0 12px}#cover .scene{width:100%;border-radius:14px;box-shadow:0 6px 20px #5b4a2a33;margin-bottom:14px}
-#cover .txt{font-size:20px;line-height:1.8;font-weight:700;margin:6px 0 4px}#cover .sub{font-size:14px;color:#6b705c}
-#cover .card{background:#fffdf6;border:1px solid #e3dac3;border-radius:16px;padding:16px;width:100%;display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center;text-align:left}
-#cover .card canvas{width:120px;height:150px}#cover .role{font-size:14px;color:#5b8c51;font-weight:700}#cover .name{font-size:21px;font-weight:800;margin:2px 0 8px}#cover .lines{font-size:16px;line-height:1.75}
-#cover .nav{margin-top:18px;display:flex;gap:10px;justify-content:center}#cover button{border:0;border-radius:999px;padding:12px 26px;background:#5b8c51;color:#fff;font:inherit;font-size:17px;font-weight:700;box-shadow:0 4px 0 #3f6838}#cover button.go{background:#c8553d;box-shadow:0 4px 0 #9b3f2c;font-size:19px}#cover button.back{background:#fff;color:#2f3a2c;border:1px solid #e3dac3;box-shadow:0 3px 0 #e3dac3}#cover button:disabled{opacity:.5}
-#cover .dots{margin-top:10px;font-size:12px;color:#b3aa90;letter-spacing:4px}
-#cover .load{padding:10px 16px 14px;font-size:12px;color:#6b705c;text-align:center;background:#f6f1e3;position:sticky;bottom:0}#cover .bar{height:8px;background:#e3dac3;border-radius:99px;overflow:hidden;margin:0 auto 4px;width:min(420px,90vw)}#cover .bar i{display:block;height:100%;width:0;background:#5b8c51;transition:width .4s}
-@media (max-width:480px){#cover .card{grid-template-columns:90px 1fr}#cover .card canvas{width:90px;height:112px}#cover .txt{font-size:18px}}</style>
+#cover .stage{flex:1;width:min(960px,100vw);margin:0 auto;padding:44px 8px 8px;display:flex;flex-direction:column;gap:10px}
+#cover .vbox{position:relative;width:100%;aspect-ratio:1002/720;background:#263429;border-radius:12px;overflow:hidden}#cover video{width:100%;height:100%;display:block;object-fit:cover}
+#icap{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:88%;background:#19231ae6;color:#fff;border-radius:10px;padding:8px 14px;text-align:center;font-weight:700;font-size:clamp(14px,2.6vw,22px);line-height:1.5}#icap:empty{display:none}
+#tap{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;background:#f6f1e3cc}#tap[hidden]{display:none}#tap button{border:0;border-radius:999px;padding:14px 30px;background:#c8553d;color:#fff;font:inherit;font-size:19px;font-weight:700;box-shadow:0 4px 0 #9b3f2c}
+#card .c{background:#fffdf6;border:1px solid #e3dac3;border-radius:14px;padding:12px;display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center}#card canvas{width:110px;height:138px}#card .role{font-size:13px;color:#5b8c51;font-weight:700}#card .name{font-size:20px;font-weight:800;margin:2px 0 6px}#card .lines{font-size:15px;line-height:1.75}
+#cover .small{font-size:12px;color:#6b705c}#cover .wait{text-align:center;font-weight:700;padding:12px}
+#cover .load{padding:8px 16px 12px;font-size:12px;color:#6b705c;text-align:center;background:#f6f1e3;position:sticky;bottom:0}#cover .bar{height:8px;background:#e3dac3;border-radius:99px;overflow:hidden;margin:0 auto 4px;width:min(420px,90vw)}#cover .bar i{display:block;height:100%;width:0;background:#5b8c51;transition:width .4s}
+@media (min-width:900px){#cover .stage{display:grid;grid-template-columns:1fr 300px;align-items:start}#card .c{grid-template-columns:1fr;text-align:center}#card canvas{margin:0 auto;width:150px;height:188px}}</style>
 <script type="module">
 import {TYPE_NAMES,PROFILE_TEXT} from './personality_text.mjs';
 import {castTypes} from './animal_reactions.js';
@@ -110,32 +110,29 @@ const START=41,TOTAL=330*2**20,$=id=>document.getElementById(id);
 const q=(new URLSearchParams(location.search).get('cast')||'33535,55331,33333,11311').split(','),ROLES=['pig_straw','pig_wood','pig_brick','wolf'],LABEL={pig_straw:'長男',pig_wood:'次男',pig_brick:'三男',wolf:'おおかみ'};
 const cast=Object.fromEntries(ROLES.map((r,i)=>[r,q[i]])),types=castTypes(cast),man=await (await fetch('./assets/portraits/manifest.json')).json();
 const imgs={};await Promise.all(ROLES.map(r=>new Promise(ok=>{const im=new Image();im.onload=ok;im.onerror=ok;im.src=man[r].url;imgs[r]=im;})));
-const pages=[{img:'home',txt:'3びきのこぶたは、小さな家で暮らしていました。<br>大きくなった3びきは、自分たちの家を作ることに。'},...ROLES.slice(0,3).map(r=>({role:r})),{img:'arrive',txt:'新しい土地に到着。<br>ふり返ると、前の家が遠くに。'},{role:'wolf',pre:'そのころ、おおかみは……'},{end:true}];
-let n=0,anim=null,ready=false,phase='read';
-function card(r){const code=cast[r],t=PROFILE_TEXT[code]?.pages??[],c=document.createElement('canvas');c.width=240;c.height=300;
+// 3Dのお話と同じ時刻割り（字幕・性格紹介）
+const CAPS=[[0,2.5,'3びきのこぶたは、小さな家で暮らしていました。'],[2.5,5,'大きくなった3びきは、自分たちの家を作ることに。'],[32,35,'新しい土地に到着。ふり返ると、前の家が遠くに。']];
+const CARDS=[[5,14,'pig_straw'],[14,23,'pig_wood'],[23,32,'pig_brick'],[35,41,'wolf']];
+const v=$('iv'),wolfSrc='./intro/wolf'+(types.wolf??9)+'.mp4';let seg='pigs',anim=null,shown=null,phase='tap',started=false;
+v.src='./intro/pigs.mp4';const pre=document.createElement('link');pre.rel='preload';pre.as='video';pre.href=wolfSrc;document.head.append(pre);
+function card(r){clearInterval(anim);const box=$('card');box.innerHTML='';shown=r;if(!r)return;const code=cast[r],t=PROFILE_TEXT[code]?.pages??[],c=document.createElement('canvas');c.width=240;c.height=300;
  const fr=man[r].frames.filter(f=>f.type===(types[r]??9)),draw=k=>{const f=fr[k%fr.length],[x,y,w,h]=f.rect,s=Math.min(230/w,290/h),ctx=c.getContext('2d');ctx.clearRect(0,0,240,300);ctx.drawImage(imgs[r],x,y,w,h,120-w*s/2,298-h*s,w*s,h*s);};
- let k=0;draw(0);anim=setInterval(()=>draw(++k),500);
- const d=document.createElement('div');d.className='card';d.append(c);const b=document.createElement('div');b.innerHTML=`<div class="role">${LABEL[r]}</div><div class="name">${TYPE_NAMES[code]??''}</div><div class="lines">${t.map(p=>p.join('')).join('<br>')}</div>`;d.append(b);return d;}
-function show(){clearInterval(anim);const p=pages[n],box=$('pro');box.innerHTML='';
- if(n===0){const h=document.createElement('h2');h.textContent='三びきのこぶた';box.append(h);}
- if(p.img){const im=document.createElement('img');im.className='scene';im.src='./assets/prologue/'+p.img+'.jpg';box.append(im);const t=document.createElement('div');t.className='txt';t.innerHTML=p.txt;box.append(t);}
- if(p.pre){const t=document.createElement('div');t.className='sub';t.textContent=p.pre;t.style.marginBottom='8px';box.append(t);}
- if(p.role){if(!p.pre){const t=document.createElement('div');t.className='sub';t.textContent='性格のお話';t.style.marginBottom='8px';box.append(t);}box.append(card(p.role));}
- if(p.end){const t=document.createElement('div');t.className='txt';t.innerHTML=ready?'準備ができました。':'もう少しで準備ができます…';box.append(t);const s=document.createElement('div');s.className='sub';s.textContent='どんなお話になるかな？';box.append(s);}
- const nav=document.createElement('div');nav.className='nav';
- if(n>0){const bk=document.createElement('button');bk.className='back';bk.textContent='もどる';bk.onclick=()=>{n--;show();};nav.append(bk);}
- const go=document.createElement('button');if(p.end){go.className='go';go.id='cover-go';go.textContent='▶ お話をはじめる';go.disabled=!ready;go.onclick=start;}else{go.textContent='つぎへ';go.onclick=()=>{n++;show();};}nav.append(go);box.append(nav);
- const dots=document.createElement('div');dots.className='dots';dots.textContent=pages.map((_,i)=>i===n?'●':'○').join('');box.append(dots);}
-function start(){phase='wait';const r=$('story-time');r.value=START;r.dispatchEvent(new Event('input'));$('story-play').click();$('pro').innerHTML='<div class="txt" style="margin-top:30vh">はじまります…</div>';}// 音を鳴らすため、押した操作の中で再生する
-function tick(){const mb=performance.getEntriesByType('resource').reduce((s,e)=>s+(e.transferSize||e.encodedBodySize||0),0);$('cover-bar').style.width=Math.min(98,mb/TOTAL*100).toFixed(0)+'%';
- const play=$('story-play'),pause=$('story-pause'),r=$('story-time');
- // 読んでいるあいだに、3Dの物語の準備まで済ませる（再生を押して、始まったらすぐ紹介のあとの位置で止める）
- if(phase==='read'&&play&&!play.disabled&&!window.__pre&&window.__prepareStory){window.__pre=1;window.__prepareStory()?.then(()=>{window.__pre=2;ready=true;if(pages[n].end)show();});}
- $('cover-mb').textContent=(ready?'準備ができました（':'3Dの絵本劇を読み込んでいます… （')+Math.round(mb/2**20)+' MB）';if(ready)$('cover-bar').style.width='100%';
- if(phase==='wait'&&+r.value>=START&&pause&&!pause.disabled){phase='on';$('cover').hidden=true;}
- if(phase==='on'&&+r.value>=+r.max-.2){phase='end';const c=$('cover');c.hidden=false;$('pro').innerHTML='<h2 style="margin-top:20vh">おしまい</h2><p>性格を変えると、ちがうお話になります。</p><div class="nav"><a class="btn-like" href="../../"><button class="go">性格を選びなおす</button></a></div><p><a href="./?cast='+q.join(',')+'">もう一度見る</a></p>';$('cover').querySelector('.load').hidden=true;}
- setTimeout(tick,300);}
-show();tick();
+ let k=0;draw(0);anim=setInterval(()=>draw(++k),500);const d=document.createElement('div');d.className='c';d.append(c);const b=document.createElement('div');b.innerHTML=`<div class="role">${LABEL[r]}${r==='wolf'?'（そのころ…）':''}</div><div class="name">${TYPE_NAMES[code]??''}</div><div class="lines">${t.map(p=>p.join('')).join('<br>')}</div>`;d.append(b);box.append(d);}
+const now=()=>seg==='pigs'?v.currentTime:35+v.currentTime;
+function sync(){const t=now(),cap=CAPS.find(([a,b])=>t>=a&&t<b);$('icap').textContent=cap?cap[2]:'';const cd=CARDS.find(([a,b])=>t>=a&&t<b);if((cd?.[2]??null)!==shown)card(cd?.[2]??null);}
+v.addEventListener('ended',()=>{if(seg==='pigs'){seg='wolf';v.src=wolfSrc;v.play();}else{phase='handoff';}});
+$('tap-go').onclick=()=>{$('tap').hidden=true;phase='video';v.play();
+ // 押した操作の中で3Dも準備を始める（音の許可もここで取る）。始まったらすぐ41秒で止めて待たせる。待つあいだは消音
+ const m=$('story-mute');if(m){m.checked=true;m.dispatchEvent(new Event('change'));}$('story-play').click();};
+let ready=false;
+function tick(){const mb=performance.getEntriesByType('resource').reduce((s,e)=>s+(e.transferSize||e.encodedBodySize||0),0),pause=$('story-pause'),r=$('story-time'),play=$('story-play');
+ if(phase!=='tap'&&!ready&&pause&&!pause.disabled){ready=true;r.value=START;r.dispatchEvent(new Event('input'));}
+ $('cover-bar').style.width=(ready?100:Math.min(98,mb/TOTAL*100)).toFixed(0)+'%';$('cover-mb').textContent=(ready?'準備ができました（':'3Dの絵本劇を読み込んでいます… （')+Math.round(mb/2**20)+' MB）';
+ if(phase!=='tap')sync();
+ if(phase==='handoff'){if(ready){phase='on';const m=$('story-mute');if(m){m.checked=false;m.dispatchEvent(new Event('change'));}r.value=START;r.dispatchEvent(new Event('input'));play.click();$('cover').hidden=true;clearInterval(anim);}else{$('icap').textContent='3Dの準備をしています。もう少しお待ちください…';}}
+ if(phase==='on'&&+r.value>=+r.max-.2){phase='end';const c=$('cover');c.hidden=false;c.querySelector('.stage').innerHTML='<div class="wait" style="margin-top:18vh"><h2>おしまい</h2><p>性格を変えると、ちがうお話になります。</p><p><a href="../../"><button style="border:0;border-radius:999px;padding:12px 26px;background:#c8553d;color:#fff;font:inherit;font-weight:700">性格を選びなおす</button></a></p><p><a href="./?cast='+q.join(',')+'">もう一度見る</a></p></div>';c.querySelector('.load').hidden=true;}
+ setTimeout(tick,250);}
+tick();
 </script>"""
 h = h.replace('<a id="back" href="../../">← 性格を選びなおす</a>', '<a id="back" href="../../">← 性格を選びなおす</a>' + cover, 1)
 open(idx, 'w', encoding='utf-8').write(h)

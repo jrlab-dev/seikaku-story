@@ -25,7 +25,7 @@ export function createStoryPlayer({document,prepare,applyCamera,releaseOtherCame
  async function ensure(){if(resources)return resources;if(pending)return pending;
   $('story-play').disabled=true;$('story-state').textContent='物語の画像と建物を準備しています…';error='';
   pending=(async()=>{try{resources=await prepare();for(const id of ['story-reset','story-scene','story-time','story-camera'])$(id).disabled=false;return resources;}
-   catch(e){error=String(e);$('story-state').textContent='物語の準備に失敗しました。村は保持しています。再生で再試行できます。';throw e;}
+   catch(e){failLoading();error=String(e);$('story-state').textContent='物語の準備に失敗しました。村は保持しています。再生で再試行できます。';throw e;}
    finally{pending=null;$('story-play').disabled=false;}})();return pending;
  }
  $('story-play').onclick=async()=>{const audioUnlock=audio.unlock();try{await ensure();await audioUnlock;await audio.prepare();finishLoadStep('audio');releaseOtherCameras();active=true;if(clock.time>=STORY_DURATION){resources.buildings.reset();clock.reset();}clock.play();render();}catch(e){failLoading();console.error(e);}};
@@ -38,6 +38,8 @@ export function createStoryPlayer({document,prepare,applyCamera,releaseOtherCame
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clock.pause();render();}});
  return{
   status,
+  unlockAudio(){return audio.unlock();},
+  async prepareIntro(){await ensure();await audio.prepare();finishLoadStep('audio');},
   async initialize(){await ensure();releaseOtherCameras();active=true;reset();},
   async setBranch(id){selectBranch(id);await ensure();refreshScenes();director=true;lastText=null;reset();},
   reset,

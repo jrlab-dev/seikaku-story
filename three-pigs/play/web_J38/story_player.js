@@ -1,9 +1,9 @@
 import {finishLoadStep,failLoading} from './story_loading_progress.mjs';
 import {createStoryAudio} from './story_audio.mjs';
 import {STORY_AUDIO_CONFIG} from './story_audio_config.mjs';
-import {SCENES,STORY_DURATION,sampleStory,createStoryClock,selectBranch} from './story_timeline.mjs';
+import {SCENES,STORY_DURATION,sampleStory,createStoryClock,selectBranch,decideEnding} from './story_timeline.mjs';
 export function createStoryPlayer({document,prepare,applyCamera,releaseOtherCameras,onReset}){
- const $=id=>document.getElementById(id),clock=createStoryClock(),audio=createStoryAudio({config:STORY_AUDIO_CONFIG,document});let resources=null,pending=null,active=false,director=true,lastText=null,error='';
+ const $=id=>document.getElementById(id),clock=createStoryClock(),audio=createStoryAudio({config:{...STORY_AUDIO_CONFIG,bedAsset:decideEnding().id.startsWith('karakuri_')?'./audio/karakuri_bed.m4a':STORY_AUDIO_CONFIG.bedAsset},document});let resources=null,pending=null,active=false,director=true,lastText=null,error='';
  selectBranch(new URLSearchParams(document.location.search).get('branch')??'normal');
  function refreshScenes(){ $('story-scene').replaceChildren();for(const s of SCENES){const o=document.createElement('option');o.value=s.at;o.textContent=s.title;$('story-scene').append(o);}$('story-time').max=STORY_DURATION;const title=sampleStory(0).branch.id==='peace'?'三びきのこぶた — 話して、分け合って':'三びきのこぶた — 低い倒壊と走行';document.querySelector('header h1').textContent=title;document.title=title;document.querySelector('#story-controls strong').textContent=`三びきのこぶた · ${STORY_DURATION}秒`;}
  refreshScenes();

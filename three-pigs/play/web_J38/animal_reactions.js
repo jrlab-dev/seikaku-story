@@ -2,7 +2,7 @@ import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 import {walkView} from './walk_orientation.mjs';
 const IDS=['pig_straw','pig_wood','pig_brick','wolf'];
-const FRONT={bomb:{wolf:[1,4,5,6,7,8]},react:{pig:[0,3,4,7,8],wolf:[2,4,6]},stance:{pig:[0,1,2,3,4,5,6,7,8],wolf:[0,1,2,3,4,5,6,7,8]}};
+const FRONT={bonk:{wolf:[0,1,2]},bomb:{wolf:[1,4,5,6,7,8]},react:{pig:[0,3,4,7,8],wolf:[2,4,6]},stance:{pig:[0,1,2,3,4,5,6,7,8],wolf:[0,1,2,3,4,5,6,7,8]}};
 export async function installAnimalReactions(layer){
  const defs=await(await fetch('./reactions/manifest.json')).json();
  const load=async url=>{const t=await new THREE.TextureLoader().loadAsync(url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;};
@@ -16,7 +16,8 @@ export async function installAnimalReactions(layer){
   for(const[a,mesh]of rigs){const p=poses.get(a.data.id),wolf=a.data.id==='wolf';
    let kind=null,idx=null;
    if(p&&a.requestedVisible!==false&&a.card.visible){
-    if(p.bombPose!=null){kind='bomb';idx=p.bombPose;}// J118：爆弾の狼の9コマ
+    if(p.bonkPose!=null){kind='bonk';idx=p.bonkPose;}
+    else if(p.bombPose!=null){kind='bomb';idx=p.bombPose;}// J118：爆弾の狼の9コマ
     else if(p.reactionPose!=null){kind='react';idx=p.reactionPose;}
     else if(p.reactionBuild&&a.motion==='build_hammer'){kind='react';idx=p.reactionBuild==='hurry'?1:2;}
     else if(p.stance!=null&&a.motion==='idle'){kind='stance';idx=p.stance;}

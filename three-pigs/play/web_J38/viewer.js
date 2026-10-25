@@ -24,7 +24,6 @@ import {installStrawWorkshopPreview} from './straw_workshop_preview.js';
 import {installPerformerActions} from './performer_actions.js';
 import {installPaperTheatre} from './paper_theatre.js';
 let qaContactTerrain=null;
-import {installTwoPoseRun} from './run_two_pose.js';
 import {createBlowawayDeparture} from './no-extra-departure.mjs';
 import {createConstructionBridge} from './construction_bridge.js';
 import {applyRoofRattle,restoreRoofRattle} from './roof_rattle.mjs';
@@ -268,7 +267,7 @@ $('#character-load').onclick=async()=>{
  stopCharacterOrbit();
  if(characterLayer){characterLayer.layout('static');setView('character_front');$('#view').value='character_front';return;}
  characterLoading=true;$('#character-load').disabled=true;$('#character-state').textContent='原画像と方向情報を準備しています…';
- try{characterLayer=await createCharacterLayer({scene,ground:villageGround});finishLoadStep('characters');characterLayer=await installVillainFaces(characterLayer);finishLoadStep('faces');characterLayer=await installTwoPoseRun(characterLayer);finishLoadStep('run');window.__paperStage=await installPaperTheatre(characterLayer);finishLoadStep('paper');await installPerformerActions(characterLayer);finishLoadStep('actions');installStrawWorkshopPreview(characterLayer);await installStrawJoy(characterLayer);finishLoadStep('joy');await installWolfEscape(characterLayer);finishLoadStep('wolf');await installDoorHost(characterLayer,villageGround);finishLoadStep('doors');installEncounterPerformers(characterLayer,villageGround);await installAnimalReactions(characterLayer);finishLoadStep('reactions');for(const b of document.querySelectorAll('[data-character-control]'))b.disabled=false;for(const o of document.querySelectorAll('option[data-character-view]'))o.disabled=false;
+ try{characterLayer=await createCharacterLayer({scene,ground:villageGround});finishLoadStep('characters');characterLayer=await installVillainFaces(characterLayer);finishLoadStep('faces');window.__paperStage=await installPaperTheatre(characterLayer);finishLoadStep('run');finishLoadStep('paper');await installPerformerActions(characterLayer);finishLoadStep('actions');installStrawWorkshopPreview(characterLayer);await installStrawJoy(characterLayer);finishLoadStep('joy');await installWolfEscape(characterLayer);finishLoadStep('wolf');await installDoorHost(characterLayer,villageGround);finishLoadStep('doors');installEncounterPerformers(characterLayer,villageGround);await installAnimalReactions(characterLayer);finishLoadStep('reactions');for(const b of document.querySelectorAll('[data-character-control]'))b.disabled=false;for(const o of document.querySelectorAll('option[data-character-view]'))o.disabled=false;
  setView('character_front');$('#view').value='character_front';$('#character-load').textContent='4体の静止配置に戻す';}
  catch(e){$('#character-state').textContent='キャラクターを準備できませんでした。村は保持しています。再試行できます。';console.error(e);}
  finally{characterLoading=false;$('#character-load').disabled=false;}

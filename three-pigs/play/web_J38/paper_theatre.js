@@ -71,10 +71,10 @@ export async function installPaperTheatre(layer){
    let q,uv,map;
    const showMark=()=>{d.mark.visible=!encounterReaction&&reactor&&time>=r.markAt&&time<Math.max(r.markEnd,2.45);if(d.mark.visible){d.mark.material.map=d.marks[profile];d.mark.quaternion.copy(camera.quaternion);d.mark.position.set(h*.52,h*1.17,0);const pop=1+.16*Math.sin(clamp((time-r.markAt)/.16)*Math.PI);d.mark.scale.setScalar(pop);}};
    if(running&&d.run){
-    const k=h/d.run.nominalHeight,idx=((Math.floor(a.motionTime/(d.run.cycleDistanceMetres*k)*(manualTempo??1)*d.run.frames.length)%d.run.frames.length)+d.run.frames.length)%d.run.frames.length,pos=d.grid.attributes.position,u=d.grid.attributes.uv,[w,ht]=d.run.canvas,[ax,ay]=d.run.anchor,scale=k/d.run.pixelsPerMetre,mirror=a.data.id==='wolf'&&((storyTime>=64&&storyTime<66)||(storyTime>=86.6&&storyTime<87.7))&&Math.sin(a.yaw-a.card.rotation.y)<0;
+    const k=h/d.run.nominalHeight,idx=((Math.floor(storyTime*13*(manualTempo??1))%d.run.frames.length)+d.run.frames.length)%d.run.frames.length,pos=d.grid.attributes.position,u=d.grid.attributes.uv,[w,ht]=d.run.canvas,[ax,ay]=d.run.anchor,scale=k/d.run.pixelsPerMetre,mirror=Math.sin(a.yaw-a.card.rotation.y)<0;
     q={left:-ax*scale,right:(w-ax)*scale,top:ay*scale,bottom:(ay-ht)*scale};
     for(let i=0;i<pos.count;i++){const col=i%25,row=Math.floor(i/25),nx=col/24,ny=1-row/24;pos.setXYZ(i,q.left+nx*(q.right-q.left),q.bottom+ny*(q.top-q.bottom),0);u.setXY(i,mirror?1-nx:nx,ny);}
-    pos.needsUpdate=u.needsUpdate=true;d.grid.computeBoundingSphere();a.card.geometry=d.grid;d.runMaterial.map=d.run.textures[idx];a.card.material=d.runMaterial;showMark();
+    pos.needsUpdate=u.needsUpdate=true;d.grid.computeBoundingSphere();a.card.geometry=d.grid;d.runMaterial.map=d.run.textures[idx];a.card.material=d.runMaterial;a.card.rotation.set(0,Math.atan2(camera.position.x-a.root.position.x,camera.position.z-a.root.position.z),0);a.renderedMotion='paper_run';showMark();
     const bounds=d.run.frames[idx].bounds;
     a.paperStatus={profile:reactor?profile:null,paper:true,running,runRepresentation:'approved J68 integrated run mechanism',runFrame:idx,mirror,source:d.run.source,lowerOriginalLegsVisible:false,bodyBottom:q.bottom,bodyTopY:q.top,visibleTopY:(ay-bounds[1])*scale,visibleFootY:(ay-bounds[3])*scale,markVisible:d.mark.visible,root:a.root.position.toArray()};continue;
    }

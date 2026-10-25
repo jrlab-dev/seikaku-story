@@ -16,6 +16,7 @@ export function prepareStoryAssetPlan(sample,duration,sites,ending){
    if(a.id==='wolf'){if(['startled','run_spiral'].includes(a.motion))wolf[a.runAway?'rearRun':'frontRun']=true;if(a.singleHotJump)wolf.hotJump=true;if(a.tailFlame?.active)wolf.tail=true;}
    (motions[a.id]??=new Set()).add(a.motion||'idle');
    if(a.bombPose!=null)reactions.add('bomb_'+a.id);
+   if(a.bonkPose!=null)reactions.add('bonk_'+a.id);
    if(a.reactionPose!=null||a.reactionBuild)reactions.add('react_'+a.id);
    if(a.stance!=null)reactions.add('stance_'+a.id);
   }

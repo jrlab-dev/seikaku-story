@@ -20,11 +20,11 @@ body.story-theatre header,.controls:not(#story-controls),#stats,#story-inspect,#
 #card .c{background:#fffdf6;border:1px solid #e3dac3;border-radius:14px;padding:12px;display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center}#card canvas{width:110px;height:138px}#card .role{font-size:13px;color:#5b8c51;font-weight:700}#card .name{font-size:20px;font-weight:800;margin:2px 0 6px}#card .lines{font-size:15px;line-height:1.75}
 #cover .small{font-size:12px;color:#6b705c}#cover .wait{text-align:center;font-weight:700;padding:12px}
 #cover .load{padding:8px 16px 12px;font-size:12px;color:#6b705c;text-align:center;background:#f6f1e3;position:sticky;bottom:0}#cover .bar{height:8px;background:#e3dac3;border-radius:99px;overflow:hidden;margin:0 auto 4px;width:min(420px,90vw)}#cover .bar i{display:block;height:100%;width:0;background:#5b8c51;transition:width .4s}
-@media (min-width:900px){#cover .stage{display:grid;grid-template-columns:1fr 300px;align-items:start}#card .c{grid-template-columns:1fr;text-align:center}#card canvas{margin:0 auto;width:150px;height:188px}}</style>
+@keyframes load-slide{from{transform:translateX(0)}to{transform:translateX(185%)}}@media(prefers-reduced-motion:reduce){#cover-bar{animation:none!important}}@media (min-width:900px){#cover .stage{display:grid;grid-template-columns:1fr 300px;align-items:start}#card .c{grid-template-columns:1fr;text-align:center}#card canvas{margin:0 auto;width:150px;height:188px}}</style>
 <script type="module">
 import {TYPE_NAMES,PROFILE_TEXT} from './personality_text.mjs';
 import {castTypes} from './animal_reactions.js';
-const START=41,TOTAL=330*2**20,$=id=>document.getElementById(id);
+const START=41,$=id=>document.getElementById(id);
 const q=(new URLSearchParams(location.search).get('cast')||'33535,55331,33333,11311').split(','),ROLES=['pig_straw','pig_wood','pig_brick','wolf'],LABEL={pig_straw:'長男',pig_wood:'次男',pig_brick:'三男',wolf:'おおかみ'};
 const cast=Object.fromEntries(ROLES.map((r,i)=>[r,q[i]])),types=castTypes(cast),man=await (await fetch('./assets/portraits/manifest.json')).json();
 const imgs={};await Promise.all(ROLES.map(r=>new Promise(ok=>{const im=new Image();im.onload=ok;im.onerror=ok;im.src=man[r].url;imgs[r]=im;})));
@@ -41,11 +41,12 @@ function sync(){const t=now(),cap=CAPS.find(([a,b])=>t>=a&&t<b);$('icap').textCo
 v.addEventListener('ended',()=>{if(seg==='pigs'){seg='wolf';v.src=wolfSrc;v.play();}else{phase='handoff';}});
 $('tap-go').onclick=()=>{$('tap').hidden=true;phase='video';v.play();
  // 押した操作の中で3Dも準備を始める（音の許可もここで取る）。始まったらすぐ41秒で止めて待たせる。待つあいだは消音
- const m=$('story-mute');if(m){m.checked=true;m.dispatchEvent(new Event('change'));}$('story-play').click();};
+ const m=$('story-mute');if(m){m.checked=true;m.dispatchEvent(new Event('change'));}};
 let ready=false;
 function tick(){const mb=performance.getEntriesByType('resource').reduce((s,e)=>s+(e.transferSize||e.encodedBodySize||0),0),pause=$('story-pause'),r=$('story-time'),play=$('story-play');
+ if(phase!=='tap'&&!started&&play&&!play.disabled){started=true;play.click();}
  if(phase!=='tap'&&!ready&&pause&&!pause.disabled){ready=true;r.value=START;r.dispatchEvent(new Event('input'));}
- $('cover-bar').style.width=(ready?100:Math.min(98,mb/TOTAL*100)).toFixed(0)+'%';$('cover-mb').textContent=(ready?'準備ができました（':'3Dの絵本劇を読み込んでいます… （')+Math.round(mb/2**20)+' MB）';
+ $('cover-bar').style.width=ready?'100%':'35%';$('cover-bar').style.animation=ready?'none':'load-slide 1.4s ease-in-out infinite alternate';$('cover-mb').textContent=(ready?'準備ができました（':'この配役に必要な絵を読み込んでいます… （')+Math.round(mb/2**20)+' MB）';
  if(phase!=='tap')sync();
  if(phase==='handoff'){if(ready){phase='on';const m=$('story-mute');if(m){m.checked=false;m.dispatchEvent(new Event('change'));}r.value=START;r.dispatchEvent(new Event('input'));play.click();$('cover').hidden=true;clearInterval(anim);}else{$('icap').textContent='3Dの準備をしています。もう少しお待ちください…';}}
  if(phase==='on'&&+r.value>=+r.max-.2){phase='end';const c=$('cover');c.hidden=false;c.querySelector('.stage').innerHTML='<div class="wait" style="margin-top:18vh"><h2>おしまい</h2><p>性格を変えると、ちがうお話になります。</p><p><a href="../../"><button style="border:0;border-radius:999px;padding:12px 26px;background:#c8553d;color:#fff;font:inherit;font-weight:700">性格を選びなおす</button></a></p><p><a href="./?cast='+q.join(',')+'">もう一度見る</a></p></div>';c.querySelector('.load').hidden=true;}

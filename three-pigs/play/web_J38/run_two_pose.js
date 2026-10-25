@@ -1,6 +1,8 @@
+import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 import {wrapAngle} from './sprite_math.mjs';
 export async function installTwoPoseRun(layer){
+ const plan=getStoryAssetPlan();if(plan&&!Object.values(plan.motions).some(ms=>ms.includes('run_two_pose')))return layer;
  const manifest=await (await fetch('./assets/run_two_pose/manifest.json')).json();
  const frames=await Promise.all(manifest.frames.map(async f=>{
   const texture=await new THREE.TextureLoader().loadAsync(f.url);

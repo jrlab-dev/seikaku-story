@@ -1,3 +1,4 @@
+import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 import {walkView} from './walk_orientation.mjs';
 const IDS=['pig_straw','pig_wood','pig_brick','wolf'];
@@ -5,7 +6,7 @@ const FRONT={bomb:{wolf:[1,4,5,6,7,8]},react:{pig:[0,3,4,7,8],wolf:[2,4,6]},stan
 export async function installAnimalReactions(layer){
  const defs=await(await fetch('./reactions/manifest.json')).json();
  const load=async url=>{const t=await new THREE.TextureLoader().loadAsync(url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;};
- for(const d of Object.values(defs))d.texture=await load(d.url);
+ const needs=getStoryAssetPlan()?.reactions;for(const[k,d]of Object.entries(defs)){if(needs&&!needs.includes(k)){delete defs[k];continue;}d.texture=await load(d.url);}
  const rigs=new Map();
  for(const a of layer.actors){const mesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({transparent:true,alphaTest:.5,depthTest:true,depthWrite:true,side:THREE.DoubleSide,toneMapped:false}));mesh.name='J117_reaction_'+a.data.id;mesh.visible=false;a.root.add(mesh);rigs.set(a,mesh);}
  let poses=new Map();const apply=layer.applyStory.bind(layer),update=layer.update.bind(layer);

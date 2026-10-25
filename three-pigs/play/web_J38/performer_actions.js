@@ -1,9 +1,10 @@
+import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import {walkPhase,walkView} from './walk_orientation.mjs';
 import {villainTexture} from './villain_faces.js';
 import * as THREE from 'three';
 export async function installPerformerActions(layer){
  const defs=await (await fetch('./performer_actions.json')).json(),clips={};
- for(const[id,d]of Object.entries(defs)){let texture=await new THREE.TextureLoader().loadAsync(d.url);if(id==='wolf_walk')texture=await villainTexture(texture,'walk');texture.colorSpace=THREE.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=texture.magFilter=THREE.LinearFilter;clips[id]={...d,texture};}
+ for(const[id,d]of Object.entries(defs)){const plan=getStoryAssetPlan();if(plan&&!Object.entries(plan.motions).some(([actor,ms])=>ms.some(m=>id===actor+'_'+m&&m!=='walk')))continue;let texture=await new THREE.TextureLoader().loadAsync(d.url);if(id==='wolf_walk')texture=await villainTexture(texture,'walk');texture.colorSpace=THREE.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=texture.magFilter=THREE.LinearFilter;clips[id]={...d,texture};}
  const apply=layer.applyStory.bind(layer),update=layer.update.bind(layer),poses=new Map(),cache=new Map();
  layer.applyStory=(items,t)=>{poses.clear();items.forEach(p=>poses.set(p.id,p));const v=apply(items,t);for(const a of layer.actors){const p=poses.get(a.data.id);if(p?.worldY!==undefined)a.root.position.y=p.worldY;}return v;};
  layer.update=(camera,dt)=>{const result=update(camera,dt);

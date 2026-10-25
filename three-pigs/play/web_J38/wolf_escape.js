@@ -1,11 +1,15 @@
+import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 export async function installWolfEscape(layer){
- const panicTexture=await new THREE.TextureLoader().loadAsync('./wolf_panic_jump.png');panicTexture.colorSpace=THREE.SRGBColorSpace;panicTexture.generateMipmaps=false;panicTexture.minFilter=panicTexture.magFilter=THREE.LinearFilter;
+ const plan=getStoryAssetPlan(),needs=plan?.wolf,motions=plan?.motions.wolf;
+ if(plan&&!needs.frontRun&&!needs.rearRun&&!needs.hotJump&&!needs.tail&&!motions?.some(m=>['idea','tired'].includes(m)))return;
+ const image=(url,needed)=>needed===false?Promise.resolve(new THREE.Texture()):new THREE.TextureLoader().loadAsync(url);
+ const panicTexture=await image('./wolf_panic_jump.png',needs?.hotJump);panicTexture.colorSpace=THREE.SRGBColorSpace;panicTexture.generateMipmaps=false;panicTexture.minFilter=panicTexture.magFilter=THREE.LinearFilter;
  const panicGeometry=new THREE.PlaneGeometry(1,1),panicMaterial=new THREE.MeshBasicMaterial({map:panicTexture,transparent:true,alphaTest:32/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});
- const run=await(await fetch('./escape_wolf/build.json')).json(),textures=await Promise.all(run.frames.map(async f=>{const t=await new THREE.TextureLoader().loadAsync(f.url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));
- const rear=await(await fetch('./escape_wolf_rear/build.json')).json(),rearTextures=await Promise.all(rear.frames.map(async f=>{const t=await new THREE.TextureLoader().loadAsync(f.url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));
+ const run=await(await fetch('./escape_wolf/build.json')).json(),textures=await Promise.all(run.frames.map(async f=>{const t=await image(f.url,needs?.frontRun);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));
+ const rear=await(await fetch('./escape_wolf_rear/build.json')).json(),rearTextures=await Promise.all(rear.frames.map(async f=>{const t=await image(f.url,needs?.rearRun);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));
  const v2=await(await fetch('./wolf_tired_idea_v2.json')).json();
- const loadV2=async n=>{const t=await new THREE.TextureLoader().loadAsync('./wolf_'+n+'_v2.png');t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;};
+ const loadV2=async n=>{const t=await image('./wolf_'+n+'_v2.png',motions?.includes(n));t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;};
  const ideaTexture=await loadV2('idea'),ideaGeometry=new THREE.PlaneGeometry(1,1),ideaMaterial=new THREE.MeshBasicMaterial({map:ideaTexture,transparent:true,alphaTest:7/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});
  const tiredTexture=await loadV2('tired');tiredTexture.colorSpace=THREE.SRGBColorSpace;tiredTexture.generateMipmaps=false;tiredTexture.minFilter=tiredTexture.magFilter=THREE.LinearFilter;
  const tiredGeometry=new THREE.PlaneGeometry(1,1),tiredMaterial=new THREE.MeshBasicMaterial({map:tiredTexture,transparent:true,alphaTest:7/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});

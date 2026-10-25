@@ -1,3 +1,4 @@
+import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 import {frameQuad} from './sprite_math.mjs';
 
@@ -48,7 +49,7 @@ function paperMaterial(map,backOnly=false){
 }
 export async function installPaperTheatre(layer){
  const runDefinitions=await (await fetch('./run_cycles.json')).json(),runClips={};
- for(const [id,def]of Object.entries(runDefinitions)){const textures=await Promise.all(def.frames.map(async f=>{const t=await new THREE.TextureLoader().loadAsync(f.url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));runClips[id]={...def,textures};}
+ for(const [id,def]of Object.entries(runDefinitions)){const ms=getStoryAssetPlan()?.motions[id];if(ms&&!ms.some(m=>['paper_run','run_two_pose'].includes(m)))continue;const textures=await Promise.all(def.frames.map(async f=>{const t=await new THREE.TextureLoader().loadAsync(f.url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));runClips[id]={...def,textures};}
  const original=layer.update.bind(layer),originalApply=layer.applyStory.bind(layer);let profile='fear',time=0,enabled=true,manual=false,manualTempo=null,storyTime=0,storyReaction=false,encounterReaction=null;
  const data=new Map();
  for(const a of layer.actors){

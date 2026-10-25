@@ -1,3 +1,4 @@
+import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 import {chooseFrame,viewSupport,frameQuad,testLayout} from './sprite_math.mjs';
 import {getCast} from './personality_story.mjs';
@@ -45,6 +46,7 @@ export async function createCharacterLayer({scene,ground}) {
  if(motionManifest.schema!==1||!Array.isArray(motionManifest.sets))throw Error('動作画像定義が不正です');
  const urlCast=typeof location!=='undefined'&&new URLSearchParams(location.search).get('cast'),castNow=urlCast?Object.fromEntries(['pig_straw','pig_wood','pig_brick','wolf'].map((k,i)=>[k,urlCast.split(',')[i]])):getCast(),need=castTypes(castNow);
  for(const set of motionManifest.sets){
+  const ms=getStoryAssetPlan()?.motions[set.characterId];if(ms&&!ms.some(m=>(m==='walk_front'?'walk':m)===set.motion))continue;
   if(set.style!=null&&need[set.characterId]!==set.style)continue;
   const owner=actors.find(a=>a.data.id===set.characterId);
   if(!owner||!['walk','blow'].includes(set.motion)||!(set.phases>0)||(set.style==null&&set.frames.length!==set.phases*8))throw Error('動作画像の方向・枚数が不正です');

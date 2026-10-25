@@ -20,7 +20,7 @@ const MODEL={straw:'StrawHouse',wood:'WoodHouse',brick:'BrickHouse',tent:'TentHo
 const MANIFEST={straw:'Straw',wood:'Wood',brick:'Brick',tent:'Tent',fortress:'Fortress',treehouse:'Treehouse',karakuri:'Karakuri',bunker:'Bunker',castle:'Castle',karakuri_fort:'KarakuriFort'};
 const FALL={straw:['Straw_VillageTopple_J59.glb','Straw_VillageTopple_J59'],wood:['Wood_VillageTopple_J59.glb','Wood_VillageTopple_J59'],tent:['Tent_BlowAway_v1.glb','Tent_BlowAway_v1'],treehouse:['Treehouse_BlowAway_v1.glb','Treehouse_BlowAway_v1']};
 
-export async function preparePuzzleSites({THREE,loadAsset,prepare,cast,placements,sources}){
+export async function preparePuzzleSites({THREE,loadAsset,prepare,cast,placements,sources,assetPlan=null}){
  const sites=siteHouses(cast),swapped={},manifests={};
  for(const site of ['straw','wood','brick']){
   const v=sites[site].visual;if(v===SITE_DEFAULT[site])continue;
@@ -29,16 +29,16 @@ export async function preparePuzzleSites({THREE,loadAsset,prepare,cast,placement
   const src=(await loadAsset('./assets/'+MODEL[v]+'.glb')).scene;sources[site]=src;
   const r=await fetch('./'+MANIFEST[v]+'_construction.json');if(!r.ok)throw Error('Construction manifest '+v);manifests[site]=await r.json();
   let fall=null;
-  if(FALL[v]){const g=await loadAsset('./assets/'+FALL[v][0]);prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
+  if(FALL[v]&&(!assetPlan||assetPlan.collapse.includes(site))){const g=await loadAsset('./assets/'+FALL[v][0]);prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
    const clip=g.animations.find(c=>c.name===FALL[v][1]);const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
    fall={scene:g.scene,seek(t){action.reset().play();action.paused=false;mixer.setTime(Math.max(0,Math.min(clip.duration,t)));action.paused=true;}};}
   let hatch=null;
   const DOOR_CLIP={bunker:['Bunker_Hatch_v1',1.2,1.8],karakuri:['Karakuri_Door_v1',1.0,1.0]};
-  if(DOOR_CLIP[v]){const[dn,d0,d1]=DOOR_CLIP[v];const g=await loadAsset('./assets/'+dn+'.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
+  if(DOOR_CLIP[v]&&(!assetPlan||assetPlan.doors.includes(site))){const[dn,d0,d1]=DOOR_CLIP[v];const g=await loadAsset('./assets/'+dn+'.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
    const clip=g.animations.find(c=>c.name===dn);const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
    hatch={scene:g.scene,d0,d1,seek(t){action.reset().play();action.paused=false;mixer.setTime(t);action.paused=true;}};}
   let sec=null;
-  if(v==='karakuri'){const g=await loadAsset('./assets/Karakuri_Security_v1.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
+  if(v==='karakuri'&&(!assetPlan||assetPlan.security.includes(site))){const g=await loadAsset('./assets/Karakuri_Security_v1.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
    const clip=g.animations.find(c=>c.name==='Karakuri_Security_v1');const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
    sec={scene:g.scene,seek(t){action.reset().play();action.paused=false;mixer.setTime(Math.max(0,Math.min(clip.duration,t)));action.paused=true;}};}
   swapped[site]={visual:v,staticScene,fall,hatch,sec,detached};

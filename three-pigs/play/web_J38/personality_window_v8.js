@@ -5,8 +5,9 @@ export async function createPersonalityWindow(canvas){
  let layout=null,lastKey='';
  function draw(ctx,s,width=960,height=690){
   const p=s.personalityWindow;if(!p){layout=null;return;}
-  const portrait=height>width,w=Math.min(320,portrait?width*.64:width*.32,(portrait?height*.40:height-80)/1.125),x=width-w-14,y=portrait?height-w*1.125-12:16;
-  layout={...card.draw(ctx,p,{x,y,width:w}),profile:p.code,page:p.page};return layout;
+  const portrait=height>width,w=Math.min(340,portrait?width-28:width*.34),options={width:w,bodyFont:portrait?17:18,portraitHeight:portrait?140:220,maxHeight:portrait?height*.43:height-32};
+  const measured=card.measure(ctx,p,options),x=width-w-14,y=portrait?height-measured.height-12:16;
+  layout={...card.draw(ctx,p,{x,y,...options}),profile:p.code,page:p.page};return layout;
  }
  function apply(s){
   overlay.hidden=!s.personalityWindow;overlay.style.display=overlay.hidden?'none':'';

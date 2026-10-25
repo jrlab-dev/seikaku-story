@@ -37,7 +37,11 @@ export async function preparePuzzleSites({THREE,loadAsset,prepare,cast,placement
   if(DOOR_CLIP[v]){const[dn,d0,d1]=DOOR_CLIP[v];const g=await loadAsset('./assets/'+dn+'.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
    const clip=g.animations.find(c=>c.name===dn);const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
    hatch={scene:g.scene,d0,d1,seek(t){action.reset().play();action.paused=false;mixer.setTime(t);action.paused=true;}};}
-  swapped[site]={visual:v,staticScene,fall,hatch,detached};
+  let sec=null;
+  if(v==='karakuri'){const g=await loadAsset('./assets/Karakuri_Security_v1.glb');prepare(g.scene);placement.add(g.scene);g.scene.visible=false;
+   const clip=g.animations.find(c=>c.name==='Karakuri_Security_v1');const mixer=new THREE.AnimationMixer(g.scene),action=mixer.clipAction(clip);action.setLoop(THREE.LoopOnce,1);action.clampWhenFinished=true;
+   sec={scene:g.scene,seek(t){action.reset().play();action.paused=false;mixer.setTime(Math.max(0,Math.min(clip.duration,t)));action.paused=true;}};}
+  swapped[site]={visual:v,staticScene,fall,hatch,sec,detached};
  }
  return{sites,swapped,manifests};
 }
@@ -48,8 +52,10 @@ export function wrapPuzzleBuildings(buildings,{swapped}){
  function show(){for(const[site,s]of Object.entries(swapped)){const st=last[site]||{},stage=st.constructionStage??5;
   if(stage<5||busy===site){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;continue;}
   if(st.intact===false&&s.fall){s.staticScene.visible=false;s.fall.scene.visible=true;s.fall.seek(st.time||0);}
+  else if(s.sec&&st.security!=null){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;if(s.hatch)s.hatch.scene.visible=false;s.sec.scene.visible=true;s.sec.seek(st.security);continue;}
   else if(s.hatch&&(st.doorOpen??0)>.05){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;s.hatch.scene.visible=true;s.hatch.seek(s.hatch.d0+s.hatch.d1*Math.min(1,st.doorOpen));}// 扉・ふたが開いた姿
   else{s.staticScene.visible=true;if(s.fall)s.fall.scene.visible=false;if(s.hatch)s.hatch.scene.visible=false;}
+  if(s.sec&&st.security==null)s.sec.scene.visible=false;
   if(s.hatch&&(stage<5||busy===site||st.intact===false||(st.doorOpen??0)<=.05))s.hatch.scene.visible=false;}}
  return{...buildings,
   apply(states){apply(states);last=states;show();},

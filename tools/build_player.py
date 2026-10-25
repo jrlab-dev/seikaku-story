@@ -18,7 +18,7 @@ W = os.path.join(base, 'web_J38')
 listed = set()
 fetched0 = set(used)
 KEEP_DIRS = {'intro', 'assets/prologue', 'assets/characters', 'reactions', 'assets/portraits', 'assets/endings', 'assets/textures', 'endings'}
-for j in ['puzzle_houses_more.json', 'tent_fortress_houses.json', 'puzzle_effects.json', 'puzzle_houses_karakuri_fort.json']:
+for j in ['puzzle_houses_more.json', 'tent_fortress_houses.json', 'puzzle_effects.json', 'puzzle_houses_karakuri_fort.json', 'puzzle_karakuri_security.json']:
     t = open(os.path.join(W, j)).read()
     import re
     listed |= set(re.findall(r'assets/([A-Za-z_0-9]+\.glb)', t))

@@ -1,0 +1,390 @@
+{
+  "schema": 1,
+  "name": "Karakuri_Security_v1",
+  "file": "assets/Karakuri_Security_v1.glb",
+  "gzip": "assets/Karakuri_Security_v1.glb.gz",
+  "brotli": "assets/Karakuri_Security_v1.glb.br",
+  "clip": "Karakuri_Security_v1",
+  "duration_s": 8,
+  "fps": 30,
+  "root": "KarakuriHouse",
+  "includes_complete_house": true,
+  "coordinates": {
+    "up": "+Y",
+    "entrance": "+Z",
+    "origin": "敷地中心の地面",
+    "unit": "m",
+    "entrance_x_m": -0.65
+  },
+  "timeline": [
+    {
+      "start_s": 0,
+      "end_s": 0.8,
+      "meaning": "警報灯が屋根から上がって回転。ロボの目が赤く光り玄関前を指す。"
+    },
+    {
+      "start_s": 0.8,
+      "end_s": 1.6,
+      "meaning": "軒下から金属アームと丸い木槌が現れ、振りかぶる。"
+    },
+    {
+      "start_s": 1.6,
+      "end_s": 2.2,
+      "meaning": "1.9秒で1回目の振り下ろし。2.08秒まで小さく跳ね返る。"
+    },
+    {
+      "start_s": 2.2,
+      "end_s": 4.5,
+      "meaning": "3秒に再び振りかぶり、3.6秒で2回目。小さく跳ね返って戻る。"
+    },
+    {
+      "start_s": 4.5,
+      "end_s": 8,
+      "meaning": "アームが縮んで軒下へ収納。警報灯が減速して屋根へ収納、目と腕も元へ。"
+    }
+  ],
+  "impacts": [
+    {
+      "time_s": 1.9,
+      "frame": 57,
+      "head_center_local_gltf": [
+        -0.6499999761581421,
+        1.6399999856948853,
+        3.200000047683716
+      ],
+      "contact_local_gltf": [
+        -0.6499999761581421,
+        1.2000000476837158,
+        3.200000047683716
+      ],
+      "wolf_head_target_local_gltf": [
+        -0.6499999761581421,
+        1.2000000476837158,
+        3.200000047683716
+      ],
+      "meaning": "木槌の底面が狼の頭へ届く瞬間"
+    },
+    {
+      "time_s": 3.6,
+      "frame": 108,
+      "head_center_local_gltf": [
+        -0.6499999761581421,
+        1.6399999856948853,
+        3.200000047683716
+      ],
+      "contact_local_gltf": [
+        -0.6499999761581421,
+        1.2000000476837158,
+        3.200000047683716
+      ],
+      "wolf_head_target_local_gltf": [
+        -0.6499999761581421,
+        1.2000000476837158,
+        3.200000047683716
+      ],
+      "meaning": "木槌の底面が狼の頭へ届く瞬間"
+    }
+  ],
+  "nodes": {
+    "head": "Security__HammerHead",
+    "contact": "Security__Contact",
+    "swing": "Security__Swing",
+    "robot_arm": "Karakuri__Robot_Arm",
+    "beacon": "Security__BeaconRotor"
+  },
+  "playback": {
+    "loop": false,
+    "clamp_when_finished": true,
+    "loader": "既存vendorのGLTFLoader + MeshoptDecoder",
+    "extra_controller_required": false,
+    "usage": "完成形KarakuriHouseと入れ替えて再生。両方を同時表示しない。AnimationMixerのLoopOnce・clampWhenFinished=true。8秒で完成形へ戻せる。",
+    "world_contact": "家のmatrixWorldをcontact_local_gltfに適用する。家を回転・移動した場合も同じ変換を使う。",
+    "warning": "狼・音・字幕・物語への接続・物理衝突判定は依頼元で実装。木槌の中心は高さ1.64m、当たる底面は1.20m。"
+  },
+  "file_validation": {
+    "name": "Karakuri_Security_v1",
+    "sourceSha256": "6fbcb822c8339b4b75e95419a4ae247a88ccd9d942030deed4b1d377edfbe25d",
+    "sourceBytes": 70105208,
+    "packedSha256": "bae5c5b156a8c4560eaf484fdf695748e2467bd1f96a7c20b6dde26b8d803759",
+    "packedBytes": 8276628,
+    "gzipBytes": 6057113,
+    "brotliBytes": 4745991,
+    "decodedGeometryExact": true,
+    "checkedBufferViews": 440,
+    "images": [
+      {
+        "uri": "textures/ca75253ea173cdf0ff93f979.webp",
+        "originalSha256": "ca75253ea173cdf0ff93f97917f521cb7d366cf107ea43f5bd1ff9f341ee7f20"
+      },
+      {
+        "uri": "textures/a5985c525405dbbab47670b6.webp",
+        "originalSha256": "a5985c525405dbbab47670b698749c021a8e336634b8468519dcc832031a8154"
+      },
+      {
+        "uri": "textures/e2975462a8682f18967eb4db.webp",
+        "originalSha256": "e2975462a8682f18967eb4db3b3ef1c1ad122d0ee04b124dad49e54347b49d91"
+      },
+      {
+        "uri": "textures/04def6bc617610c7487d6a57.webp",
+        "originalSha256": "04def6bc617610c7487d6a57f28ffdf0f0ae884cb10e06bb5f387280d129fef9"
+      },
+      {
+        "uri": "textures/d3475349fe898f1dc924fe24.webp",
+        "originalSha256": "d3475349fe898f1dc924fe243fac26d1f53ac24a1230768bb5af84b861d8c302"
+      },
+      {
+        "uri": "textures/574cd4a470626edf7d33f863.webp",
+        "originalSha256": "574cd4a470626edf7d33f8635dfec18d7e50404d4df90dca1c49b08b252a46ff"
+      },
+      {
+        "uri": "textures/ecbbd1648b675c153852f8ac.webp",
+        "originalSha256": "ecbbd1648b675c153852f8ac1af18da13a9b2623df41d76d6fc5354b79171670"
+      },
+      {
+        "uri": "textures/a7d9924006a2d9084f73f9cb.webp",
+        "originalSha256": "a7d9924006a2d9084f73f9cb6a23fe6908bc2b231e94eca01fabc9f76be97d88"
+      },
+      {
+        "uri": "textures/972a78f020b8d8feef638cf2.webp",
+        "originalSha256": "972a78f020b8d8feef638cf272f0d8356d9bc10060b9510a87d872613605cf8b"
+      },
+      {
+        "uri": "textures/aae95dad99ed9e121640c613.webp",
+        "originalSha256": "aae95dad99ed9e121640c613bc996c986269a89ef3083567ab7e5b629c29c600"
+      },
+      {
+        "uri": "textures/cd26e0601b128efc73bc0b64.webp",
+        "originalSha256": "cd26e0601b128efc73bc0b645d11ced978ffd564dc33ab50dd73f1e52df5db72"
+      },
+      {
+        "uri": "textures/58ca32b1fd1be6717a1935b8.webp",
+        "originalSha256": "58ca32b1fd1be6717a1935b844f7e0f9824e9a01a53b4ea191bbc75c8dfe3116"
+      },
+      {
+        "uri": "textures/b1a7d91dd7a39868e1c7e98b.webp",
+        "originalSha256": "b1a7d91dd7a39868e1c7e98bbc336718b4dbb613060af7eea356fba82ef62bbd"
+      },
+      {
+        "uri": "textures/294e2d63057e4357755a8093.webp",
+        "originalSha256": "294e2d63057e4357755a8093f3f49bc872d05d94e02f32968a8fd092663bd727"
+      },
+      {
+        "uri": "textures/f1532a0ead55cae5365723b6.webp",
+        "originalSha256": "f1532a0ead55cae5365723b627fd74612e47467e1e30c968f03f2e6df701d33e"
+      },
+      {
+        "uri": "textures/c5237a76f74fe42c6f0f46d7.webp",
+        "originalSha256": "c5237a76f74fe42c6f0f46d726a0ed19d45ab30c5131a637f92aa422e5b801dd"
+      },
+      {
+        "uri": "textures/2c41f90a5b12eff1eacaecfe.webp",
+        "originalSha256": "2c41f90a5b12eff1eacaecfe663117e520aa74c43949d3f5c583f0ac86f101c0"
+      },
+      {
+        "uri": "textures/d3f6099e30f93199d298fc96.webp",
+        "originalSha256": "d3f6099e30f93199d298fc9648916d77aa5bb086258f30523f95092fcf266919"
+      },
+      {
+        "uri": "textures/b75453ae00b8723d5fa1ece5.webp",
+        "originalSha256": "b75453ae00b8723d5fa1ece5fe4710945e6e6e4e2a3a11b878ea3817d460105d"
+      },
+      {
+        "uri": "textures/d7748f97eb52760a1369b367.webp",
+        "originalSha256": "d7748f97eb52760a1369b367a06897a7ac0d7aabb97bec81a90da0e02d41ac05"
+      },
+      {
+        "uri": "textures/ea9e7ff62ebe4d17be1dc1a2.webp",
+        "originalSha256": "ea9e7ff62ebe4d17be1dc1a27900bbbe60493ceb05b09764c8132567e5049c96"
+      },
+      {
+        "uri": "textures/bc698bedbe52fc30cfa891e2.webp",
+        "originalSha256": "bc698bedbe52fc30cfa891e21651d6df0cd6a241ff24aca95094d243f1b0c7f2"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+      },
+      {
+        "uri": "textures/fd3fb5c2e43e0efacde9555c.webp",
+        "originalSha256": "fd3fb5c2e43e0efacde9555ce36913008b590fbccc4739d343002ad2dd994795"
+      },
+      {
+        "uri": "textures/a1b40d7e153ad26a5f6bc601.webp",
+        "originalSha256": "a1b40d7e153ad26a5f6bc601e329250e454a0ab0dd9988aa8005ee53dc594f00"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/0c20f40fa5aa922bb1e68d07.webp",
+        "originalSha256": "0c20f40fa5aa922bb1e68d07b9178b9812862a679780aa7791aa9f353073b445"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+        "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/ac8e436235110a8b6733599c.webp",
+        "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/a52097e206cdea67a5a798e1.webp",
+        "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/457e5059093fee5ab7b14290.webp",
+        "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/db0ad2984d71b4b18ec67c65.webp",
+        "originalSha256": "db0ad2984d71b4b18ec67c6542965be87d88a2ccf47a0f47e826ccd61d431e7b"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/dff61c452a5ca0b8a8d8d170.webp",
+        "originalSha256": "dff61c452a5ca0b8a8d8d170465ecbf3cb19429115b22384c1368ccf17578a46"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/a52097e206cdea67a5a798e1.webp",
+        "originalSha256": "a52097e206cdea67a5a798e1df77bb8ea3c346bf113c386908b3d34b88680a48"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/ac8e436235110a8b6733599c.webp",
+        "originalSha256": "ac8e436235110a8b6733599c2b03c75430749a887449bcd693b6eb3f01f8b1d3"
+      },
+      {
+        "uri": "textures/34c0a9b2f6686b6dac377940.webp",
+        "originalSha256": "34c0a9b2f6686b6dac377940b399bd69ea5941bf5d9a8167d37672decd8160fd"
+      },
+      {
+        "uri": "textures/457e5059093fee5ab7b14290.webp",
+        "originalSha256": "457e5059093fee5ab7b14290bbd18b3f3bd91dca64c1613d9d8c20a6d3ee7466"
+      },
+      {
+        "uri": "textures/739b68416d910695653104dc.webp",
+        "originalSha256": "739b68416d910695653104dc2433ce178587ac00df2f988810627fce97b9feed"
+      },
+      {
+        "uri": "textures/ea2fde5bcb89f497d9dd4658.webp",
+        "originalSha256": "ea2fde5bcb89f497d9dd4658308c821ae3157b58bebf1880b14e9f07c10ae2cd"
+      },
+      {
+        "uri": "textures/65d153f46b95cbe0b4ccc016.webp",
+        "originalSha256": "65d153f46b95cbe0b4ccc0167d41ad6c0c0d743460ade311b0098599d0903ae4"
+      },
+      {
+        "uri": "textures/b69f1c434531871127c7227f.webp",
+        "originalSha256": "b69f1c434531871127c7227f8abe3b46ee79c5d471f7a78507884c082de5dbfa"
+      },
+      {
+        "uri": "textures/bdc38afd7f42cd2166d47b05.webp",
+        "originalSha256": "bdc38afd7f42cd2166d47b054faf4b5aea38f5b0068147b3f66915cca310a17e"
+      },
+      {
+        "uri": "textures/9f590afdd7af0033740806fa.webp",
+        "originalSha256": "9f590afdd7af0033740806fa45602ce35cd4690020ed8fb59d691f8d881b7031"
+      },
+      {
+        "uri": "textures/472ab989f878d7657c0767a4.webp",
+        "originalSha256": "472ab989f878d7657c0767a43f7176a5f48527578d476151362c0034ad2c9a38"
+      },
+      {
+        "uri": "textures/7c6889d46fc946292a000abb.webp",
+        "originalSha256": "7c6889d46fc946292a000abb0a56950356c65c5516ba213b8c6ff62ec4e1c912"
+      },
+      {
+        "uri": "textures/df2e4f35636ab295082d8381.webp",
+        "originalSha256": "df2e4f35636ab295082d8381d01720662d8b45efa30b5282e1f5af4b3bb98107"
+      },
+      {
+        "uri": "textures/8cd4309b1a2614b0123d5aa0.webp",
+        "originalSha256": "8cd4309b1a2614b0123d5aa0bf21ce2ea1dd045655bdbf26ea96d4617fc2b534"
+      },
+      {
+        "uri": "textures/dd87fca1fae5b203e2017fe9.webp",
+        "originalSha256": "dd87fca1fae5b203e2017fe9dd7452b90f35deddd341d51931084de00cf5ca41"
+      },
+      {
+        "uri": "textures/f5a7ce0c455eedfb685d6cb5.webp",
+        "originalSha256": "f5a7ce0c455eedfb685d6cb531be55928ebe2570cb98dd7125dfd1edb8072be3"
+      },
+      {
+        "uri": "textures/c9ee13ff0571912c947cc230.webp",
+        "originalSha256": "c9ee13ff0571912c947cc230c397ff6603b66d2ced98d4dd514f131410bb003a"
+      },
+      {
+        "uri": "textures/4f1379ea27135b40d922e4af.webp",
+        "originalSha256": "4f1379ea27135b40d922e4af83e1a891e34dad7579a78eccfea6aa980f751587"
+      },
+      {
+        "uri": "textures/597af1ba0aac3f849ef45cb5.webp",
+        "originalSha256": "597af1ba0aac3f849ef45cb5a76a8849f2e6b02ab2c3887780f2435d66f97d52"
+      },
+      {
+        "uri": "textures/2f1af8ea790e75219a45eaf3.webp",
+        "originalSha256": "2f1af8ea790e75219a45eaf30cc1e243bc9093fb6c7c909d4126b5f7a0caeee2"
+      },
+      {
+        "uri": "textures/8609d86d4ac67741e418cb9c.webp",
+        "originalSha256": "8609d86d4ac67741e418cb9cc0614b9051cd811a94d0fd11305142bc5fc76b4b"
+      },
+      {
+        "uri": "textures/d0c66d334dab8558bf0eb51b.webp",
+        "originalSha256": "d0c66d334dab8558bf0eb51b172e8d61c5c9b03bdacdea342717d6aef25aed12"
+      },
+      {
+        "uri": "textures/e5fa31a3663436cbc4619d0f.webp",
+        "originalSha256": "e5fa31a3663436cbc4619d0feee49a0edcd50e3d3724f592e52f22d976a0509a"
+      },
+      {
+        "uri": "textures/6cd00a8e799b815ff44d6539.webp",
+        "originalSha256": "6cd00a8e799b815ff44d65397826d4243cc64bef3593d7ee2eb4363e30a986d6"
+      }
+    ]
+  },
+  "textures_lossless_pixel_exact": true
+}

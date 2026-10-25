@@ -5,6 +5,7 @@ import {WOOD_HOLDS} from './endings/wood_holds.mjs';
 import {PLAN as STRAW_HOLDS} from './endings/straw_holds.mjs';
 import {allFallScene,allFallResume,BRANCH as AF_BRANCH,LENGTH as AF_LENGTH} from './endings/all_fall.mjs';
 import {bombScene,bombResume,bombBackfireScene,BACKFIRE_LENGTH,BRANCH as BOMB_BRANCH,LENGTH as BOMB_LENGTH} from './endings/bomb.mjs';
+import {karakuriPlan} from './endings/karakuri_security.mjs';
 import {chimneyLidScene,LENGTH as CHIMNEY_LID_LENGTH} from './endings/chimney_lid.mjs';
 export const BASE_DURATION=240.45;
 export const smooth=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
@@ -29,6 +30,7 @@ export function wolfGivesUp(lines,opt={}){
 
 export const ENDING_PLANS={
  calm_leave:CALM_LEAVE,
+ karakuri_straw:karakuriPlan('straw'),karakuri_wood:karakuriPlan('wood'),karakuri_brick:karakuriPlan('brick'),
  bomb_backfire:{branch:BOMB_BRANCH,length:BACKFIRE_LENGTH,resume:228.7,scene:bombBackfireScene,finale:'爆弾がはね返ったルート。みんな無事！'},
  bomb:{branch:BOMB_BRANCH,length:BOMB_LENGTH,resume:BASE_DURATION,scene:bombScene,resumeScene:bombResume},
  all_fall:{branch:AF_BRANCH,length:AF_LENGTH,resume:BASE_DURATION,scene:allFallScene,resumeScene:allFallResume},

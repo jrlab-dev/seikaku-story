@@ -1,10 +1,11 @@
-import {createPersonalityCard} from './personality_card.js';
+import {createPersonalityCard,drawPersonalityText} from './personality_card.js';
 export async function createPersonalityWindow(canvas){
  const card=await createPersonalityCard();await card.ready;
  const overlay=document.createElement('canvas');overlay.id='personality-window-v8';overlay.setAttribute('aria-label','登場人物の性格紹介');Object.assign(overlay.style,{position:'absolute',inset:'0',width:'100%',height:'100%',pointerEvents:'none',zIndex:'3'});canvas.parentElement.appendChild(overlay);
  let layout=null,lastKey='';
  function draw(ctx,s,width=960,height=690){
   const p=s.personalityWindow;if(!p){layout=null;return;}
+  if(p.id==='wolf'){layout={...drawPersonalityText(ctx,p,{width,height}),profile:p.code,page:p.page};return layout;}
   const portrait=height>width,w=Math.min(340,portrait?width-28:width*.34),options={width:w,bodyFont:portrait?17:18,portraitHeight:portrait?140:220,maxHeight:portrait?height*.43:height-32};
   const measured=card.measure(ctx,p,options),x=width-w-14,y=portrait?height-measured.height-12:16;
   layout={...card.draw(ctx,p,{x,y,...options}),profile:p.code,page:p.page};return layout;

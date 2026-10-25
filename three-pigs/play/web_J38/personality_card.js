@@ -1,7 +1,16 @@
+function wrap(ctx,text,width){const lines=[],chars=[...text];let line='';for(let i=0;i<chars.length;i++){const c=chars[i],next=chars[i+1]??'',tail=/[、。！？）」』]/.test(next)?next:'';if(line&&ctx.measureText(line+c+tail).width>width){lines.push(line);line=c;}else line+=c;}if(line)lines.push(line);return lines;}
+export function drawPersonalityText(ctx,p,{width=960,height=690}={}){
+ const bodyFont=width<700?18:20,titleFont=width<700?26:30,boxWidth=Math.min(760,width-24),textWidth=boxWidth-28;
+ ctx.save();ctx.textBaseline='alphabetic';ctx.font='800 '+titleFont+'px system-ui';const titleLines=wrap(ctx,p.name??'',width-36);
+ ctx.textAlign='center';ctx.lineJoin='round';ctx.strokeStyle='rgba(255,253,246,.95)';ctx.lineWidth=7;ctx.fillStyle='#263728';
+ titleLines.forEach((line,i)=>{const y=76+i*(titleFont+8);ctx.strokeText(line,width/2,y);ctx.fillText(line,width/2,y);});
+ ctx.font='600 '+bodyFont+'px system-ui';const paragraphs=p.pages?.map(lines=>lines.join(''))??[p.lines?.join('')??''],lines=paragraphs.flatMap(text=>wrap(ctx,text,textWidth)),lineHeight=bodyFont*1.5,boxHeight=lines.length*lineHeight+24,boxY=height-boxHeight-16,x=(width-boxWidth)/2;
+ ctx.fillStyle='rgba(255,253,246,.92)';ctx.beginPath();ctx.roundRect(x,boxY,boxWidth,boxHeight,12);ctx.fill();ctx.fillStyle='#263728';ctx.textAlign='left';lines.forEach((line,i)=>ctx.fillText(line,x+14,boxY+12+bodyFont+i*lineHeight));ctx.restore();
+ return{left:0,top:0,width,height,bodyFont,titleLines,lines,descriptionTop:boxY,mode:'scene-text'};
+}
 export async function createPersonalityCard(){
  const manifest=await(await fetch('./assets/portraits/manifest.json')).json(),images={};
  const ready=Promise.all(Object.entries(manifest).map(async([id,def])=>{const image=new Image();images[id]=image;image.src=def.url;await image.decode();}));
- function wrap(ctx,text,width){const lines=[],chars=[...text];let line='';for(let i=0;i<chars.length;i++){const c=chars[i],next=chars[i+1]??'',tail=/[、。！？）」』]/.test(next)?next:'';if(line&&ctx.measureText(line+c+tail).width>width){lines.push(line);line=c;}else line+=c;}if(line)lines.push(line);return lines;}
  function measure(ctx,p,{width=340,bodyFont=18,portraitHeight=220,maxHeight=Infinity}={}){
   ctx.save();ctx.font='800 24px system-ui';const title=wrap(ctx,p.name??'',width-28),titleBottom=49+(title.length-1)*27;
   ctx.font='600 '+bodyFont+'px system-ui';const paragraphs=p.pages?.map(lines=>lines.join(''))??[p.lines?.join('')??''],lines=paragraphs.flatMap(text=>wrap(ctx,text,width-38));

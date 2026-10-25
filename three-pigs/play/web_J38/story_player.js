@@ -1,3 +1,4 @@
+import {finishLoadStep,failLoading} from './story_loading_progress.mjs';
 import {createStoryAudio} from './story_audio.mjs';
 import {STORY_AUDIO_CONFIG} from './story_audio_config.mjs';
 import {SCENES,STORY_DURATION,sampleStory,createStoryClock,selectBranch} from './story_timeline.mjs';
@@ -27,7 +28,7 @@ export function createStoryPlayer({document,prepare,applyCamera,releaseOtherCame
    catch(e){error=String(e);$('story-state').textContent='物語の準備に失敗しました。村は保持しています。再生で再試行できます。';throw e;}
    finally{pending=null;$('story-play').disabled=false;}})();return pending;
  }
- $('story-play').onclick=async()=>{const audioUnlock=audio.unlock();try{await ensure();await audioUnlock;await audio.prepare();releaseOtherCameras();active=true;if(clock.time>=STORY_DURATION){resources.buildings.reset();clock.reset();}clock.play();render();}catch(e){console.error(e);}};
+ $('story-play').onclick=async()=>{const audioUnlock=audio.unlock();try{await ensure();await audioUnlock;await audio.prepare();finishLoadStep('audio');releaseOtherCameras();active=true;if(clock.time>=STORY_DURATION){resources.buildings.reset();clock.reset();}clock.play();render();}catch(e){failLoading();console.error(e);}};
  $('story-pause').onclick=()=>{clock.pause();render();};
  function reset(){lastText=null;clock.reset();resources?.buildings.reset();resources?.effects?.reset();onReset?.();active=!!resources;render();}
  $('story-reset').onclick=reset;

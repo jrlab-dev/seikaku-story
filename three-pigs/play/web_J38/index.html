@@ -11,23 +11,24 @@ body.story-theatre header,.controls:not(#story-controls),#stats,#story-inspect,#
 #story-controls button:disabled{opacity:.5}
 #story-controls label:has(#story-time){flex:1 1 220px;display:flex;gap:6px;align-items:center}#story-time{flex:1}
 #back{position:fixed;top:10px;left:10px;z-index:20;background:#fffdf6e6;border:1px solid #e3dac3;border-radius:999px;padding:6px 14px;color:#2f3a2c;text-decoration:none;font:13px "Hiragino Maru Gothic ProN",system-ui,sans-serif}
-</style><body class="story-theatre"><a id="back" href="../../">← 性格を選びなおす</a><div id="cover"><div class="stage"><div class="vbox"><video id="iv" playsinline preload="auto"></video><div id="icap"></div><div id="tap"><button id="tap-go">▶ お話をはじめる</button><p class="small">音が出ます</p></div></div><div id="card"></div></div><div class="load"><div class="bar"><i id="cover-bar"></i></div><span id="cover-mb">3Dの絵本劇を読み込んでいます…</span></div></div>
+</style><body class="story-theatre"><a id="back" href="../../">← 性格を選びなおす</a><div id="cover"><div class="stage"><div class="vbox"><video id="iv" playsinline preload="auto"></video><div id="icap"></div><div id="tap"><button id="tap-go">▶ お話をはじめる</button><p class="small">音が出ます</p></div></div><div id="card"></div></div><div class="load"><div class="bar"><i id="cover-bar"></i></div><strong id="cover-percent">準備 0%（目安）</strong><div id="cover-stage">絵本劇を準備しています</div><span id="cover-mb"></span></div></div>
 <style>#cover{position:fixed;inset:0;z-index:30;background:#f6f1e3;display:flex;flex-direction:column;font-family:"Hiragino Maru Gothic ProN",system-ui,sans-serif;color:#2f3a2c;overflow:auto}#cover[hidden]{display:none}
 #cover .stage{flex:1;width:min(960px,100vw);margin:0 auto;padding:44px 8px 8px;display:flex;flex-direction:column;gap:10px}
 #cover .vbox{position:relative;width:100%;aspect-ratio:1002/720;background:#263429;border-radius:12px;overflow:hidden}#cover video{width:100%;height:100%;display:block;object-fit:cover}
 #icap{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:88%;background:#19231ae6;color:#fff;border-radius:10px;padding:8px 14px;text-align:center;font-weight:700;font-size:clamp(14px,2.6vw,22px);line-height:1.5}#icap:empty{display:none}
 #tap{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;background:#f6f1e3cc}#tap[hidden]{display:none}#tap button{border:0;border-radius:999px;padding:14px 30px;background:#c8553d;color:#fff;font:inherit;font-size:19px;font-weight:700;box-shadow:0 4px 0 #9b3f2c}
 #card .c{background:#fffdf6;border:1px solid #e3dac3;border-radius:14px;padding:12px;display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center}#card canvas{width:110px;height:138px}#card .role{font-size:13px;color:#5b8c51;font-weight:700}#card .name{font-size:20px;font-weight:800;margin:2px 0 6px}#card .lines{font-size:15px;line-height:1.75}
-#cover .small{font-size:12px;color:#6b705c}#cover .wait{text-align:center;font-weight:700;padding:12px}
+#cover-percent{display:block;font-size:17px;color:#2f3a2c;margin:4px 0}#cover-stage{font-size:14px;color:#2f3a2c;line-height:1.6}#cover .small{font-size:12px;color:#6b705c}#cover .wait{text-align:center;font-weight:700;padding:12px}
 #cover .load{padding:8px 16px 12px;font-size:12px;color:#6b705c;text-align:center;background:#f6f1e3;position:sticky;bottom:0}#cover .bar{height:8px;background:#e3dac3;border-radius:99px;overflow:hidden;margin:0 auto 4px;width:min(420px,90vw)}#cover .bar i{display:block;height:100%;width:0;background:#5b8c51;transition:width .4s}
 @keyframes load-slide{from{transform:translateX(0)}to{transform:translateX(185%)}}@media(prefers-reduced-motion:reduce){#cover-bar{animation:none!important}}@media (min-width:900px){#cover .stage{display:grid;grid-template-columns:1fr 300px;align-items:start}#card .c{grid-template-columns:1fr;text-align:center}#card canvas{margin:0 auto;width:150px;height:188px}}</style>
 <script type="module">
 import {TYPE_NAMES,PROFILE_TEXT} from './personality_text.mjs';
 import {castTypes} from './animal_reactions.js';
+import {getLoadProgress} from './story_loading_progress.mjs';
 const START=41,$=id=>document.getElementById(id);
 const q=(new URLSearchParams(location.search).get('cast')||'33535,55331,33333,11311').split(','),ROLES=['pig_straw','pig_wood','pig_brick','wolf'],LABEL={pig_straw:'長男',pig_wood:'次男',pig_brick:'三男',wolf:'おおかみ'};
 const cast=Object.fromEntries(ROLES.map((r,i)=>[r,q[i]])),types=castTypes(cast),man=await (await fetch('./assets/portraits/manifest.json')).json();
-const imgs={};await Promise.all(ROLES.map(r=>new Promise(ok=>{const im=new Image();im.onload=ok;im.onerror=ok;im.src=man[r].url;imgs[r]=im;})));
+const imgs={};ROLES.forEach(r=>{const im=new Image();im.src=man[r].url;imgs[r]=im;});
 // 3Dのお話と同じ時刻割り（字幕・性格紹介）
 const CAPS=[[0,2.5,'3びきのこぶたは、小さな家で暮らしていました。'],[2.5,5,'大きくなった3びきは、自分たちの家を作ることに。'],[32,35,'新しい土地に到着。ふり返ると、前の家が遠くに。']];
 const CARDS=[[5,14,'pig_straw'],[14,23,'pig_wood'],[23,32,'pig_brick'],[35,41,'wolf']];
@@ -35,18 +36,22 @@ const v=$('iv'),wolfSrc='./intro/wolf'+(types.wolf??9)+'.mp4';let seg='pigs',ani
 v.src='./intro/pigs.mp4';const pre=document.createElement('link');pre.rel='preload';pre.as='video';pre.href=wolfSrc;document.head.append(pre);
 function card(r){clearInterval(anim);const box=$('card');box.innerHTML='';shown=r;if(!r)return;const code=cast[r],t=PROFILE_TEXT[code]?.pages??[],c=document.createElement('canvas');c.width=240;c.height=300;
  const fr=man[r].frames.filter(f=>f.type===(types[r]??9)),draw=k=>{const f=fr[k%fr.length],[x,y,w,h]=f.rect,s=Math.min(230/w,290/h),ctx=c.getContext('2d');ctx.clearRect(0,0,240,300);ctx.drawImage(imgs[r],x,y,w,h,120-w*s/2,298-h*s,w*s,h*s);};
- let k=0;draw(0);anim=setInterval(()=>draw(++k),500);const d=document.createElement('div');d.className='c';d.append(c);const b=document.createElement('div');b.innerHTML=`<div class="role">${LABEL[r]}${r==='wolf'?'（そのころ…）':''}</div><div class="name">${TYPE_NAMES[code]??''}</div><div class="lines">${t.map(p=>p.join('')).join('<br>')}</div>`;d.append(b);box.append(d);}
+ let k=0;const safeDraw=()=>{if(imgs[r].complete&&imgs[r].naturalWidth)draw(k++);};safeDraw();anim=setInterval(safeDraw,500);const d=document.createElement('div');d.className='c';d.append(c);const b=document.createElement('div');b.innerHTML=`<div class="role">${LABEL[r]}${r==='wolf'?'（そのころ…）':''}</div><div class="name">${TYPE_NAMES[code]??''}</div><div class="lines">${t.map(p=>p.join('')).join('<br>')}</div>`;d.append(b);box.append(d);}
 const now=()=>seg==='pigs'?v.currentTime:35+v.currentTime;
 function sync(){const t=now(),cap=CAPS.find(([a,b])=>t>=a&&t<b);$('icap').textContent=cap?cap[2]:'';const cd=CARDS.find(([a,b])=>t>=a&&t<b);if((cd?.[2]??null)!==shown)card(cd?.[2]??null);}
 v.addEventListener('ended',()=>{if(seg==='pigs'){seg='wolf';v.src=wolfSrc;v.play();}else{phase='handoff';}});
 $('tap-go').onclick=()=>{$('tap').hidden=true;phase='video';v.play();
  // 押した操作の中で3Dも準備を始める（音の許可もここで取る）。始まったらすぐ41秒で止めて待たせる。待つあいだは消音
  const m=$('story-mute');if(m){m.checked=true;m.dispatchEvent(new Event('change'));}};
-let ready=false;
+let ready=false;const loadingBegan=performance.now();let readyElapsed=0;
 function tick(){const mb=performance.getEntriesByType('resource').reduce((s,e)=>s+(e.transferSize||e.encodedBodySize||0),0),pause=$('story-pause'),r=$('story-time'),play=$('story-play');
  if(phase!=='tap'&&!started&&play&&!play.disabled){started=true;play.click();}
- if(phase!=='tap'&&!ready&&pause&&!pause.disabled){ready=true;r.value=START;r.dispatchEvent(new Event('input'));}
- $('cover-bar').style.width=ready?'100%':'35%';$('cover-bar').style.animation=ready?'none':'load-slide 1.4s ease-in-out infinite alternate';$('cover-mb').textContent=(ready?'準備ができました（':'この配役に必要な絵を読み込んでいます… （')+Math.round(mb/2**20)+' MB）';
+ if(phase!=='tap'&&!ready&&pause&&!pause.disabled){ready=true;readyElapsed=Math.round((performance.now()-loadingBegan)/1000);r.value=START;r.dispatchEvent(new Event('input'));}
+ const progress=getLoadProgress(),percent=ready?100:Math.min(99,progress.percent),elapsed=ready?readyElapsed:Math.floor((performance.now()-loadingBegan)/1000),loaded=Math.round((mb+progress.received)/2**20);
+ $('cover-bar').style.width=percent+'%';$('cover-bar').style.animation='none';
+ const seconds=elapsed<60?elapsed+'秒':Math.floor(elapsed/60)+'分'+elapsed%60+'秒';
+ const status=progress.failed?'準備が止まりました。ページを読み直してください。':ready?(phase==='tap'?'はじめるボタンで再生できます':phase==='video'?'動画が終わると本編へ進みます（あと約'+Math.max(0,Math.ceil(START-now()))+'秒）':'本編を始めます'):progress.receiving?'3Dデータを受信中です':progress.label;
+ $('cover-percent').textContent=ready?'準備 100%':'準備 '+percent+'%（目安）';$('cover-stage').textContent=status;$('cover-mb').textContent=loaded+' MB 読込済み・'+seconds+(ready?'で準備完了':'経過');
  if(phase!=='tap')sync();
  if(phase==='handoff'){if(ready){phase='on';const m=$('story-mute');if(m){m.checked=false;m.dispatchEvent(new Event('change'));}r.value=START;r.dispatchEvent(new Event('input'));play.click();$('cover').hidden=true;clearInterval(anim);}else{$('icap').textContent='3Dの準備をしています。もう少しお待ちください…';}}
  if(phase==='on'&&+r.value>=+r.max-.2){phase='end';const c=$('cover');c.hidden=false;c.querySelector('.stage').innerHTML='<div class="wait" style="margin-top:18vh"><h2>おしまい</h2><p>性格を変えると、ちがうお話になります。</p><p><a href="../../"><button style="border:0;border-radius:999px;padding:12px 26px;background:#c8553d;color:#fff;font:inherit;font-weight:700">性格を選びなおす</button></a></p><p><a href="./?cast='+q.join(',')+'">もう一度見る</a></p></div>';c.querySelector('.load').hidden=true;}

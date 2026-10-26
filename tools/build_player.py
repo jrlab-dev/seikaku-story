@@ -10,6 +10,7 @@ LIMIT = 24 * 2**20
 used = set()
 for f in FETCHED: used |= {u.split('?')[0] for u in json.load(open(f))}
 extra = ['/web_J38/audio/J114_v7_final_mix.m4a', '/web_J38/audio/ending_bed.m4a', '/web_J38/audio/karakuri_bed.m4a', '/web_J38/index.html']
+extra += ['/web_J38/audio/doorless_' + site + '.m4a' for site in ['straw', 'wood', 'brick']]
 used |= set(extra)
 base = os.path.join(SRC, 'animal', 'delivery')
 # 配役しだいで読む素材（性格の歩き方・新しい家・効果）も入れる：web_J38 の中で、assets 直下の大きな3Dと audio 以外は全部、

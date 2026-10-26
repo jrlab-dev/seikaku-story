@@ -74,7 +74,7 @@ function tiredCamera(){return{id:'J116_wood_wolf_tired',position:[WOLF_AT_WOOD[0
 
 function resumeScene(s){
  for(const a of s.actors){if(!a.visible||!a.id.startsWith('pig_'))continue;a.x+=SHIFT.x;a.z+=SHIFT.z;if(a.worldY!=null)a.worldY+=SHIFT.y;}
- if(s.egress){const b3=s.actors.find(a=>a.id==='pig_brick');if(b3?.visible){const u=Math.max(0,Math.min(1,(b3.z-SHIFT.z+13.3)/4.5));b3.x=-18.7;b3.z=-11.25+1.45*u;delete b3.worldY;}}
+ if(s.egress){const b3=s.actors.find(a=>a.id==='pig_brick');if(b3?.visible){const original={x:b3.x,z:b3.z},u=Math.max(0,Math.min(1,(b3.z-SHIFT.z+13.3)/4.5)),merge=smooth(((s.storyTime??0)-219.25)/.9);b3.x=-18.7+(original.x+18.7)*merge;b3.z=(-11.25+1.45*u)*(1-merge)+original.z*merge;delete b3.worldY;}}
  if(s.egress){const pw=s.actors.find(a=>a.id==='pig_wood');if(pw?.visible&&pw.z<-13.45){pw.z=-13.45;pw.x=-20.7;pw.worldY=DOOR.floor;pw.motion='idle';}}
  const c=s.camera;if(c){const dy=c.terrainRelative?0:SHIFT.y;s.camera={...c,id:c.id+'_at_wood',position:[c.position[0]+SHIFT.x,c.position[1]+dy,c.position[2]+SHIFT.z],target:[c.target[0]+SHIFT.x,c.target[1]+dy,c.target[2]+SHIFT.z]};}
  const b=s.houses.brick;

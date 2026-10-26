@@ -1,5 +1,6 @@
 import * as BASE from './story_timeline_v4.mjs';
 import {applyPigEscapeRule} from './pig_escape.mjs';
+import {applyPuzzleEntries} from './puzzle_entry.mjs';
 import {openingSample,applyWolfPersonality,OPENING_DURATION,OPENING_SHIFT}from './opening_v8.mjs';
 import {applyPersonality,setCast,decideEnding,applyStances,getCast} from './personality_story.mjs';
 import {siteHouses,puzzleCaption,applyTentAway} from './puzzle_houses.mjs';
@@ -20,7 +21,7 @@ export function sampleStory(t){
  if(s.resultCard&&ending.completion!=null){s.resultCard={...s.resultCard,target:ending.completion/100,meaning:ending.title};if(plan?.finale){s.scene={...s.scene,caption:plan.finale};s.branch={...s.branch,caption:{...s.branch.caption,text:plan.finale}};}}
  s.audioMap=m.phase==='variant'?{src:'bed',t:m.q}:{src:'base',t:m.phase==='resume'?m.baseTime:t};s.time=t;s.duration=STORY_DURATION;s.ended=t>=STORY_DURATION;s.endingPhase=m.phase;s.personality={...s.personality,ending};
  const sites=siteHouses(getCast());if(s.scene?.caption)s.scene={...s.scene,caption:puzzleCaption(s.scene.caption,sites)};if(s.branch?.caption?.text)s.branch={...s.branch,caption:{...s.branch.caption,text:puzzleCaption(s.branch.caption.text,sites)}};s.puzzleSites=sites;if(m.phase==='base')applyTentAway(s,sites);
- return applyPigEscapeRule(s);
+ return applyPigEscapeRule(applyPuzzleEntries(s,sites));
 }
 function baseSample(t){
  t=Math.max(0,Math.min(240.45,t));const old=t<OPENING_DURATION?0:Math.round((t-OPENING_SHIFT)*1e9)/1e9;

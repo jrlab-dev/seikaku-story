@@ -46,11 +46,13 @@
  <div class="go">
   <a class="btn" id="play" href="#">この性格でお話を見る</a>
   <p class="note">3Dの絵本劇を読み込みます（初回は通信量が多めです。Wi-Fiがおすすめ）。</p>
+  <p class="note" id="warmup-status">性格を選んでいる間に、お話の素材を少しずつ準備します。</p>
  </div>
 </main>
 <footer><div class="wrap">お話は性格をもとにした創作で、診断の科学的な結論ではありません。</div></footer>
 <script type="module">
 import {TYPE_NAMES} from './play/web_J38/personality_text.mjs';
+let warmup=null;
 const ROLES=[['pig_straw','長男','straw'],['pig_wood','次男','wood'],['pig_brick','三男','brick'],['wolf','おおかみ','wolf']];
 const F=[['O','開放性'],['C','誠実性'],['E','外向性'],['A','協調性'],['N','感受性']];
 const LV=[['1','低い'],['3','ふつう'],['5','高い']];
@@ -72,9 +74,14 @@ function render(){
   box.append(d);
  }
  document.getElementById('play').href='play/web_J38/?cast='+ROLES.map(([id])=>cast[id]).join(',');
+ warmup?.setCast(cast);
 }
 function save(){localStorage.setItem('story_three_pigs_cast',JSON.stringify(cast));render();}
 render();
+import('../assets/story-warmup.mjs').then(({createWarmup})=>{
+ warmup=createWarmup({stage:'selection',status:document.getElementById('warmup-status')});
+ warmup.setCast(cast);
+}).catch(()=>{document.getElementById('warmup-status').textContent='お話の開始時に素材を準備します。';});
 </script>
 </body>
 </html>

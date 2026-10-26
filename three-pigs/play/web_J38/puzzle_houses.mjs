@@ -16,7 +16,7 @@ export function siteHouses(cast){
  return out;
 }
 export const NAME={straw:'わらの家',wood:'木の家',brick:'れんがの家',tent:'テント',fortress:'鉄の要塞',treehouse:'ツリーハウス',karakuri:'発明の家',bunker:'地下シェルター',castle:'お城',karakuri_fort:'からくり要塞'};
-const MODEL={straw:'StrawHouse',wood:'WoodHouse',brick:'BrickHouse',tent:'TentHouse',fortress:'FortressHouse',treehouse:'TreehouseHouse',karakuri:'KarakuriHouse',bunker:'BunkerHouse',castle:'CastleHouse',karakuri_fort:'KarakuriFortHouse'};
+export const MODEL={straw:'StrawHouse',wood:'WoodHouse',brick:'BrickHouse',tent:'TentHouse',fortress:'FortressHouse',treehouse:'TreehouseHouse',karakuri:'KarakuriHouse',bunker:'BunkerHouse',castle:'CastleHouse',karakuri_fort:'KarakuriFortHouse'};
 const MANIFEST={straw:'Straw',wood:'Wood',brick:'Brick',tent:'Tent',fortress:'Fortress',treehouse:'Treehouse',karakuri:'Karakuri',bunker:'Bunker',castle:'Castle',karakuri_fort:'KarakuriFort'};
 const FALL={straw:['Straw_VillageTopple_J59.glb','Straw_VillageTopple_J59'],wood:['Wood_VillageTopple_J59.glb','Wood_VillageTopple_J59'],tent:['Tent_BlowAway_v1.glb','Tent_BlowAway_v1'],treehouse:['Treehouse_BlowAway_v1.glb','Treehouse_BlowAway_v1']};
 

@@ -165,3 +165,5 @@ print('cover ok')
 
 from optimize_player import optimize_player
 optimize_player(DST)
+from build_warmup import build_warmup
+build_warmup(DST)

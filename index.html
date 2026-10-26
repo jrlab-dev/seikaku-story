@@ -38,5 +38,9 @@ fetch('stories.json').then(r=>r.json()).then(d=>{const box=document.getElementBy
  for(const s of d.stories){const a=document.createElement(s.status==='open'?'a':'div');a.className='story'+(s.status==='open'?'':' soon');if(s.href)a.href=s.href;
   a.innerHTML=(s.image?`<img src="${s.image}" alt="">`:'<div class="ph">📖</div>')+`<div class="body"><h3>${s.title}</h3><p>${s.lead}</p></div>`;box.append(a);}});
 </script>
+<script type="module">
+import {createWarmup} from './assets/story-warmup.mjs';
+createWarmup();
+</script>
 </body>
 </html>

@@ -4,7 +4,7 @@ const REGIONS={
  walk:[[482,91,166,148],[1097,93,165,148],[488,603,170,150],[1101,605,168,153]]
 };
 export async function villainTexture(original,kind){
- const edit=await new THREE.TextureLoader().loadAsync('./villain/'+kind+'.png'),w=original.image.width,h=original.image.height,c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(original.image,0,0);
+ const edit=await new THREE.TextureLoader().loadAsync('./villain/'+kind+'.webp'),w=original.image.width,h=original.image.height,c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(original.image,0,0);
  const before=x.getImageData(0,0,w,h).data;
  const e=document.createElement('canvas');e.width=w;e.height=h;const ex=e.getContext('2d');ex.drawImage(edit.image,0,0,w,h);
  for(const [sx,sy,rw,rh] of REGIONS[kind]){const patch=document.createElement('canvas');patch.width=rw;patch.height=rh;const p=patch.getContext('2d');p.drawImage(e,sx,sy,rw,rh,0,0,rw,rh);p.globalCompositeOperation='destination-in';p.save();p.translate(rw/2,rh/2);p.scale(rw/2,rh/2);const g=p.createRadialGradient(0,0,.74,0,0,1);g.addColorStop(0,'white');g.addColorStop(1,'transparent');p.fillStyle=g;p.beginPath();p.arc(0,0,1,0,Math.PI*2);p.fill();p.restore();x.drawImage(patch,sx,sy);}

@@ -4,12 +4,12 @@ export async function installWolfEscape(layer){
  const plan=getStoryAssetPlan(),needs=plan?.wolf,motions=plan?.motions.wolf;
  if(plan&&!needs.frontRun&&!needs.rearRun&&!needs.hotJump&&!needs.tail&&!motions?.some(m=>['idea','tired'].includes(m)))return;
  const image=(url,needed)=>needed===false?Promise.resolve(new THREE.Texture()):new THREE.TextureLoader().loadAsync(url);
- const panicTexture=await image('./wolf_panic_jump.png',needs?.hotJump);panicTexture.colorSpace=THREE.SRGBColorSpace;panicTexture.generateMipmaps=false;panicTexture.minFilter=panicTexture.magFilter=THREE.LinearFilter;
+ const panicTexture=await image('./wolf_panic_jump.webp',needs?.hotJump);panicTexture.colorSpace=THREE.SRGBColorSpace;panicTexture.generateMipmaps=false;panicTexture.minFilter=panicTexture.magFilter=THREE.LinearFilter;
  const panicGeometry=new THREE.PlaneGeometry(1,1),panicMaterial=new THREE.MeshBasicMaterial({map:panicTexture,transparent:true,alphaTest:32/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});
  const run=await(await fetch('./escape_wolf/build.json')).json(),textures=await Promise.all(run.frames.map(async f=>{const t=await image(f.url,needs?.frontRun);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));
  const rear=await(await fetch('./escape_wolf_rear/build.json')).json(),rearTextures=await Promise.all(rear.frames.map(async f=>{const t=await image(f.url,needs?.rearRun);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));
  const v2=await(await fetch('./wolf_tired_idea_v2.json')).json();
- const loadV2=async n=>{const t=await image('./wolf_'+n+'_v2.png',motions?.includes(n));t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;};
+ const loadV2=async n=>{const t=await image('./wolf_'+n+'_v2.webp',motions?.includes(n));t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;};
  const ideaTexture=await loadV2('idea'),ideaGeometry=new THREE.PlaneGeometry(1,1),ideaMaterial=new THREE.MeshBasicMaterial({map:ideaTexture,transparent:true,alphaTest:7/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});
  const tiredTexture=await loadV2('tired');tiredTexture.colorSpace=THREE.SRGBColorSpace;tiredTexture.generateMipmaps=false;tiredTexture.minFilter=tiredTexture.magFilter=THREE.LinearFilter;
  const tiredGeometry=new THREE.PlaneGeometry(1,1),tiredMaterial=new THREE.MeshBasicMaterial({map:tiredTexture,transparent:true,alphaTest:7/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});
@@ -32,19 +32,19 @@ export async function installWolfEscape(layer){
    const d=v2.tired,[w,h]=d.size,[ax,ay]=d.anchor,p=tiredGeometry.attributes.position,scale=a.data.heightMetres/v2.idea.body,breath=1+.009*Math.sin(a.motionTime*7),az=Math.atan2(camera.position.x-a.root.position.x,camera.position.z-a.root.position.z);
    p.setXYZ(0,-ax*scale,ay*scale*breath,0);p.setXYZ(1,(w-ax)*scale,ay*scale*breath,0);p.setXYZ(2,-ax*scale,(ay-h)*scale*breath,0);p.setXYZ(3,(w-ax)*scale,(ay-h)*scale*breath,0);p.needsUpdate=true;tiredGeometry.computeBoundingSphere();
    a.card.geometry=tiredGeometry;a.card.material=tiredMaterial;a.card.rotation.set(0,az,0);for(const o of a.root.children)if(o.name==='paper_cut_edge')o.visible=false;
-   a.paperStatus={...a.paperStatus,action:'tired',running:false,tiredAsset:'wolf_tired_v2.png',visibleFootY:0};
+   a.paperStatus={...a.paperStatus,action:'tired',running:false,tiredAsset:'wolf_tired_v2.webp',visibleFootY:0};
   }
   if(a.motion==='idea'){
    const d=v2.idea,[w,h]=d.size,[ax,ay]=d.anchor,p=ideaGeometry.attributes.position,scale=a.data.heightMetres/d.body,az=Math.atan2(camera.position.x-a.root.position.x,camera.position.z-a.root.position.z);
    p.setXYZ(0,-ax*scale,ay*scale,0);p.setXYZ(1,(w-ax)*scale,ay*scale,0);p.setXYZ(2,-ax*scale,(ay-h)*scale,0);p.setXYZ(3,(w-ax)*scale,(ay-h)*scale,0);p.needsUpdate=true;ideaGeometry.computeBoundingSphere();
    a.card.geometry=ideaGeometry;a.card.material=ideaMaterial;a.card.rotation.set(0,az,0);for(const o of a.root.children)if(o.name==='paper_cut_edge')o.visible=false;
-   a.paperStatus={...a.paperStatus,action:'idea',running:false,ideaAsset:'wolf_idea_v2.png',visibleFootY:0};
+   a.paperStatus={...a.paperStatus,action:'idea',running:false,ideaAsset:'wolf_idea_v2.webp',visibleFootY:0};
   }
   const singleJump=jumpPose;
   if(singleJump){
    const w=panicTexture.image.width,h=panicTexture.image.height,p=panicGeometry.attributes.position,scale=a.data.heightMetres/(h*.887),ax=w*.39,ay=h*.926,az=Math.atan2(camera.position.x-a.root.position.x,camera.position.z-a.root.position.z);
    p.setXYZ(0,-ax*scale,ay*scale,0);p.setXYZ(1,(w-ax)*scale,ay*scale,0);p.setXYZ(2,-ax*scale,(ay-h)*scale,0);p.setXYZ(3,(w-ax)*scale,(ay-h)*scale,0);const uv=panicGeometry.attributes.uv;uv.setXY(0,1,1);uv.setXY(1,0,1);uv.setXY(2,1,0);uv.setXY(3,0,0);uv.needsUpdate=true;p.needsUpdate=true;panicGeometry.computeBoundingSphere();a.card.geometry=panicGeometry;a.card.material=panicMaterial;a.card.rotation.set(0,az,0);
-   a.paperStatus={...a.paperStatus,expression:'panicked_open_mouth',running:false,runRepresentation:null,source:'wolf_panic_jump.png',mirror:true,lowerOriginalLegsVisible:true,visibleFootY:0,singleJump:true};
+   a.paperStatus={...a.paperStatus,expression:'panicked_open_mouth',running:false,runRepresentation:null,source:'wolf_panic_jump.webp',mirror:true,lowerOriginalLegsVisible:true,visibleFootY:0,singleJump:true};
   }
   if(tail?.active){
    const az=a.card.rotation.y,sign=a.paperStatus?.mirror?-1:1,offset=new THREE.Vector3((a.motion==='run_spiral'?-.57:-.78)*sign,a.motion==='run_spiral'?.57:.60,.03).applyAxisAngle(new THREE.Vector3(0,1,0),az);

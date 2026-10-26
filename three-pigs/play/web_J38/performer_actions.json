@@ -1,6 +1,6 @@
 {
   "pig_straw_build_hammer": {
-    "url": "./build_straw.png",
+    "url": "./build_straw.webp",
     "size": [
       1774,
       887
@@ -34,7 +34,7 @@
     ]
   },
   "pig_wood_build_hammer": {
-    "url": "./build_wood.png",
+    "url": "./build_wood.webp",
     "size": [
       1774,
       887
@@ -68,7 +68,7 @@
     ]
   },
   "pig_brick_build_hammer": {
-    "url": "./build_brick_clean.png",
+    "url": "./build_brick_clean.webp",
     "size": [
       1536,
       1024
@@ -102,7 +102,7 @@
     ]
   },
   "wolf_walk": {
-    "url": "./walk_wolf.png",
+    "url": "./walk_wolf.webp",
     "size": [
       1536,
       1024

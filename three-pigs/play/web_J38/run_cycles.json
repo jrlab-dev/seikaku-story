@@ -15,7 +15,7 @@
     "frames": [
       {
         "index": 0,
-        "url": "./escape_straw/run_00.png",
+        "url": "./escape_straw/run_00.webp",
         "bounds": [
           201,
           151,
@@ -25,7 +25,7 @@
       },
       {
         "index": 1,
-        "url": "./escape_straw/run_01.png",
+        "url": "./escape_straw/run_01.webp",
         "bounds": [
           201,
           148,
@@ -35,7 +35,7 @@
       },
       {
         "index": 2,
-        "url": "./escape_straw/run_02.png",
+        "url": "./escape_straw/run_02.webp",
         "bounds": [
           201,
           148,
@@ -45,7 +45,7 @@
       },
       {
         "index": 3,
-        "url": "./escape_straw/run_03.png",
+        "url": "./escape_straw/run_03.webp",
         "bounds": [
           201,
           148,
@@ -55,7 +55,7 @@
       },
       {
         "index": 4,
-        "url": "./escape_straw/run_04.png",
+        "url": "./escape_straw/run_04.webp",
         "bounds": [
           201,
           151,
@@ -65,7 +65,7 @@
       },
       {
         "index": 5,
-        "url": "./escape_straw/run_05.png",
+        "url": "./escape_straw/run_05.webp",
         "bounds": [
           201,
           148,
@@ -75,7 +75,7 @@
       },
       {
         "index": 6,
-        "url": "./escape_straw/run_06.png",
+        "url": "./escape_straw/run_06.webp",
         "bounds": [
           201,
           148,
@@ -85,7 +85,7 @@
       },
       {
         "index": 7,
-        "url": "./escape_straw/run_07.png",
+        "url": "./escape_straw/run_07.webp",
         "bounds": [
           201,
           148,
@@ -111,7 +111,7 @@
     "frames": [
       {
         "index": 0,
-        "url": "./escape_wood/run_00.png",
+        "url": "./escape_wood/run_00.webp",
         "bounds": [
           230,
           175,
@@ -121,7 +121,7 @@
       },
       {
         "index": 1,
-        "url": "./escape_wood/run_01.png",
+        "url": "./escape_wood/run_01.webp",
         "bounds": [
           229,
           161,
@@ -131,7 +131,7 @@
       },
       {
         "index": 2,
-        "url": "./escape_wood/run_02.png",
+        "url": "./escape_wood/run_02.webp",
         "bounds": [
           239,
           163,
@@ -141,7 +141,7 @@
       },
       {
         "index": 3,
-        "url": "./escape_wood/run_03.png",
+        "url": "./escape_wood/run_03.webp",
         "bounds": [
           229,
           161,
@@ -151,7 +151,7 @@
       },
       {
         "index": 4,
-        "url": "./escape_wood/run_04.png",
+        "url": "./escape_wood/run_04.webp",
         "bounds": [
           230,
           175,
@@ -161,7 +161,7 @@
       },
       {
         "index": 5,
-        "url": "./escape_wood/run_05.png",
+        "url": "./escape_wood/run_05.webp",
         "bounds": [
           229,
           161,
@@ -171,7 +171,7 @@
       },
       {
         "index": 6,
-        "url": "./escape_wood/run_06.png",
+        "url": "./escape_wood/run_06.webp",
         "bounds": [
           239,
           163,
@@ -181,7 +181,7 @@
       },
       {
         "index": 7,
-        "url": "./escape_wood/run_07.png",
+        "url": "./escape_wood/run_07.webp",
         "bounds": [
           229,
           161,
@@ -207,7 +207,7 @@
     "frames": [
       {
         "index": 0,
-        "url": "./run_brick/run_00.png",
+        "url": "./run_brick/run_00.webp",
         "bounds": [
           254,
           205,
@@ -217,7 +217,7 @@
       },
       {
         "index": 1,
-        "url": "./run_brick/run_01.png",
+        "url": "./run_brick/run_01.webp",
         "bounds": [
           255,
           207,
@@ -227,7 +227,7 @@
       },
       {
         "index": 2,
-        "url": "./run_brick/run_02.png",
+        "url": "./run_brick/run_02.webp",
         "bounds": [
           255,
           212,
@@ -237,7 +237,7 @@
       },
       {
         "index": 3,
-        "url": "./run_brick/run_03.png",
+        "url": "./run_brick/run_03.webp",
         "bounds": [
           244,
           207,
@@ -247,7 +247,7 @@
       },
       {
         "index": 4,
-        "url": "./run_brick/run_04.png",
+        "url": "./run_brick/run_04.webp",
         "bounds": [
           268,
           205,
@@ -257,7 +257,7 @@
       },
       {
         "index": 5,
-        "url": "./run_brick/run_05.png",
+        "url": "./run_brick/run_05.webp",
         "bounds": [
           243,
           207,
@@ -267,7 +267,7 @@
       },
       {
         "index": 6,
-        "url": "./run_brick/run_06.png",
+        "url": "./run_brick/run_06.webp",
         "bounds": [
           244,
           212,
@@ -277,7 +277,7 @@
       },
       {
         "index": 7,
-        "url": "./run_brick/run_07.png",
+        "url": "./run_brick/run_07.webp",
         "bounds": [
           261,
           207,

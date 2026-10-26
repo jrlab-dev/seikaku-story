@@ -1,6 +1,6 @@
 {
   "config": {
-    "torso": "brick_torso.png",
+    "torso": "brick_torso.webp",
     "scale": 0.55,
     "hem_y": 1190,
     "hips_x": 550,
@@ -20,7 +20,7 @@
   "frames": [
     {
       "index": 0,
-      "image": "run_00.png",
+      "image": "run_00.webp",
       "crop_xywh": [
         0,
         0,
@@ -36,7 +36,7 @@
     },
     {
       "index": 1,
-      "image": "run_01.png",
+      "image": "run_01.webp",
       "crop_xywh": [
         0,
         0,
@@ -52,7 +52,7 @@
     },
     {
       "index": 2,
-      "image": "run_02.png",
+      "image": "run_02.webp",
       "crop_xywh": [
         0,
         0,
@@ -68,7 +68,7 @@
     },
     {
       "index": 3,
-      "image": "run_03.png",
+      "image": "run_03.webp",
       "crop_xywh": [
         0,
         0,
@@ -84,7 +84,7 @@
     },
     {
       "index": 4,
-      "image": "run_04.png",
+      "image": "run_04.webp",
       "crop_xywh": [
         0,
         0,
@@ -100,7 +100,7 @@
     },
     {
       "index": 5,
-      "image": "run_05.png",
+      "image": "run_05.webp",
       "crop_xywh": [
         0,
         0,
@@ -116,7 +116,7 @@
     },
     {
       "index": 6,
-      "image": "run_06.png",
+      "image": "run_06.webp",
       "crop_xywh": [
         0,
         0,
@@ -132,7 +132,7 @@
     },
     {
       "index": 7,
-      "image": "run_07.png",
+      "image": "run_07.webp",
       "crop_xywh": [
         0,
         0,

@@ -1,7 +1,7 @@
 {
  "react_pig_straw": {
   "ref": 0,
-  "url": "./reactions/react_straw.png",
+  "url": "./reactions/react_straw.webp",
   "size": [
    1380,
    1380
@@ -173,7 +173,7 @@
  },
  "react_pig_wood": {
   "ref": 0,
-  "url": "./reactions/react_wood.png",
+  "url": "./reactions/react_wood.webp",
   "size": [
    1380,
    1380
@@ -345,7 +345,7 @@
  },
  "react_wolf": {
   "ref": 0,
-  "url": "./reactions/react_wolf.png",
+  "url": "./reactions/react_wolf.webp",
   "size": [
    1380,
    1380
@@ -517,7 +517,7 @@
  },
  "stance_pig_straw": {
   "ref": 4,
-  "url": "./reactions/stance_straw.png",
+  "url": "./reactions/stance_straw.webp",
   "size": [
    1380,
    1380
@@ -689,7 +689,7 @@
  },
  "stance_pig_wood": {
   "ref": 4,
-  "url": "./reactions/stance_wood.png",
+  "url": "./reactions/stance_wood.webp",
   "size": [
    1380,
    1380
@@ -861,7 +861,7 @@
  },
  "react_pig_brick": {
   "ref": 0,
-  "url": "./reactions/react_brick.png",
+  "url": "./reactions/react_brick.webp",
   "size": [
    1380,
    1380
@@ -1033,7 +1033,7 @@
  },
  "stance_pig_brick": {
   "ref": 4,
-  "url": "./reactions/stance_brick.png",
+  "url": "./reactions/stance_brick.webp",
   "size": [
    1380,
    1380
@@ -1205,7 +1205,7 @@
  },
  "stance_wolf": {
   "ref": 4,
-  "url": "./reactions/stance_wolf.png",
+  "url": "./reactions/stance_wolf.webp",
   "size": [
    1380,
    1380
@@ -1377,7 +1377,7 @@
  },
  "bomb_wolf": {
   "ref": 6,
-  "url": "./reactions/bomb_wolf.png",
+  "url": "./reactions/bomb_wolf.webp",
   "size": [
    1680,
    1680
@@ -1549,7 +1549,7 @@
  },
  "bonk_wolf": {
   "ref": 0,
-  "url": "./reactions/bonk_wolf.png",
+  "url": "./reactions/bonk_wolf.webp",
   "size": [
    2172,
    724

@@ -162,3 +162,6 @@ tick();
 h = h.replace('<a id="back" href="../../">← 性格を選びなおす</a>', '<a id="back" href="../../">← 性格を選びなおす</a>' + cover, 1)
 open(idx, 'w', encoding='utf-8').write(h)
 print('cover ok')
+
+from optimize_player import optimize_player
+optimize_player(DST)

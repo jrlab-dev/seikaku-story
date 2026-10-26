@@ -11,7 +11,7 @@ export async function installCostumeCast(layer,ground){
  const defs=await(await fetch('./costume114/manifest.json')).json();
  const load=async url=>{const t=await new THREE.TextureLoader().loadAsync(url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t};
  for(const d of Object.values(defs)){d.texture=await load(d.url);d.mirrorTexture=d.mirrorUrl?await load(d.mirrorUrl):d.texture;}
- const ringMaps=await Promise.all(Array.from({length:8},(_,n)=>load('./run_straw/run_'+String(n).padStart(2,'0')+'.png')));
+ const ringMaps=await Promise.all(Array.from({length:8},(_,n)=>load('./run_straw/run_'+String(n).padStart(2,'0')+'.webp')));
  const mat=map=>new THREE.MeshBasicMaterial({map,transparent:true,alphaTest:.5,depthTest:true,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});
  const bodyRows={};
  for(const id of ids.slice(0,3)){const d=defs[id],c=document.createElement('canvas');c.width=d.size[0];c.height=d.size[1];const ctx=c.getContext('2d');ctx.drawImage(d.texture.image,0,0);const pix=ctx.getImageData(0,0,c.width,c.height).data;

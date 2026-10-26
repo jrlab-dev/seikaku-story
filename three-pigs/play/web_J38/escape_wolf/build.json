@@ -14,7 +14,7 @@
   "frames": [
     {
       "index": 0,
-      "url": "./escape_wolf/run_00.png",
+      "url": "./escape_wolf/run_00.webp",
       "bounds": [
         114,
         187,
@@ -24,7 +24,7 @@
     },
     {
       "index": 1,
-      "url": "./escape_wolf/run_01.png",
+      "url": "./escape_wolf/run_01.webp",
       "bounds": [
         116,
         185,
@@ -34,7 +34,7 @@
     },
     {
       "index": 2,
-      "url": "./escape_wolf/run_02.png",
+      "url": "./escape_wolf/run_02.webp",
       "bounds": [
         119,
         185,
@@ -44,7 +44,7 @@
     },
     {
       "index": 3,
-      "url": "./escape_wolf/run_03.png",
+      "url": "./escape_wolf/run_03.webp",
       "bounds": [
         116,
         185,
@@ -54,7 +54,7 @@
     },
     {
       "index": 4,
-      "url": "./escape_wolf/run_04.png",
+      "url": "./escape_wolf/run_04.webp",
       "bounds": [
         114,
         187,
@@ -64,7 +64,7 @@
     },
     {
       "index": 5,
-      "url": "./escape_wolf/run_05.png",
+      "url": "./escape_wolf/run_05.webp",
       "bounds": [
         116,
         185,
@@ -74,7 +74,7 @@
     },
     {
       "index": 6,
-      "url": "./escape_wolf/run_06.png",
+      "url": "./escape_wolf/run_06.webp",
       "bounds": [
         119,
         185,
@@ -84,7 +84,7 @@
     },
     {
       "index": 7,
-      "url": "./escape_wolf/run_07.png",
+      "url": "./escape_wolf/run_07.webp",
       "bounds": [
         116,
         185,
@@ -94,7 +94,7 @@
     }
   ],
   "config": {
-    "torso": "wolf_panic_torso.png",
+    "torso": "wolf_panic_torso.webp",
     "scale": 0.59,
     "hem_y": 1059,
     "hips_x": 740,

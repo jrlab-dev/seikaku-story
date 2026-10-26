@@ -1,7 +1,7 @@
 import {getStoryAssetPlan} from './story_asset_plan.mjs';
 import * as THREE from 'three';
 export async function installDoorHost(layer,ground){
- const configs={pig_wood:{url:'./owner_wood_door.png',width:1210,height:1300,body:1176,foot:[520,1234],hand:[1155,500]},pig_brick:{url:'./owner_brick_door.png',width:1142,height:1378,body:1287,foot:[470,1324],hand:[1114,555]}};
+ const configs={pig_wood:{url:'./owner_wood_door.webp',width:1210,height:1300,body:1176,foot:[520,1234],hand:[1155,500]},pig_brick:{url:'./owner_brick_door.webp',width:1142,height:1378,body:1287,foot:[470,1324],hand:[1114,555]}};
  const plan=getStoryAssetPlan();for(const id of Object.keys(configs))if(plan&&!plan.motions[id]?.includes('door_host'))delete configs[id];
  for(const d of Object.values(configs)){d.texture=await new THREE.TextureLoader().loadAsync(d.url);d.texture.colorSpace=THREE.SRGBColorSpace;d.texture.generateMipmaps=false;d.texture.minFilter=d.texture.magFilter=THREE.LinearFilter;d.geometry=new THREE.PlaneGeometry(1,1,24,24);d.material=new THREE.MeshBasicMaterial({map:d.texture,transparent:true,alphaTest:7/255,depthWrite:true,side:THREE.DoubleSide,toneMapped:false});}
  const apply=layer.applyStory.bind(layer),update=layer.update.bind(layer);let poses=new Map();

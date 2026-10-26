@@ -1,4 +1,5 @@
 import {getStoryAssetPlan} from './story_asset_plan.mjs';
+import {isPigEscapeMotion} from './pig_escape.mjs';
 import * as THREE from 'three';
 import {frameQuad} from './sprite_math.mjs';
 
@@ -49,9 +50,9 @@ function paperMaterial(map,backOnly=false){
 }
 export async function installPaperTheatre(layer){
  const runDefinitions=await (await fetch('./run_cycles.json')).json(),runClips={};
- for(const [id,def]of Object.entries(runDefinitions)){const ms=getStoryAssetPlan()?.motions[id];if(ms&&!ms.some(m=>['paper_run','run_two_pose'].includes(m)))continue;const textures=await Promise.all(def.frames.map(async f=>{const t=await new THREE.TextureLoader().loadAsync(f.url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));runClips[id]={...def,textures};}
+ for(const [id,def]of Object.entries(runDefinitions)){const ms=getStoryAssetPlan()?.motions[id];if(ms&&!ms.some(m=>isPigEscapeMotion(m)))continue;const textures=await Promise.all(def.frames.map(async f=>{const t=await new THREE.TextureLoader().loadAsync(f.url);t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=t.magFilter=THREE.LinearFilter;return t;}));runClips[id]={...def,textures};}
  const original=layer.update.bind(layer),originalApply=layer.applyStory.bind(layer);let profile='fear',time=0,enabled=true,manual=false,manualTempo=null,storyTime=0,storyReaction=false,encounterReaction=null;
- const data=new Map();
+ const data=new Map(),runTimes=new Map();
  for(const a of layer.actors){
   const h=a.data.heightMetres,source=a.card.geometry,grid=new THREE.PlaneGeometry(1,1,24,24),edge=new THREE.Mesh(grid.clone(),paperMaterial(a.card.material.map,true));
   edge.name='paper_cut_edge';a.root.add(edge);
@@ -60,18 +61,18 @@ export async function installPaperTheatre(layer){
   const originalTexture=originalMat.map,faces=a.data.id==='pig_straw'?Object.fromEntries(Object.keys(REACTIONS).map(k=>[k,expressionTexture(originalTexture.image,a.data.frames[0],k)])):{};
   data.set(a,{source,grid,edge,originalMat,material,run,runMaterial,mark,originalTexture,faces,marks:Object.fromEntries(Object.entries(REACTIONS).map(([k,v])=>[k,markTexture(v)]))});
  }
- layer.applyStory=(poses,t)=>{encounterReaction=poses.find(p=>p.encounterReaction)?.encounterReaction??null;storyTime=t;storyReaction=poses.some(p=>p.id==='pig_straw'&&['straw_inside','straw_continuous_escape','wood_inside','wood_continuous_escape'].includes(p.anchor))&&((t>=72.3&&t<81)||(t>=90.3&&t<102));if(!manual)time=t-(t>=90.3&&t<102?90.3:72.3);if(encounterReaction)time=1.02+encounterReaction.elapsed;return originalApply(poses,t);};
+ layer.applyStory=(poses,t)=>{runTimes.clear();for(const p of poses)if(Number.isFinite(p.spiralRunTime))runTimes.set(p.id,p.spiralRunTime);encounterReaction=poses.find(p=>p.encounterReaction)?.encounterReaction??null;storyTime=t;storyReaction=poses.some(p=>p.id==='pig_straw'&&['straw_inside','straw_continuous_escape','wood_inside','wood_continuous_escape'].includes(p.anchor))&&((t>=72.3&&t<81)||(t>=90.3&&t<102));if(!manual)time=t-(t>=90.3&&t<102?90.3:72.3);if(encounterReaction)time=1.02+encounterReaction.elapsed;return originalApply(poses,t);};
  layer.update=(camera,dt)=>{
   for(const[a,d]of data){a.card.geometry=d.source;a.card.material=d.originalMat;a.card.rotation.z=0;d.edge.visible=d.mark.visible=false;}
   const result=original(camera,dt);if(!enabled)return result;
   for(const[a,d]of data){
    if(!a.card.visible)continue;
-   if(a.renderedMotion==='walk'&&!['run_two_pose','paper_run'].includes(a.motion))continue;// J118：歩きは描いたコマをそのまま見せる（紙を揺らす・曲げる表現をしない）
-   const h=a.data.heightMetres,isPig=a.data.id.startsWith('pig_'),running=isPig&&['run_two_pose','paper_run'].includes(a.motion),lead=a.data.id==='pig_straw',reactor=(manual||storyReaction||!!encounterReaction)&&(lead||(a.data.id==='pig_wood'&&storyTime>=90.3&&storyTime<102)),r=REACTIONS[profile],emotional=reactor&&time>=r.onset&&time<r.recover,react=emotional&&!running;
+   if(a.renderedMotion==='walk'&&!isPigEscapeMotion(a.motion))continue;// J118：歩きは描いたコマをそのまま見せる（紙を揺らす・曲げる表現をしない）
+   const h=a.data.heightMetres,isPig=a.data.id.startsWith('pig_'),running=isPig&&isPigEscapeMotion(a.motion),lead=a.data.id==='pig_straw',reactor=(manual||storyReaction||!!encounterReaction)&&(lead||(a.data.id==='pig_wood'&&storyTime>=90.3&&storyTime<102)),r=REACTIONS[profile],emotional=reactor&&time>=r.onset&&time<r.recover,react=emotional&&!running;
    let q,uv,map;
    const showMark=()=>{d.mark.visible=!encounterReaction&&reactor&&time>=r.markAt&&time<Math.max(r.markEnd,2.45);if(d.mark.visible){d.mark.material.map=d.marks[profile];d.mark.quaternion.copy(camera.quaternion);d.mark.position.set(h*.52,h*1.17,0);const pop=1+.16*Math.sin(clamp((time-r.markAt)/.16)*Math.PI);d.mark.scale.setScalar(pop);}};
    if(running&&d.run){
-    const k=h/d.run.nominalHeight,idx=((Math.floor(storyTime*13*(manualTempo??1))%d.run.frames.length)+d.run.frames.length)%d.run.frames.length,pos=d.grid.attributes.position,u=d.grid.attributes.uv,[w,ht]=d.run.canvas,[ax,ay]=d.run.anchor,scale=k/d.run.pixelsPerMetre,mirror=Math.sin(a.yaw-a.card.rotation.y)<0;
+    const k=h/d.run.nominalHeight,idx=((Math.floor((runTimes.get(a.data.id)??storyTime)*13*(manualTempo??1))%d.run.frames.length)+d.run.frames.length)%d.run.frames.length,pos=d.grid.attributes.position,u=d.grid.attributes.uv,[w,ht]=d.run.canvas,[ax,ay]=d.run.anchor,scale=k/d.run.pixelsPerMetre,mirror=Math.sin(a.yaw-a.card.rotation.y)<0;
     q={left:-ax*scale,right:(w-ax)*scale,top:ay*scale,bottom:(ay-ht)*scale};
     for(let i=0;i<pos.count;i++){const col=i%25,row=Math.floor(i/25),nx=col/24,ny=1-row/24;pos.setXYZ(i,q.left+nx*(q.right-q.left),q.bottom+ny*(q.top-q.bottom),0);u.setXY(i,mirror?1-nx:nx,ny);}
     pos.needsUpdate=u.needsUpdate=true;d.grid.computeBoundingSphere();a.card.geometry=d.grid;d.runMaterial.map=d.run.textures[idx];a.card.material=d.runMaterial;a.card.rotation.set(0,Math.atan2(camera.position.x-a.root.position.x,camera.position.z-a.root.position.z),0);a.renderedMotion='paper_run';showMark();

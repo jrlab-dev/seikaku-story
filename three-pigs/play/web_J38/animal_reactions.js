@@ -1,4 +1,5 @@
 import {getStoryAssetPlan} from './story_asset_plan.mjs';
+import {isPigEscaping} from './pig_escape.mjs';
 import * as THREE from 'three';
 import {walkView} from './walk_orientation.mjs';
 const IDS=['pig_straw','pig_wood','pig_brick','wolf'];
@@ -15,7 +16,7 @@ export async function installAnimalReactions(layer){
  layer.update=(camera,dt)=>{const result=update(camera,dt);audit.length=0;
   for(const[a,mesh]of rigs){const p=poses.get(a.data.id),wolf=a.data.id==='wolf';
    let kind=null,idx=null;
-   if(p&&a.requestedVisible!==false&&a.card.visible){
+   if(p&&a.requestedVisible!==false&&a.card.visible&&!isPigEscaping(p)){
     if(p.bonkPose!=null){kind='bonk';idx=p.bonkPose;}
     else if(p.bombPose!=null){kind='bomb';idx=p.bombPose;}// J118：爆弾の狼の9コマ
     else if(p.reactionPose!=null){kind='react';idx=p.reactionPose;}

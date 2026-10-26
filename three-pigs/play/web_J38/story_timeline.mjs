@@ -1,4 +1,5 @@
 import * as BASE from './story_timeline_v4.mjs';
+import {applyPigEscapeRule} from './pig_escape.mjs';
 import {openingSample,applyWolfPersonality,OPENING_DURATION,OPENING_SHIFT}from './opening_v8.mjs';
 import {applyPersonality,setCast,decideEnding,applyStances,getCast} from './personality_story.mjs';
 import {siteHouses,puzzleCaption,applyTentAway} from './puzzle_houses.mjs';
@@ -10,7 +11,7 @@ export let STORY_DURATION=240.45,SCENES=[];
 let branch='normal';
 export function selectBranch(id){branch=id;BASE.selectBranch(id);STORY_DURATION=id==='peace'?BASE.STORY_DURATION:BASE.STORY_DURATION+OPENING_SHIFT;SCENES=id==='peace'?BASE.SCENES:[{id:'opening_v7',at:0,title:'あるところに'},...BASE.SCENES.filter(s=>s.at>=23).map(s=>({...s,at:s.at+OPENING_SHIFT}))];return{id,duration:STORY_DURATION};}
 export function sampleStory(t){
- if(branch==='peace')return BASE.sampleStory(t);
+ if(branch==='peace')return applyPigEscapeRule(BASE.sampleStory(t));
  const ending=decideEnding(),plan=planFor(ending);STORY_DURATION=planDuration(plan);
  t=Math.max(0,Math.min(STORY_DURATION,t));const m=mapTime(plan,t);
  let s=baseSample(m.baseTime);
@@ -19,7 +20,7 @@ export function sampleStory(t){
  if(s.resultCard&&ending.completion!=null){s.resultCard={...s.resultCard,target:ending.completion/100,meaning:ending.title};if(plan?.finale){s.scene={...s.scene,caption:plan.finale};s.branch={...s.branch,caption:{...s.branch.caption,text:plan.finale}};}}
  s.audioMap=m.phase==='variant'?{src:'bed',t:m.q}:{src:'base',t:m.phase==='resume'?m.baseTime:t};s.time=t;s.duration=STORY_DURATION;s.ended=t>=STORY_DURATION;s.endingPhase=m.phase;s.personality={...s.personality,ending};
  const sites=siteHouses(getCast());if(s.scene?.caption)s.scene={...s.scene,caption:puzzleCaption(s.scene.caption,sites)};if(s.branch?.caption?.text)s.branch={...s.branch,caption:{...s.branch.caption,text:puzzleCaption(s.branch.caption.text,sites)}};if(s.resultCard?.meaning)s.resultCard={...s.resultCard,meaning:puzzleCaption(s.resultCard.meaning,sites)};s.puzzleSites=sites;if(m.phase==='base')applyTentAway(s,sites);
- return s;
+ return applyPigEscapeRule(s);
 }
 function baseSample(t){
  t=Math.max(0,Math.min(240.45,t));const old=t<OPENING_DURATION?0:Math.round((t-OPENING_SHIFT)*1e9)/1e9;

@@ -305,7 +305,7 @@ async function prepareStory(){
  const construction=createConstructionBridge({THREE,entries:constructionEntries,prepare,ground:villageGround,invalidate(){renderer.shadowMap.needsUpdate=true;}});
  finishLoadStep('construction');window.__constructionExterior=(...args)=>construction.exteriorContact(...args);
  if(new URLSearchParams(location.search).has('qa')){window.__constructionProbe=()=>construction.inspectParts();window.__constructionSites=()=>construction.contactSites();window.__constructionContactAudit=()=>construction.contactAudit();window.__cumulativeAudit=()=>construction.cumulativeAudit();}
- const doorParts=[];for(const id of ['straw','wood','brick']){if(['tent','bunker','treehouse'].includes(constructionEntries[id].kind))continue;try{doorParts.push(createShelterDoors({[id]:constructionEntries[id]}));}catch(e){console.warn('J118 door skipped',id,e.message);}}
+ const doorParts=[];for(const id of ['straw','wood','brick']){if(['tent','bunker','treehouse','karakuri'].includes(constructionEntries[id].kind))continue;try{doorParts.push(createShelterDoors({[id]:constructionEntries[id]}));}catch(e){console.warn('Door setup failed',id,e.message);}}
  const doors={apply(st){for(const d of doorParts)d.apply(st);},record(){return Object.assign({},...doorParts.map(d=>d.record()));}};
  if(new URLSearchParams(location.search).has('qa'))window.__doorAudit=()=>doors.record();
  window.__terrainAudit=()=>{qaContactTerrain.updateMatrixWorld(true);return new THREE.Box3().setFromObject(qaContactTerrain);};

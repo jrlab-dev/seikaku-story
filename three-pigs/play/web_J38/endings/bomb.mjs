@@ -50,6 +50,7 @@ export function bombBackfireScene(s,q,L){
  const id=siteHouses(getCast()).brick.id,r=q-8.8;let cap;
  Object.assign(wolf,{visible:true,x:DOOR[0]-4.5,z:DOOR[1]+2,yaw:Math.PI,yOffset:0,motion:'idle',motionTime:q});s.camera=HOUSE_CAM;
  if(r<3.2){
+  s.camera={id:'J118_bomb_backfire_flight',position:[10,5.5,5],target:[16,2.1,-8],fov:48,terrainRelative:false};
   if(r<1.1)s.comic={id:'bomb_boom',start:0,duration:1.1,text:'ドカーン！',kind:'collapse',house:'brick',power:1.6,phase:r,sourceWorld:[HOUSE[0],HOUSE[1]+3,HOUSE[2]],sourceTerrainRelative:false,style:'J84_manga'};
   s.puzzleEffect=[{kind:'explosion_small',time:Math.min(7.9,r),at:[DOOR[0],0,DOOR[1]+.6]}];
   if(r<.5)wolf.bombPose=4;else{const u=Math.min(1,(r-.5)/2.4);wolf.bombPose=5;Object.assign(wolf,{x:DOOR[0]-4.5-u*4,z:DOOR[1]+2+u*5,yOffset:3.2*Math.sin(Math.PI*Math.min(1,u*1.05))});}
@@ -57,7 +58,7 @@ export function bombBackfireScene(s,q,L){
   cap=SAY[id]||SAY.fortress;
  }else if(r<6.5){wolf.bombPose=6;s.camera=CAM;Object.assign(wolf,{x:SPOT[0],z:SPOT[1]});cap='狼「け、けむい……」';}
  else if(r<10){wolf.bombPose=8;s.camera=CAM;Object.assign(wolf,{x:SPOT[0],z:SPOT[1]});cap='狼「爆弾は、もうこりごりだ……」';}
- else{const w=r-10;wolf.motion='walk';wolf.motionTime=w;wolf.walkDistance=1.1*w;Object.assign(wolf,{x:SPOT[0]-w*1.1,z:SPOT[1]+w*.3,yaw:-Math.PI/2});s.camera=CAM;cap='おおかみは、すすだらけで帰っていきました。';
+ else{const w=r-10,dx=-w*1.1,dz=w*.3;wolf.motion='walk';wolf.motionTime=w;wolf.walkDistance=1.1*w;Object.assign(wolf,{x:SPOT[0]+dx,z:SPOT[1]+dz,yaw:Math.atan2(-1.1,.3)});s.camera={...CAM,id:'J118_bomb_backfire_walks_home',position:[CAM.position[0]+dx,CAM.position[1],CAM.position[2]+dz],target:[CAM.target[0]+dx,CAM.target[1],CAM.target[2]+dz]};cap='おおかみは、すすだらけで帰っていきました。';
   s.cutOpacity=r>L-8.8-.4?.85*Math.min(1,(r-(L-8.8-.4))/.4):0;return cap;}
  s.cutOpacity=0;return cap;
 }

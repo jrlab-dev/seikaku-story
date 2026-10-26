@@ -27,12 +27,12 @@ export function strawHolds(s,q,L){
    wolf.visible=false;s.comic=null;
    Object.assign(pig,{visible:true,x:1.25,z:-2.35,worldY:FLOOR,yaw:0,yOffset:0,motion:'idle',motionTime:q,reactionPose:q<5.4?2:3});
    camera={id:'J116_straw_holds_inside',position:[2.95,1.3,-1.0],target:[1.25,.9,-2.35],fov:54,terrainRelative:false};
-   cap=q<5.4?'長男「結び目、ちゃんと確かめておいてよかった！」':'長男（よし。この家なら、だいじょうぶ。）';
+   cap=q<5.4?'長男「ちゃんと確かめておいてよかった！」':'長男（よし。この家なら、だいじょうぶ。）';
   }
   else cap=q<9.3?'狼「もう一度！ ふううーっ！」':'ぐらり……。それでも、わらの家は立っています！';
  } else if(q<17.5){
   camera={id:'J116_straw_holds_wolf_tired',position:[4.6,1.75,6.9],target:[1.45,1.1,2.7],fov:44,terrainRelative:false};
-  if(q<14.5){wolf.motion='tired';cap='狼「はあ、はあ……。わらなのに、なんて丈夫なんだ。」';s.comic={text:'はあ… はあ…',kind:'tired',side:'left',phase:q-11};}
+  if(q<14.5){wolf.motion='tired';cap='狼「はあ、はあ……。なんて丈夫な家なんだ。」';s.comic={text:'はあ… はあ…',kind:'tired',side:'left',phase:q-11};}
   else{wolf.reactionPose=4;cap='狼「こんな家は、むりだ。あきらめよう。」';}
  } else {
   const w=q-17.5,d=Math.min(1.15*w,13),p=along(ROUTE,d);

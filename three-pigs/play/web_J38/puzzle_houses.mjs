@@ -50,7 +50,7 @@ export function wrapPuzzleBuildings(buildings,{swapped}){
  if(!Object.keys(swapped).length)return buildings;
  const apply=buildings.apply.bind(buildings),timeline=buildings.timeline.bind(buildings);let busy=null,last={};
  function show(){for(const[site,s]of Object.entries(swapped)){const st=last[site]||{},stage=st.constructionStage??5;
-  if(stage<5||busy===site){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;continue;}
+  if(stage<5||busy===site){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;if(s.hatch)s.hatch.scene.visible=false;if(s.sec)s.sec.scene.visible=false;continue;}
   if(st.intact===false&&s.fall){s.staticScene.visible=false;s.fall.scene.visible=true;s.fall.seek(st.time||0);}
   else if(s.sec&&st.security!=null){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;if(s.hatch)s.hatch.scene.visible=false;s.sec.scene.visible=true;s.sec.seek(st.security);continue;}
   else if(s.hatch&&(st.doorOpen??0)>.05){s.staticScene.visible=false;if(s.fall)s.fall.scene.visible=false;s.hatch.scene.visible=true;s.hatch.seek(s.hatch.d0+s.hatch.d1*Math.min(1,st.doorOpen));}// 扉・ふたが開いた姿
@@ -91,7 +91,11 @@ for(const[v,lines]of Object.entries(NEW_LINES)){SPECIAL[v]={};for(const list of 
 export function puzzleCaption(text,sites){
  if(!text)return text;let out=text;
  const m=out.match(/^(長男|次男|三男)「(.*)」$/);
- if(m){const site=SPEAKER[m[1]],v=sites[site]?.visual;if(v&&v!==SITE_DEFAULT[site]){const sp=SPECIAL[v]?.[m[2]];let body=sp??m[2].split(WORD[SITE_DEFAULT[site]]).join(WORD[v]);out=m[1]+'「'+body+'」';}}
+ if(m){const site=SPEAKER[m[1]],v=sites[site]?.visual;if(v&&v!==SITE_DEFAULT[site]){
+  const sp=SPECIAL[v]?.[m[2]];
+  if(sp!=null)return m[1]+'「'+sp+'」';
+  if(BUILD[site].includes(m[2]))return m[1]+'「'+m[2].split(WORD[SITE_DEFAULT[site]]).join(WORD[v])+'」';
+ }}
  const marks={};for(const site of ['straw','wood','brick']){const v=sites[site].visual;if(v===SITE_DEFAULT[site])continue;const k='\u0001'+site+'\u0001';marks[k]=NAME[v];out=out.split(NAME[SITE_DEFAULT[site]]).join(k);}
  for(const[k,v]of Object.entries(marks))out=out.split(k).join(v);
  return out;

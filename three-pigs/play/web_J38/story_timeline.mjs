@@ -19,7 +19,7 @@ export function sampleStory(t){
  else{s=applyPersonality(s,m.baseTime);if(m.phase==='resume'){const f=plan?.resumeScene??plan?.after;if(f)s=f(s,m.baseTime)??s;}}
  if(s.resultCard&&ending.completion!=null){s.resultCard={...s.resultCard,target:ending.completion/100,meaning:ending.title};if(plan?.finale){s.scene={...s.scene,caption:plan.finale};s.branch={...s.branch,caption:{...s.branch.caption,text:plan.finale}};}}
  s.audioMap=m.phase==='variant'?{src:'bed',t:m.q}:{src:'base',t:m.phase==='resume'?m.baseTime:t};s.time=t;s.duration=STORY_DURATION;s.ended=t>=STORY_DURATION;s.endingPhase=m.phase;s.personality={...s.personality,ending};
- const sites=siteHouses(getCast());if(s.scene?.caption)s.scene={...s.scene,caption:puzzleCaption(s.scene.caption,sites)};if(s.branch?.caption?.text)s.branch={...s.branch,caption:{...s.branch.caption,text:puzzleCaption(s.branch.caption.text,sites)}};if(s.resultCard?.meaning)s.resultCard={...s.resultCard,meaning:puzzleCaption(s.resultCard.meaning,sites)};s.puzzleSites=sites;if(m.phase==='base')applyTentAway(s,sites);
+ const sites=siteHouses(getCast());if(s.scene?.caption)s.scene={...s.scene,caption:puzzleCaption(s.scene.caption,sites)};if(s.branch?.caption?.text)s.branch={...s.branch,caption:{...s.branch.caption,text:puzzleCaption(s.branch.caption.text,sites)}};s.puzzleSites=sites;if(m.phase==='base')applyTentAway(s,sites);
  return applyPigEscapeRule(s);
 }
 function baseSample(t){

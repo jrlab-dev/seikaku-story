@@ -64,7 +64,8 @@ function scene(s,q,L){
     pig(s,'pig_straw',{x:-21.45+.8*w,z,yaw:0,worldY:stepY(z),motion:'walk',motionTime:u-4.8});}
    pig(s,'pig_wood',{x:-20.7,z:-13.45,yaw:0,worldY:DOOR.floor,reactionPose:u>=3.3?3:5});
   }
-  s.camera={id:'J116_wood_trio_at_door',position:[DOOR.x+4.3,DOOR.floor+2.25,DOOR.z+7],target:[DOOR.x,DOOR.floor+.95,DOOR.z+1],fov:42,terrainRelative:false};
+  const framing=smooth(u/2.6),blend=(a,b)=>a+(b-a)*framing;
+  s.camera={id:'J116_wood_trio_at_door',position:[blend(-12,DOOR.x+4.3),blend(4.1,DOOR.floor+2.25),blend(-.5,DOOR.z+7)],target:[blend(-17.4,DOOR.x),DOOR.floor+.95,blend(-11.5,DOOR.z+1)],fov:blend(52,42),terrainRelative:false};
   cap=u<2.6?'三男「おーい！ ふたりとも、だいじょうぶ？」':u<3.3?'戸が開いて……':'次男「三男！ 木の家が、ぼくたちを守ってくれたよ！」';
  }
  return cap;

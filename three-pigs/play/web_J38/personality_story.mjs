@@ -47,10 +47,10 @@ export function decideEnding(c=cast){
  if(L('wolf','A')==='high'&&L('pig_straw','A')==='high'){reasons.push('狼が話し合いを求め、長男も話を聞く（協調性）');return{id:'peace',no:2,title:'早い和解',completion:35,reasons,...base};}
  const KK={id:'karakuri',no:'9',title:'発明の家のセキュリティ',completion:60};
  if(S.straw>P&&sites.straw.id==='karakuri'){reasons.push('長男の発明の家のセキュリティが、狼を追い返す');return{...KK,id:'karakuri_straw',reasons,...base};}
- if(S.straw>P){reasons.push('長男の'+HOUSE_NAME[sites.straw.visual]+'は、狼の息より丈夫');return{id:'straw_holds',no:3,title:'わらの家が耐える',completion:30,reasons,...base};}
+ if(S.straw>P){reasons.push('長男の'+HOUSE_NAME[sites.straw.visual]+'は、狼の息より丈夫');return{id:'straw_holds',no:3,title:HOUSE_NAME[sites.straw.visual]+'が耐える',completion:30,reasons,...base};}
  if(L('wolf','C')==='low'&&L('wolf','N')==='high'){reasons.push('狼は粘らず、家が崩れる音に自分で驚く（誠実性・感受性）');return{id:'wolf_leaves',no:5,title:'狼が自分で帰る',completion:35,reasons,...base};}
  if(S.wood>P&&sites.wood.id==='karakuri'){reasons.push('次男の発明の家のセキュリティが、狼を追い返す');return{...KK,id:'karakuri_wood',reasons,...base};}
- if(S.wood>P){reasons.push('次男の'+HOUSE_NAME[sites.wood.visual]+'が狼の息より丈夫');return{id:'wood_holds',no:4,title:'木の家で守り切る',completion:55,reasons,...base};}
+ if(S.wood>P){reasons.push('次男の'+HOUSE_NAME[sites.wood.visual]+'が狼の息より丈夫');return{id:'wood_holds',no:4,title:HOUSE_NAME[sites.wood.visual]+'で守り切る',completion:55,reasons,...base};}
  const W=k=>L('wolf',k);
  if(S.brick<=P){reasons.push('三男の'+HOUSE_NAME[sites.brick.visual]+'も倒れ、3びきは逃げ出す');return{id:'all_fall',no:'6',title:'狼のごちそうルート',completion:20,reasons,...base};}
  if(W('O')==='high'&&W('C')==='high'&&W('A')==='low'&&!['fortress','castle','karakuri','karakuri_fort','bunker'].includes(sites.brick.id)){reasons.push('狼が爆弾を発明して、'+HOUSE_NAME[sites.brick.visual]+'を吹き飛ばす');return{id:'bomb',no:'7',title:'狼のごちそうルート（爆弾）',completion:20,reasons,...base};}

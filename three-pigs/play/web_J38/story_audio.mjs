@@ -7,7 +7,7 @@ export function createStoryAudio({config,document,AudioContextClass=globalThis.A
  function stop(){if(node){node.onended=null;try{node.stop();}catch{}node.disconnect();node=null;}}
  function unlock(){
   if(!configured)return Promise.resolve();
-  try{if(!context){context=new AudioContextClass();gain=context.createGain();gain.gain.value=muted?0:volume;gain.connect(context.destination);}return context.resume().then(()=>{unlocked=context.state==='running';}).catch(e=>{error=String(e);});}catch(e){error=String(e);return Promise.resolve();}
+  try{if(!context){context=globalThis.__storyStartAudioContext??new AudioContextClass();gain=context.createGain();gain.gain.value=muted?0:volume;gain.connect(context.destination);}return context.resume().then(()=>{unlocked=context.state==='running';}).catch(e=>{error=String(e);});}catch(e){error=String(e);return Promise.resolve();}
  }
  async function prepare(){
   if(!configured||buffer||!context)return;if(pending)return pending;

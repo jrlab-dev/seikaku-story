@@ -48,7 +48,7 @@ import {createSeamlessSky} from './sky.js';
 import {GLTFLoader} from '../vendor/loaders/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/utils/BufferGeometryUtils.js';
 const diagnostics={assets:[],images:[],meshDecodeMs:0,meshDecodedBytes:0,phases:{},cpuLOD:[],cpuRender:[],gpu:[],gpuSupport:false,gpuDisjoint:0};
-const $=s=>document.querySelector(s),canvas=$('canvas'),stage=$('main');
+const $=s=>document.querySelector(s),canvas=$('main > canvas'),stage=$('main');
 canvas.style.visibility='hidden';for(const id of ['view','orbit','walk'])$('#'+id).disabled=true;
 const lutReady=new THREE.TextureLoader().loadAsync('./assets/agx_j37_lut.webp');let agxLUT;
 lutReady.then(t=>{agxLUT=t;t.colorSpace=THREE.SRGBColorSpace;t.generateMipmaps=false;t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;});

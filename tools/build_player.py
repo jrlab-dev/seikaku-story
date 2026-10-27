@@ -95,7 +95,19 @@ open(vj, 'w', encoding='utf-8').write(v); print('viewer public ok', parts)
 # 狼登場までに準備済みなら35秒で3Dへ。未完了なら型ごとの狼動画を続け、41秒で接続する。
 # 動画は intro/pigs.mp4（0〜35秒）と intro/wolf<型>.mp4（35〜41秒）。字幕と性格紹介はここで重ねる（動画には焼き込まない）。
 h = open(idx, encoding='utf-8').read()
-cover = """<div id="cover"><div class="stage"><div class="vbox"><video id="iv" playsinline preload="auto"></video><div id="icap"></div><div id="tap"><button id="tap-go" disabled>▶ お話をはじめる</button><p class="small">音が出ます</p></div></div><div id="card"></div></div><div class="load"><div class="bar"><i id="cover-bar"></i></div><strong id="cover-percent">準備 0%（目安）</strong><div id="cover-stage">絵本劇を準備しています</div><span id="cover-mb"></span></div></div>
+cover = """<div id="cover"><div class="stage"><div class="vbox"><video id="iv" src="./intro/pigs.mp4" playsinline preload="auto"></video><div id="icap"></div><div id="tap"><button id="tap-go">▶ お話をはじめる</button><p class="small">音が出ます</p></div></div><div id="card"></div></div><div class="load"><div class="bar"><i id="cover-bar"></i></div><strong id="cover-percent">準備 0%（目安）</strong><div id="cover-stage">絵本劇を準備しています</div><span id="cover-mb"></span></div></div>
+<script>
+(()=>{
+ const video=document.getElementById('iv'),tap=document.getElementById('tap'),button=document.getElementById('tap-go');
+ const start=window.__storyIntroStart={requested:false,blocked:false};
+ start.play=()=>video.play().then(()=>{start.blocked=false;}).catch(()=>{start.blocked=true;button.textContent='▶ 動画を再開';tap.querySelector('p').textContent='タップして続きを再生できます';tap.hidden=false;});
+ button.onclick=()=>{
+  start.requested=true;tap.hidden=true;document.getElementById('cover-stage').textContent='お話を始めています…';
+  try{if(window.__unlockStoryAudio)window.__unlockStoryAudio();else{const AC=window.AudioContext||window.webkitAudioContext;if(AC){const context=window.__storyStartAudioContext??(window.__storyStartAudioContext=new AC());context.resume().catch(()=>{});}}}catch(e){console.warn('Audio start unavailable',e);}
+  start.play();window.dispatchEvent(new Event('story-intro-start'));
+ };
+})();
+</script>
 <style>#cover{position:fixed;inset:0;z-index:30;background:#f6f1e3;display:flex;flex-direction:column;font-family:"Hiragino Maru Gothic ProN",system-ui,sans-serif;color:#2f3a2c;overflow:auto}#cover[hidden]{display:none}
 #cover .stage{flex:1;width:min(960px,100vw);margin:0 auto;padding:44px 8px 8px;display:flex;flex-direction:column;gap:10px}
 #cover .vbox{position:relative;width:100%;aspect-ratio:1002/720;background:#263429;border-radius:12px;overflow:hidden}#cover video{width:100%;height:100%;display:block;object-fit:cover}
@@ -119,8 +131,8 @@ const cast=Object.fromEntries(ROLES.map((r,i)=>[r,q[i]])),types=castTypes(cast),
 // 3Dのお話と同じ時刻割り（字幕・性格紹介）
 const CAPS=[[0,2.5,'3びきのこぶたは、小さな家で暮らしていました。'],[2.5,5,'大きくなった3びきは、自分たちの家を作ることに。'],[32,35,'新しい土地に到着。ふり返ると、前の家が遠くに。']];
 const CARDS=[[5,14,'pig_straw'],[14,23,'pig_wood'],[23,32,'pig_brick'],[35,41,'wolf']];
-const v=$('iv'),wolfSrc='./intro/wolf'+(types.wolf??9)+'.mp4';let seg='pigs',anim=null,shown=null,phase='tap',started=false,lastVideoTime=0,lastVideoAdvance=performance.now(),videoBlocked=false,videoFailed=false;
-v.src='./intro/pigs.mp4';const wolfReady=fetch(wolfSrc).then(r=>{if(!r.ok)throw Error('Video unavailable');return r.blob();}).then(b=>URL.createObjectURL(b)).catch(()=>wolfSrc);
+const v=$('iv'),earlyStart=window.__storyIntroStart,wolfSrc='./intro/wolf'+(types.wolf??9)+'.mp4';let seg='pigs',anim=null,shown=null,phase=earlyStart.requested?'video':'tap',started=false,audioRequested=false,lastVideoTime=0,lastVideoAdvance=performance.now(),videoBlocked=false,videoFailed=false;
+const wolfReady=fetch(wolfSrc).then(r=>{if(!r.ok)throw Error('Video unavailable');return r.blob();}).then(b=>URL.createObjectURL(b)).catch(()=>wolfSrc);
 const skip=document.createElement('button');skip.id='intro-skip';skip.textContent='本編へ進む';skip.hidden=true;$('cover').querySelector('.load').append(skip);
 async function playVideo(){try{await v.play();videoBlocked=false;videoFailed=false;lastVideoAdvance=performance.now();}catch(e){videoBlocked=true;$('tap-go').textContent='▶ 動画を再開';$('tap').querySelector('p').textContent='タップして続きを再生できます';$('tap').hidden=false;}}
 v.addEventListener('error',()=>{videoFailed=true;});
@@ -135,14 +147,14 @@ function card(r){clearInterval(anim);const box=$('card');box.innerHTML='';box.cl
 const now=()=>seg==='pigs'?v.currentTime:35+v.currentTime;
 function sync(){const t=now(),cap=CAPS.find(([a,b])=>t>=a&&t<b);$('icap').textContent=cap?cap[2]:'';const cd=CARDS.find(([a,b])=>t>=a&&t<b);if((cd?.[2]??null)!==shown)card(cd?.[2]??null);}
 v.addEventListener('ended',async()=>{if(phase==='on')return;if(seg==='pigs'){if(ready){enterMain(35);return;}phase='video-next';const source=await wolfReady;if(phase!=='video-next')return;seg='wolf';v.src=source;lastVideoTime=0;lastVideoAdvance=performance.now();phase='video';playVideo();}else{phase='handoff';}});
-$('tap-go').onclick=()=>{$('tap').hidden=true;if(phase==='tap'){window.__unlockStoryAudio?.();phase='video';}playVideo();
- // 音の許可は開始操作で取り、本編の再生は冒頭動画からの切り替えまで待つ。
- const m=$('story-mute');if(m){m.checked=true;m.dispatchEvent(new Event('change'));}};
+window.addEventListener('story-intro-start',()=>{if(phase==='tap')phase='video';videoBlocked=false;lastVideoAdvance=performance.now();});
 let ready=false;const loadingBegan=performance.now();
 function enterMain(at=START){if(!ready||phase==='on'||phase==='end')return;phase='on';v.pause();$('tap').hidden=true;const m=$('story-mute');if(m){m.checked=false;m.dispatchEvent(new Event('change'));}const r=$('story-time');r.value=at;r.dispatchEvent(new Event('input'));$('cover').hidden=true;clearInterval(anim);$('story-play').click();}
 skip.onclick=()=>enterMain();
 function tick(){const mb=performance.getEntriesByType('resource').reduce((s,e)=>s+(e.transferSize||e.encodedBodySize||0),0),r=$('story-time'),play=$('story-play');
- if(phase==='tap')$('tap-go').disabled=typeof window.__unlockStoryAudio!=='function';
+ if(earlyStart.requested&&!audioRequested&&window.__unlockStoryAudio){audioRequested=true;window.__unlockStoryAudio();const m=$('story-mute');if(m){m.checked=true;m.dispatchEvent(new Event('change'));}}
+ if(earlyStart.blocked)videoBlocked=true;
+ if(phase==='video'&&seg==='pigs'&&v.ended){if(ready)enterMain(35);else v.dispatchEvent(new Event('ended'));}
  if(phase!=='tap'&&!started&&play&&!play.disabled&&window.__prepareIntro){started=true;window.__prepareIntro().then(()=>{ready=true;}).catch(()=>{videoFailed=true;});}
  if(v.currentTime!==lastVideoTime){lastVideoTime=v.currentTime;lastVideoAdvance=performance.now();}
  const stalled=phase==='video'&&!v.ended&&performance.now()-lastVideoAdvance>3000,waiting=phase==='video-next'||(stalled&&v.readyState<3),paused=stalled&&v.paused;
@@ -168,3 +180,5 @@ from optimize_player import optimize_player
 optimize_player(DST)
 from build_warmup import build_warmup
 build_warmup(DST)
+from version_player import version_player
+print('module versions', version_player(DST))

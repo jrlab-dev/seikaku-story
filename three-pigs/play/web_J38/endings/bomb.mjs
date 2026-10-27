@@ -27,7 +27,7 @@ export function bombScene(s,q,L){
  if(q<2.4){wolf.bombPose=0;cap='狼「吹いてもだめなら……そうだ！」';}
  else if(q<4.4){wolf.bombPose=1;cap='狼「できたぞ、特製のばくだん！」';}
  else if(q<6.2){wolf.bombPose=2;Object.assign(wolf,{x:DOOR[0]-.9,z:DOOR[1],yaw:Math.PI/2});s.camera=HOUSE_CAM;cap='狼「火をつけて……」';if(q>5.2)s.puzzleEffect={kind:'bomb',time:(q-5.2)*2,at:[DOOR[0],0,DOOR[1]+.4]};}
- else if(q<7.6){const w=q-6.2;s.puzzleEffect={kind:'bomb',time:2+w*2,at:[DOOR[0],0,DOOR[1]+.4]};wolf.bombPose=3;Object.assign(wolf,{x:DOOR[0]-.9-w*2.6,z:DOOR[1]+w*1.4,yaw:-Math.PI/2});s.camera=HOUSE_CAM;cap='狼「にげろー！」';}
+ else if(q<7.6){const w=q-6.2;s.puzzleEffect={kind:'bomb',time:2+w*2,at:[DOOR[0],0,DOOR[1]+.4]};delete wolf.bombPose;Object.assign(wolf,{x:DOOR[0]-.9-w*2.6,z:DOOR[1]+w*1.4,yaw:Math.atan2(-2.6,1.4),motion:'run_spiral',motionTime:w,runAway:false});s.camera=HOUSE_CAM;cap='狼「にげろー！」';}
  else if(q<8.8){s.puzzleEffect={kind:'bomb',time:4.8+(q-7.6)*2.5,at:[DOOR[0],0,DOOR[1]+.4]};wolf.bombPose=4;Object.assign(wolf,{x:DOOR[0]-4.5,z:DOOR[1]+2});s.camera=HOUSE_CAM;cap='……';}
  else{
   const r=q-8.8;wolf.visible=false;s.camera=HOUSE_CAM;

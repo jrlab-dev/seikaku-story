@@ -90,6 +90,11 @@ function setView(n){view=n;mode='manual';$('#orbit').setAttribute('aria-pressed'
 function resize(){renderer.setSize(stage.clientWidth,stage.clientHeight,false);contactPass.resize(canvas.width,canvas.height);camera.aspect=stage.clientWidth/stage.clientHeight;setCompletionAspect(camera.aspect);camera.fov=2*THREE.MathUtils.radToDeg(Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.userData.baseFov||28)/2)*Math.max(1,1.6/camera.aspect)));camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(stage);resize();setView('hero');
 $('#view').onchange=e=>setView(e.target.value);
 for(const n of ['orbit','walk'])$('#'+n).onclick=()=>{mode=mode===n?'manual':n;modeStart=performance.now();camera.userData.baseFov=n==='walk'?60:35;resize();for(const k of ['orbit','walk'])$('#'+k).setAttribute('aria-pressed',String(mode===k));};
+const fixedStoryCamera=document.body.classList.contains('story-theatre');
+if(fixedStoryCamera){
+ canvas.setAttribute('aria-label','三びきのこぶたの物語');
+ for(const type of ['pointerdown','pointermove','pointerup','pointercancel','wheel','keydown','touchstart','touchmove','dblclick'])canvas.addEventListener(type,e=>{if(e.cancelable)e.preventDefault();e.stopImmediatePropagation();},{capture:true,passive:false});
+}
 let drag=null;canvas.addEventListener('contextmenu',e=>e.preventDefault());canvas.addEventListener('pointerdown',e=>{canvas.focus();canvas.setPointerCapture(e.pointerId);drag={x:e.clientX,y:e.clientY,pan:e.button===2||e.shiftKey};mode='manual'});canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('pointermove',e=>{if(!drag)return;let dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;if(drag.pan){const right=new THREE.Vector3().setFromMatrixColumn(camera.matrix,0),up=new THREE.Vector3().setFromMatrixColumn(camera.matrix,1);target.addScaledVector(right,-dx*spherical.radius*.0015).addScaledVector(up,dy*spherical.radius*.0015)}else{spherical.theta-=dx*.005;spherical.phi=THREE.MathUtils.clamp(spherical.phi+dy*.004,.06,Math.PI-.06)}pose();});canvas.addEventListener('wheel',e=>{e.preventDefault();spherical.radius=THREE.MathUtils.clamp(spherical.radius*Math.exp(e.deltaY*.001),2,700);pose();},{passive:false});
 const keys=new Set();canvas.addEventListener('keydown',e=>{if('wasdqe'.includes(e.key.toLowerCase())){keys.add(e.key.toLowerCase());e.preventDefault()}});window.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>keys.clear());
 let strawDeparture;
@@ -263,15 +268,24 @@ canvas.addEventListener('pointerdown',stopCharacterOrbit);canvas.addEventListene
 $('#view').addEventListener('change',stopCharacterOrbit);
 for(const id of ['orbit','walk'])$('#'+id).addEventListener('click',stopCharacterOrbit);
 for(const b of document.querySelectorAll('[data-travel]'))b.addEventListener('click',stopCharacterOrbit);
+let characterTask=null;
 $('#character-load').onclick=async()=>{
- if(!villageReady||characterLoading)return;
+ if(!villageReady)throw Error('Village is not ready');
+ if(characterTask)return characterTask;
  stopCharacterOrbit();
  if(characterLayer){characterLayer.layout('static');setView('character_front');$('#view').value='character_front';return;}
  characterLoading=true;$('#character-load').disabled=true;$('#character-state').textContent='原画像と方向情報を準備しています…';
- try{characterLayer=await createCharacterLayer({scene,ground:villageGround});finishLoadStep('characters');characterLayer=await installVillainFaces(characterLayer);finishLoadStep('faces');window.__paperStage=await installPaperTheatre(characterLayer);finishLoadStep('run');finishLoadStep('paper');await installPerformerActions(characterLayer);finishLoadStep('actions');installStrawWorkshopPreview(characterLayer);await installStrawJoy(characterLayer);finishLoadStep('joy');await installWolfEscape(characterLayer);finishLoadStep('wolf');await installDoorHost(characterLayer,villageGround);finishLoadStep('doors');installEncounterPerformers(characterLayer,villageGround);await installAnimalReactions(characterLayer);finishLoadStep('reactions');for(const b of document.querySelectorAll('[data-character-control]'))b.disabled=false;for(const o of document.querySelectorAll('option[data-character-view]'))o.disabled=false;
- setView('character_front');$('#view').value='character_front';$('#character-load').textContent='4体の静止配置に戻す';}
- catch(e){$('#character-state').textContent='キャラクターを準備できませんでした。村は保持しています。再試行できます。';console.error(e);}
- finally{characterLoading=false;$('#character-load').disabled=false;}
+ characterTask=(async()=>{let candidate,paperStage;
+ try{candidate=await createCharacterLayer({scene,ground:villageGround});candidate.group.visible=false;finishLoadStep('characters');candidate=await installVillainFaces(candidate);finishLoadStep('faces');paperStage=await installPaperTheatre(candidate);finishLoadStep('run');finishLoadStep('paper');await installPerformerActions(candidate);finishLoadStep('actions');installStrawWorkshopPreview(candidate);await installStrawJoy(candidate);finishLoadStep('joy');await installWolfEscape(candidate);finishLoadStep('wolf');await installDoorHost(candidate,villageGround);finishLoadStep('doors');installEncounterPerformers(candidate,villageGround);await installAnimalReactions(candidate);finishLoadStep('reactions');
+ characterLayer=candidate;candidate.group.visible=true;window.__paperStage=paperStage;
+ for(const b of document.querySelectorAll('[data-character-control]'))b.disabled=false;for(const o of document.querySelectorAll('option[data-character-view]'))o.disabled=false;
+ setView('character_front');$('#view').value='character_front';$('#character-load').textContent='4体の静止配置に戻す';
+ }catch(error){
+  if(candidate){candidate.group.removeFromParent();const geometries=new Set(),materials=new Set(),textures=new Set();candidate.group.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of o.material?(Array.isArray(o.material)?o.material:[o.material]):[]){materials.add(m);if(m.map)textures.add(m.map);}});for(const value of [...geometries,...materials,...textures])value.dispose();}
+  document.getElementById('paper-controls')?.remove();
+  $('#character-state').textContent='登場人物の準備が完了していません。';throw error;
+ }finally{characterLoading=false;characterTask=null;$('#character-load').disabled=false;}
+ })();return characterTask;
 };
 $('#character-orbit').onclick=()=>{characterOrbit=!characterOrbit;characterOrbitStart=performance.now();mode='manual';travel=null;$('#orbit').setAttribute('aria-pressed','false');$('#walk').setAttribute('aria-pressed','false');$('#character-orbit').setAttribute('aria-pressed',String(characterOrbit));};
 $('#character-occlusion').onclick=()=>{stopCharacterOrbit();characterLayer.layout('occlusion');setView('character_house_occlusion');$('#view').value='character_house_occlusion';};
@@ -282,7 +296,7 @@ $('#character-time').oninput=e=>characterLayer.seek(Number(e.target.value));
 async function prepareStory(){
  if(!villageReady)await $('#village-open').onclick();
  if(!villageReady)throw Error('三軒の村を準備できませんでした');finishLoadStep('village');
- if(!characterLayer)await $('#character-load').onclick();
+ if(!characterLayer){try{await $('#character-load').onclick();}catch(error){console.warn('Retrying character preparation');await $('#character-load').onclick();}}
  if(!characterLayer)throw Error('キャラクターを準備できません');
  playToken++;running=false;captureTimes=[];
  if(selectedSites.straw.visual==='straw'&&selectedAssets.collapse.includes('straw'))await loadCollapse();
@@ -323,7 +337,7 @@ async function prepareStory(){
  finishLoadStep('render');const puzzleFx=await createPuzzleEffectsLayer({scene,loadAsset,prepare,ground:villageGround,required:selectedAssets.effects});const comic=createComicEffects(scene,characterLayer,villageGround);finishLoadStep('effects');
  return{characters:characterLayer,buildings,commonHome,personalityWindow,effects:Object.assign(Object.create(comic),comic,{apply(st){puzzleFx.apply(st?.puzzleEffect);return comic.apply(st);}})};
 }
-function releaseStoryCameraCompetitors(){mode='manual';travel=null;stopCharacterOrbit();for(const id of ['orbit','walk'])$('#'+id).setAttribute('aria-pressed','false');}
+function releaseStoryCameraCompetitors(){drag=null;keys.clear();mode='manual';travel=null;stopCharacterOrbit();for(const id of ['orbit','walk'])$('#'+id).setAttribute('aria-pressed','false');}
 storyPlayer=createStoryPlayer({document,prepare:prepareStory,releaseOtherCameras:releaseStoryCameraCompetitors,onReset(){captureTimes=[];running=false;},applyCamera(p){
  camera.position.fromArray(p.position);target.fromArray(p.target);
  if(p.terrainRelative){camera.position.y+=villageGround(camera.position.x,camera.position.z);target.y+=villageGround(target.x,target.z);}

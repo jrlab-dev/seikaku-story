@@ -17,7 +17,7 @@ def optimize_player(destination):
 
     def convert(path):
         original = path.read_bytes()
-        lossless = 'lut' in path.stem.lower()
+        lossless = 'lut' in path.stem.lower() or (path.parent.name == 'villain' and path.stem.startswith('prepared_'))
         key = hashlib.sha256(original + str(lossless).encode() + b'webp95-v1').hexdigest()
         cached = cache / (key + '.webp') if cache else None
         source = Image.open(io.BytesIO(original)).convert('RGBA')

@@ -25,6 +25,20 @@
 .go{text-align:center;margin:26px 0 10px}
 .note{font-size:13px;color:var(--sub)}
 .goal{background:#fff7d6;border:1px solid #efdc95;border-radius:14px;padding:12px 16px}
+.test-settings{background:#f3f7ed;border-color:#c5d5b4}
+.test-settings h2{margin:0 0 8px;font-size:20px}
+.test-settings select{display:block;width:100%;max-width:100%;font:inherit;padding:12px 8px;border:1px solid #9eae8d;border-radius:10px;background:white;color:var(--ink)}
+.test-settings label{display:block;margin-bottom:6px;font-weight:700}
+.test-settings button{font:inherit;padding:8px 12px;border:1px solid #9eae8d;border-radius:8px;background:white;cursor:pointer}
+.test-settings button:disabled{opacity:.5;cursor:default}
+#current-flow{font-weight:700;line-height:1.6}
+.factor{padding:6px;border:2px solid transparent;border-radius:10px;margin:6px -6px}
+.factor.flow-change{border-color:#b52b35;background:#fff5f4}
+.flow-tag{display:block;font-size:10px;color:#a5212c;font-weight:700}
+.flow-detail{grid-column:1/-1;margin:2px 0 0;font-size:11px;color:#8c2028;line-height:1.5}
+.seg button{min-height:40px}
+.seg button:focus-visible,.test-settings select:focus-visible,.test-settings button:focus-visible{outline:3px solid #285cb2;outline-offset:2px}
+.role{min-width:0}
 </style>
 </head>
 <body>
@@ -33,6 +47,17 @@
  <h1 style="margin:18px 0 6px">三びきのこぶた</h1>
  <p class="note" style="margin-top:0">長男・次男・三男・おおかみ。4人の性格を決めて、お話を見てみよう。</p>
  <div class="goal"><b>目標：</b>原作どおり「ストーリー完成度100%」になる4人の性格を見つけよう。家がテントになったり、狼が爆弾を発明したり……原作にない結末も、たくさん隠れています。</div>
+
+ <section class="panel test-settings" aria-labelledby="test-title">
+  <h2 id="test-title">話の流れから試す</h2>
+  <p class="note">14種類から選ぶと、4人の性格が自動で入ります。そのまま再生したり、性格を変えて試せます。</p>
+  <label for="story-preset">見たい話の流れ</label>
+  <select id="story-preset"><option value="">話を選んで性格を自動設定</option></select>
+  <p id="current-flow" role="status" aria-live="polite"></p>
+  <button type="button" id="reset-preset" disabled>選んだ話の設定に戻す</button>
+  <p class="note">赤枠の「流れが変わる」は、その項目だけを変えると別の話になる目印です。変更先は赤枠の中に表示します。家の見た目や台詞だけの違いは含めません。</p>
+  <p class="note">赤枠は今の設定に合わせて更新されます。複数の項目を一緒に変えると、赤枠のない項目でも話が変わる場合があります。</p>
+ </section>
 
  <div class="panel">
   <b>ビッグファイブ診断の結果を使う</b>
@@ -52,31 +77,42 @@
 <footer><div class="wrap">お話は性格をもとにした創作で、診断の科学的な結論ではありません。</div></footer>
 <script type="module">
 import {TYPE_NAMES} from './play/web_J38/personality_text.mjs';
+import {PRESETS,changesFor} from './test-settings.mjs?v=1';
 let warmup=null;
 const ROLES=[['pig_straw','長男','straw'],['pig_wood','次男','wood'],['pig_brick','三男','brick'],['wolf','おおかみ','wolf']];
 const F=[['O','開放性'],['C','誠実性'],['E','外向性'],['A','協調性'],['N','感受性']];
 const LV=[['1','低い'],['3','ふつう'],['5','高い']];
-const q=new URLSearchParams(location.search),saved=JSON.parse(localStorage.getItem('story_three_pigs_cast')||'null');
-const cast=saved||{pig_straw:'33535',pig_wood:'55331',pig_brick:'33333',wolf:'11311'};
+const q=new URLSearchParams(location.search);
+let saved=null;try{saved=JSON.parse(localStorage.getItem('story_three_pigs_cast')||'null');}catch{}
+const cast={pig_straw:'33535',pig_wood:'55331',pig_brick:'33333',wolf:'11311'};
+for(const[id]of ROLES)if(/^[135]{5}$/.test(saved?.[id]??''))cast[id]=saved[id];
 if(q.get('cast')){const c=q.get('cast').split(',');ROLES.forEach(([id],i)=>{if(/^[135]{5}$/.test(c[i]||''))cast[id]=c[i];});}
 const norm=s=>{const m=String(s).match(/(?:code|type)=([1-5]{5})/)||String(s).match(/\b([1-5]{5})\b/);return m?m[1].replace(/[12]/g,'1').replace(/[45]/g,'5'):null;};
 if(q.get('me')&&norm(q.get('me'))){cast.pig_brick=norm(q.get('me'));}
 const box=document.getElementById('cast');
+const chooser=document.getElementById('story-preset'),reset=document.getElementById('reset-preset');
+for(const[pIndex,p]of PRESETS.entries()){const o=document.createElement('option');o.value=p.id;o.textContent=(pIndex+1)+'. '+p.label;chooser.append(o);}
+let chosen=null;
+function applyPreset(){if(!chosen)return;Object.assign(cast,chosen.cast);save();}
+chooser.onchange=()=>{chosen=PRESETS.find(p=>p.id===chooser.value)??null;reset.disabled=!chosen;if(chosen)applyPreset();};
+reset.onclick=applyPreset;
 function render(){
+ const analysis=changesFor(cast);
+ document.getElementById('current-flow').textContent='現在の話：'+analysis.current.label;
  box.innerHTML='';
  for(const[id,label,img]of ROLES){
   const d=document.createElement('section');d.className='role';const code=cast[id];
   d.innerHTML=`<header><img src="../assets/role-${img}.png" alt=""><div><h3>${label}</h3><div class="type">${TYPE_NAMES[code]??''}</div></div></header>`+
-   F.map(([f,name],i)=>`<div class="factor"><span>${name}</span><div class="seg">${LV.map(([v,t])=>`<button data-i="${i}" data-v="${v}" aria-pressed="${code[i]===v}">${t}</button>`).join('')}</div></div>`).join('')+
+   F.map(([f,name],i)=>{const changes=analysis.changes[id][i],detailId=id+'-'+f+'-changes';return `<div class="factor${changes.length?' flow-change':''}" data-role="${id}" data-factor="${f}"><span>${name}${changes.length?'<span class="flow-tag">流れが変わる</span>':''}</span><div class="seg">${LV.map(([v,t])=>`<button type="button" data-i="${i}" data-v="${v}" aria-label="${label}の${name}：${t}" ${changes.length?'aria-describedby="'+detailId+'"':''} aria-pressed="${code[i]===v}">${t}</button>`).join('')}</div>${changes.length?'<p class="flow-detail" id="'+detailId+'">'+changes.map(c=>LV.find(l=>l[0]===c.value)[1]+' → '+c.label).join('<br>')+'</p>':''}</div>`;}).join('')+
    `<button class="mine">自分の性格にする</button>`;
-  d.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{const c=[...cast[id]];c[b.dataset.i]=b.dataset.v;cast[id]=c.join('');save();});
+  d.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{const i=b.dataset.i,v=b.dataset.v,c=[...cast[id]];c[i]=v;cast[id]=c.join('');save();box.querySelector('[data-role="'+id+'"][data-factor="'+F[i][0]+'"] button[data-v="'+v+'"]').focus({preventScroll:true});});
   d.querySelector('.mine').onclick=()=>{const v=norm(document.getElementById('mine').value);const msg=document.getElementById('mine-msg');if(!v){msg.textContent='結果ページのアドレスか、5けたの番号を入れてください。';return;}cast[id]=v;msg.textContent=label+'を「'+(TYPE_NAMES[v]??v)+'」にしました。';save();};
   box.append(d);
  }
  document.getElementById('play').href='play/web_J38/?cast='+ROLES.map(([id])=>cast[id]).join(',');
  warmup?.setCast(cast);
 }
-function save(){localStorage.setItem('story_three_pigs_cast',JSON.stringify(cast));render();}
+function save(){try{localStorage.setItem('story_three_pigs_cast',JSON.stringify(cast));}catch{}render();}
 render();
 import('../assets/story-warmup.mjs').then(({createWarmup})=>{
  warmup=createWarmup({stage:'selection',status:document.getElementById('warmup-status')});

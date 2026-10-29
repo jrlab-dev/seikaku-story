@@ -4,7 +4,7 @@ export function installStrategyContact(layer,ground){
  const update=layer.update.bind(layer);
  layer.update=(camera,dt)=>{
   const result=update(camera,dt);
-  if(!layer.costumeSceneState?.strategy)return result;
+  if(!layer.costumeSceneState?.strategy&&!layer.costumeSceneState?.strategyConstruction&&!layer.costumeSceneState?.strategyPrelude)return result;
   for(const a of layer.actors){
    if(!a.requestedVisible)continue;
    const foot=a.paperStatus?.running?(a.paperStatus.visibleFootY??0):0;
@@ -23,7 +23,17 @@ export function createStrategyProps(scene,houses={}){
  const geom=new THREE.BoxGeometry(1,1,1),ball=new THREE.SphereGeometry(1,12,8),cyl=new THREE.CylinderGeometry(1,1,1,16);
  const mesh=(parent,g,m,x,y,z,sx=1,sy=1,sz=1)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);o.castShadow=false;o.receiveShadow=true;parent.add(o);return o;};
  const box=(p,m,x,y,z,a,b,c)=>mesh(p,geom,m,x,y,z,a,b,c);
- const groups={},guards={};
+ const groups={},guards={},benches={};
+ const workRoot=new THREE.Group();workRoot.name='Construction_workbenches';scene.add(workRoot);
+ for(const[site,c]of Object.entries(CENTERS)){
+  const g=new THREE.Group();workRoot.add(g);benches[site]=g;
+  const z=site==='wood'?3.461624:3.510001;
+  g.position.set(c[0]-.45,c[1],c[2]+z+.65);
+  box(g,oak,0,.55,0,.9,.09,.5);
+  for(const x of[-.34,.34])for(const dz of[-.16,.16])box(g,oak,x,.27,dz,.075,.54,.075);
+  box(g,iron,0,.63,0,.48,.08,.28);
+  mesh(g,cyl,brass,.2,.7,0,.13,.07,.13);
+ }
  for(const[site,house]of Object.entries(houses)){
   const nodes=[];house.staticScene.traverse(o=>{if(/__Robot(?:_[12])?$/.test(o.name))nodes.push(o);});
   guards[site]=nodes.map(o=>{o.updateWorldMatrix(true,true);const center=new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3()),parent=o.parent,pivot=new THREE.Group();pivot.position.copy(parent.worldToLocal(center));parent.add(pivot);pivot.updateWorldMatrix(true,false);pivot.attach(o);return pivot;});
@@ -33,7 +43,7 @@ export function createStrategyProps(scene,houses={}){
   box(g,stone,0,.015,4.8,4.7,.1,1.0);
   for(const x of[-2.4,2.4]){
    if(x<0||site==='brick')box(g,iron,x,.72,3.5,.12,.12,2.6);
-   else{box(g,iron,x,.72,2.65,.12,.12,.65);box(g,iron,x,.72,4.65,.12,.12,.3);}
+   else{box(g,iron,x,.72,2.9,.12,.12,1.3);}
    for(const z of[2.3,4.8])box(g,oak,x,.85,z,.16,1.7,.18);
   }
   for(const x of[-1.8,1.8]){box(g,iron,x,.75,4.95,1.15,.1,.13);for(const dx of[-.4,0,.4])box(g,iron,x+dx,.4,4.95,.07,.8,.1);}
@@ -48,10 +58,10 @@ export function createStrategyProps(scene,houses={}){
   const r={g,left,right};groups[site]=r;
   for(const o of g.children)if(o.position.z===3.15)o.position.z=4.95;
   if(site!=='brick'){
-   for(const z of[3.1,4.3])box(g,oak,2.4,.9,z,.15,1.8,.12);
-   box(g,oak,2.4,1.82,3.7,.2,.12,1.35);
-   const pivot=new THREE.Group();pivot.position.set(2.4,0,3.1);g.add(pivot);r.exit=pivot;
-   box(pivot,blue,.55,.86,0,1.1,1.65,.1);mesh(pivot,ball,brass,.96,.83,.1,.06,.06,.06);
+   for(const z of[3.55,4.75])box(g,oak,2.4,.9,z,.15,1.8,.12);
+   box(g,oak,2.4,1.82,4.15,.2,.12,1.35);
+   const pivot=new THREE.Group();pivot.position.set(2.4,0,3.55);g.add(pivot);r.exit=pivot;
+   box(pivot,blue,0,.86,.6,.1,1.65,1.2);mesh(pivot,ball,brass,.1,.83,1.04,.06,.06,.06);
   }
   if(site==='straw'){
    box(g,iron,-1.8,.75,3.1,.16,1.5,.16);
@@ -98,18 +108,22 @@ export function createStrategyProps(scene,houses={}){
  }
  let last=null;
  function apply(st){
-  const f=st?.strategy;root.visible=!!f;last=f??null;
+  const f=st?.strategy??(st?.strategyPrelude?{scan:0,decoy:0,steam:0,lever:0,gear:0,wedge:0,alarm:0,fire:0,exit:0,...st.strategyPrelude}:null);root.visible=!!f;last=f??null;
+  workRoot.visible=!!st?.strategyConstruction&&!!st?.build;
+  for(const[site,g]of Object.entries(benches))g.visible=site===st?.strategyConstruction?.site;
   for(const[site,rigs]of Object.entries(guards))for(const rig of rigs)rig.rotation.y=f?.site===site?(f.scan??0):0;
   for(const[site,r]of Object.entries(groups)){
-   r.g.visible=f?.site===site;if(!r.g.visible)continue;
-   const t=f.phase;r.left.position.x=-.54-(f.gate??0)*.95;r.right.position.x=.54+(f.gate??0)*.95;
-   if(r.exit)r.exit.rotation.y=-Math.PI/2+1.5*f.exit;
-   if(r.head){r.head.rotation.y=f.scan;r.lamp.material.emissive.setHex(f.alarm&&Math.floor(t*4)%2?0xff3a00:0x220700);}
-   if(r.dummy){r.dummy.visible=f.decoy>0;r.dummy.rotation.z=Math.sin(t*5)*.12;}
-   if(r.lever){r.lever.rotation.z=-.75*f.lever;r.fire.visible=!!f.fire; r.fire.scale.y=.9+Math.sin(t*9)*.12;
-    r.steam.forEach((o,k)=>{o.visible=f.steam>.01;const u=(t*.65+k*.23)%1;o.position.set((k%6-2.5)*.45,.6+u*1.5,4.6+Math.sin(k)*.1);o.scale.setScalar((.7+u*.8)*f.steam);});
+   const active=f?.site===site,arrival=f?.arrival?.site===site;
+   r.g.visible=active||arrival;if(!r.g.visible)continue;
+   const state=active?f:{phase:0,gate:f.arrival.gate,exit:0,scan:0,decoy:0,steam:0,lever:0,gear:0,wedge:0,alarm:0,fire:0};
+   const t=state.phase;r.left.position.x=-.54-(state.gate??0)*.95;r.right.position.x=.54+(state.gate??0)*.95;
+   if(r.exit)r.exit.rotation.y=Math.PI/2*(state.exit??0);
+   if(r.head){r.head.rotation.y=state.scan;r.lamp.material.emissive.setHex(state.alarm&&Math.floor(t*4)%2?0xff3a00:0x220700);}
+   if(r.dummy){r.dummy.visible=state.decoy>0;r.dummy.rotation.z=Math.sin(t*5)*.12;}
+   if(r.lever){r.lever.rotation.z=-.75*state.lever;r.fire.visible=!!state.fire; r.fire.scale.y=.9+Math.sin(t*9)*.12;
+    r.steam.forEach((o,k)=>{o.visible=state.steam>.01;const u=(t*.65+k*.23)%1;o.position.set((k%6-2.5)*.45,.6+u*1.5,4.6+Math.sin(k)*.1);o.scale.setScalar((.7+u*.8)*state.steam);});
    }
-   if(r.gear){r.gear.rotation.z=f.gear;r.wedge.visible=f.wedge>0;r.wedge.position.set(-1.9+f.wedge*.55,.26,5.35);r.wedge.rotation.z=.2;}
+   if(r.gear){r.gear.rotation.z=state.gear;r.wedge.visible=state.wedge>0;r.wedge.position.set(-1.9+state.wedge*.55,.26,5.35);r.wedge.rotation.z=.2;}
   }
  }
  apply(null);

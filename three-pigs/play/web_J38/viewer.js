@@ -344,6 +344,7 @@ function releaseStoryCameraCompetitors(){drag=null;keys.clear();mode='manual';tr
 storyPlayer=createStoryPlayer({document,prepare:prepareStory,releaseOtherCameras:releaseStoryCameraCompetitors,onReset(){captureTimes=[];running=false;},applyCamera(p){
  camera.position.fromArray(p.position);target.fromArray(p.target);
  if(p.terrainRelative){camera.position.y+=villageGround(camera.position.x,camera.position.z);target.y+=villageGround(target.x,target.z);}
+  if(p.groundFocus){const y=(travelWalkSurface??villageGround)(...p.groundFocus);camera.position.y=y+p.position[1];target.y=y+p.target[1];}
  if(camera.userData.baseFov!==p.fov||camera.userData.fitAspect!==(p.fitAspect??1.6)){camera.userData.baseFov=p.fov;camera.userData.fitAspect=p.fitAspect??1.6;resize();}
  if(p.roadFocusWeight){const a=characterLayer.actors.find(a=>a.data.id==='wolf');target.lerp(a.root.position.clone().add(new THREE.Vector3(0,a.data.heightMetres*.55,0)),p.roadFocusWeight);}
  if(p.centeredActor){const actor=characterLayer.actors.find(a=>a.data.id===p.centeredActor);camera.position.y+=(1-p.centerWeight)*villageGround(...p.initialTerrainPosition);target.y+=villageGround(...p.initialTerrainTarget);target.lerp(actor.root.position.clone().add(new THREE.Vector3(0,actor.data.heightMetres*.55,0)),p.centerWeight);}

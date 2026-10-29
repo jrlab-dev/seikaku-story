@@ -4,6 +4,7 @@ import {applyPuzzleEntries} from './puzzle_entry.mjs';
 import {openingSample,applyWolfPersonality,OPENING_DURATION,OPENING_SHIFT}from './opening_v8.mjs';
 import {applyPersonality,setCast,decideEnding,applyStances,getCast,setStoryMode,getStoryMode,getRawCast} from './personality_story.mjs';
 import {strategyPreparation} from './endings/strategy.mjs';
+import {applyStrategyConstruction} from './strategy_construction.mjs';
 import {siteHouses,puzzleCaption,applyTentAway} from './puzzle_houses.mjs';
 import {planFor,planDuration,mapTime} from './endings.mjs';
 export {setCast,getCast,decideEnding} from './personality_story.mjs';
@@ -22,7 +23,7 @@ export function sampleStory(t){
  if(s.resultCard&&ending.completion!=null){s.resultCard={...s.resultCard,target:ending.completion/100,meaning:ending.title};if(plan?.finale){s.scene={...s.scene,caption:plan.finale};s.branch={...s.branch,caption:{...s.branch.caption,text:plan.finale}};}}
  s.audioMap=m.phase==='variant'?{src:'bed',t:m.q}:{src:'base',t:m.phase==='resume'?m.baseTime:t};s.time=t;s.duration=STORY_DURATION;s.ended=t>=STORY_DURATION;s.endingPhase=m.phase;s.personality={...s.personality,ending};
  const sites=siteHouses(getCast());if(s.scene?.caption)s.scene={...s.scene,caption:puzzleCaption(s.scene.caption,sites)};if(s.branch?.caption?.text)s.branch={...s.branch,caption:{...s.branch.caption,text:puzzleCaption(s.branch.caption.text,sites)}};s.puzzleSites=sites;if(m.phase==='base')applyTentAway(s,sites);
- if(getStoryMode()==='strategy'&&m.phase==='base'&&ending.id!=='peace')strategyPreparation(s,t,getRawCast());
+ if(getStoryMode()==='strategy'&&m.phase==='base'&&ending.id!=='peace'){strategyPreparation(s,t,getRawCast());applyStrategyConstruction(s,t,sites);}
  return applyPigEscapeRule(applyPuzzleEntries(s,sites));
 }
 function baseSample(t){

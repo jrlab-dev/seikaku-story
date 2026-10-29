@@ -1,4 +1,4 @@
-import {evaluateEnding} from './play/web_J38/story_rules.mjs';
+import {evaluateEnding} from './play/web_J38/story_rules.mjs?v=8f38244a65062732';
 import {STRATEGY_CAST} from './play/web_J38/strategy_rules.mjs';
 export const ROLES=['pig_straw','pig_wood','pig_brick','wolf'];
 const base=['31333','33333','35333','35313'];

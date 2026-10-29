@@ -1,19 +1,24 @@
 import {evaluateEnding} from './story_rules.mjs';
+import {normalizeCast} from './strategy_rules.mjs';
 import {PROFILE_TEXT,TYPE_NAMES} from './personality_text.mjs';
-import {stanceFor,castTypes} from './animal_reactions.js';
+import {stanceFor,castTypes} from './personality_types.mjs';
 import {siteHouses,puzzleCaption,NAME as HOUSE_NAME} from './puzzle_houses.mjs';
 
 export const DEFAULT_CAST={pig_straw:'33535',pig_wood:'55331',pig_brick:'33333',wolf:'11311'};
 const ROLE_LABEL={pig_straw:'長男',pig_wood:'次男',pig_brick:'三男',wolf:'おおかみ'};
 let cast={...DEFAULT_CAST};
+let rawCast={...DEFAULT_CAST},storyMode='classic';
+export function setStoryMode(mode){storyMode=mode==='strategy'?'strategy':'classic';}
+export function getStoryMode(){return storyMode;}
+export function getRawCast(){return{...rawCast};}
 const lv=d=>d==='1'?'low':d==='5'?'high':'mid';
 const F={O:0,C:1,E:2,A:3,N:4};
 const f=(role,k)=>lv(cast[role][F[k]]);
 
 export function setCast(next){
  const c={...DEFAULT_CAST,...(next||{})};
- for(const[k,v]of Object.entries(c))if(!/^[135]{5}$/.test(v))throw Error('cast code must be 5 digits of 1/3/5: '+k+'='+v);
- cast=c;return getCast();
+ for(const[k,v]of Object.entries(c))if(!/^[1-5]{5}$/.test(v))throw Error('cast code must be 5 digits of 1 to 5: '+k+'='+v);
+ rawCast=c;cast=normalizeCast(c);return getCast();
 }
 export function getCast(){return{...cast};}
 
@@ -40,7 +45,7 @@ const BEATS=[
  {id:'wolf_N',role:'wolf',k:'N',from:219,to:220.25,line:{low:null,mid:'狼「あちち……逃げるが勝ちだ！」',high:'狼「ぎゃあ！ 火だ火だ、逃げろーっ！」'}},
 ];
 
-export function decideEnding(c=cast){return evaluateEnding(c);}
+export function decideEnding(c=rawCast){return evaluateEnding(c,{mode:storyMode});}
 
 function setCaption(s,text){s.scene={...s.scene,caption:text};s.branch={...s.branch,caption:{...s.branch.caption,text}};}
 function actor(s,id){return s.actors?.find(a=>a.id===id);}

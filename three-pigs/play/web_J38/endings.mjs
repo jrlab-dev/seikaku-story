@@ -7,6 +7,7 @@ import {allFallScene,allFallResume,BRANCH as AF_BRANCH,LENGTH as AF_LENGTH} from
 import {bombScene,bombResume,bombBackfireScene,BACKFIRE_LENGTH,BRANCH as BOMB_BRANCH,LENGTH as BOMB_LENGTH} from './endings/bomb.mjs';
 import {karakuriPlan} from './endings/karakuri_security.mjs';
 import {chimneyLidScene,LENGTH as CHIMNEY_LID_LENGTH} from './endings/chimney_lid.mjs';
+import {strategyPlan} from './endings/strategy.mjs';
 export const BASE_DURATION=240.45;
 export const smooth=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
 export const BRICK=[20,1.06,-14],WOLF_AT_BRICK=[19.35,-8.2];
@@ -47,7 +48,7 @@ export const ENDING_PLANS={
   finale:'煙突までは来なかったルート。みんな無事！'},
 };
 
-export function planFor(ending){return ENDING_PLANS[ending?.id]??null;}
+export function planFor(ending){return ending?.id.startsWith('strategy_')?strategyPlan(ending):ENDING_PLANS[ending?.id]??null;}
 export function planDuration(plan){return plan?plan.branch+plan.length+(BASE_DURATION-plan.resume):BASE_DURATION;}
 export function mapTime(plan,t){
  if(!plan||t<plan.branch)return{phase:'base',baseTime:t};

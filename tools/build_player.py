@@ -126,8 +126,10 @@ import {castTypes} from './animal_reactions.js';
 import {getLoadProgress} from './story_loading_progress.mjs';
 import {createPersonalityCard} from './personality_card.js';
 const START=41,$=id=>document.getElementById(id);
+const storyMode=new URLSearchParams(location.search).get('mode')==='strategy'?'strategy':'classic';
+$('back').href='../../?cast='+new URLSearchParams(location.search).get('cast')+'&mode='+storyMode;
 const q=(new URLSearchParams(location.search).get('cast')||'33535,55331,33333,11311').split(','),ROLES=['pig_straw','pig_wood','pig_brick','wolf'],LABEL={pig_straw:'長男',pig_wood:'次男',pig_brick:'三男',wolf:'おおかみ'};
-const cast=Object.fromEntries(ROLES.map((r,i)=>[r,q[i]])),types=castTypes(cast),portrait=await createPersonalityCard();portrait.ready.catch(console.error);
+const cast=Object.fromEntries(ROLES.map((r,i)=>[r,q[i].replace(/[12]/g,'1').replace(/[45]/g,'5')])),types=castTypes(cast),portrait=await createPersonalityCard();portrait.ready.catch(console.error);
 // 3Dのお話と同じ時刻割り（字幕・性格紹介）
 const CAPS=[[0,2.5,'3びきのこぶたは、小さな家で暮らしていました。'],[2.5,5,'大きくなった3びきは、自分たちの家を作ることに。'],[32,35,'新しい土地に到着。ふり返ると、前の家が遠くに。']];
 const CARDS=[[5,14,'pig_straw'],[14,23,'pig_wood'],[23,32,'pig_brick'],[35,41,'wolf']];
@@ -168,7 +170,7 @@ function tick(){const mb=performance.getEntriesByType('resource').reduce((s,e)=>
  if(phase==='video-next'&&ready)enterMain(35);
  if(phase==='video')sync();
  if(phase==='handoff'){if(ready)enterMain();else{$('icap').textContent='本編の準備をしています。もう少しお待ちください…';}}
- if(phase==='on'&&+r.value>=+r.max-.2){phase='end';const c=$('cover');c.hidden=false;c.querySelector('.stage').innerHTML='<div class="wait" style="margin-top:18vh"><h2>おしまい</h2><p>性格を変えると、ちがうお話になります。</p><p><a href="../../"><button style="border:0;border-radius:999px;padding:12px 26px;background:#c8553d;color:#fff;font:inherit;font-weight:700">性格を選びなおす</button></a></p><p><a href="./?cast='+q.join(',')+'">もう一度見る</a></p></div>';c.querySelector('.load').hidden=true;}
+ if(phase==='on'&&+r.value>=+r.max-.2){phase='end';const c=$('cover');c.hidden=false;c.querySelector('.stage').innerHTML='<div class="wait" style="margin-top:18vh"><h2>おしまい</h2><p>性格を変えると、ちがうお話になります。</p><p><a href="../../?cast='+q.join(',')+'&mode='+storyMode+'"><button style="border:0;border-radius:999px;padding:12px 26px;background:#c8553d;color:#fff;font:inherit;font-weight:700">性格を選びなおす</button></a></p><p><a href="./?cast='+q.join(',')+'&mode='+storyMode+'">もう一度見る</a></p></div>';c.querySelector('.load').hidden=true;}
  setTimeout(tick,250);}
 tick();
 </script>"""

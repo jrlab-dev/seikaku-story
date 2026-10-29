@@ -4,6 +4,7 @@ import {installAnimalReactions} from './animal_reactions.js';
 import {createPersonalityWindow} from './personality_window_v8.js';
 import {siteHouses,preparePuzzleSites,wrapPuzzleBuildings} from './puzzle_houses.mjs';
 import {createPuzzleEffectsLayer} from './puzzle_effects_layer.js';
+import {createStrategyProps,installStrategyContact} from './strategy_props.js';
 import {getCast as getPuzzleCast} from './personality_story.mjs';
 import {inspectTravelActor,installTravelSupport,createWalkSurface} from './travel_support_v7.js';
 import {createCommonHome,createHomePath}from './common_home_v6.js';
@@ -87,7 +88,7 @@ const target=new THREE.Vector3(),spherical=new THREE.Spherical();let mode='manua
 const presets={hero:[[11,3.5,18],[-.5,1.7,-2.5]],front:[[2.1,4.5,12.75],[2.1,2,-2.25]],right:[[17.1,4.5,-2.25],[2.1,2,-2.25]],back:[[2.1,4.5,-17.25],[2.1,2,-2.25]],left:[[-12.9,4.5,-2.25],[2.1,2,-2.25]],low:[[10,.60,10],[2.1,1.55,-1.8]],top:[[2.1,19,1],[2.1,0,-2.25]],forest:[[-40,8,-44],[-63,6,-65]],distant:[[80,35,105],[2.1,3,-2.25]]};
 function pose(){camera.position.copy(target).add(new THREE.Vector3().setFromSpherical(spherical));camera.position.y=Math.max(.2,camera.position.y);camera.lookAt(target)}
 function setView(n){view=n;mode='manual';$('#orbit').setAttribute('aria-pressed','false');$('#walk').setAttribute('aria-pressed','false');const[p,t]=presets[n];camera.position.fromArray(p);target.fromArray(t);spherical.setFromVector3(camera.position.clone().sub(target));camera.userData.baseFov=n==='hero'?27.484:35.638;resize();pose();lastLOD=0;if(ready)updateLOD();}
-function resize(){renderer.setSize(stage.clientWidth,stage.clientHeight,false);contactPass.resize(canvas.width,canvas.height);camera.aspect=stage.clientWidth/stage.clientHeight;setCompletionAspect(camera.aspect);camera.fov=2*THREE.MathUtils.radToDeg(Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.userData.baseFov||28)/2)*Math.max(1,1.6/camera.aspect)));camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(stage);resize();setView('hero');
+function resize(){renderer.setSize(stage.clientWidth,stage.clientHeight,false);contactPass.resize(canvas.width,canvas.height);camera.aspect=stage.clientWidth/stage.clientHeight;setCompletionAspect(camera.aspect);camera.fov=2*THREE.MathUtils.radToDeg(Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.userData.baseFov||28)/2)*Math.max(1,(camera.userData.fitAspect??1.6)/camera.aspect)));camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(stage);resize();setView('hero');
 $('#view').onchange=e=>setView(e.target.value);
 for(const n of ['orbit','walk'])$('#'+n).onclick=()=>{mode=mode===n?'manual':n;modeStart=performance.now();camera.userData.baseFov=n==='walk'?60:35;resize();for(const k of ['orbit','walk'])$('#'+k).setAttribute('aria-pressed',String(mode===k));};
 const fixedStoryCamera=document.body.classList.contains('story-theatre');
@@ -335,13 +336,15 @@ async function prepareStory(){
  const buildings=wrapPuzzleBuildings(createStoryBuildings({doors,straw:{reset:resetHouse,seek(t){if(!action)return;running=false;elapsed=t;action.reset().play();evaluateAt(t);action.paused=true;staticHouse.visible=false;collapseHouse.visible=true;},deform:deformStraw},wood,construction,invalidate(){renderer.shadowMap.needsUpdate=true;}}),{swapped:puzzle.swapped,construction});
  await contactPass.compile(scene);
  finishLoadStep('render');const puzzleFx=await createPuzzleEffectsLayer({scene,loadAsset,prepare,ground:villageGround,required:selectedAssets.effects});const comic=createComicEffects(scene,characterLayer,villageGround);finishLoadStep('effects');
- return{characters:characterLayer,buildings,commonHome,personalityWindow,effects:Object.assign(Object.create(comic),comic,{apply(st){puzzleFx.apply(st?.puzzleEffect);return comic.apply(st);}})};
+ const strategyFx=selectedAssets.ending.startsWith('strategy_')?createStrategyProps(scene,puzzle.swapped):null;
+ if(strategyFx)installStrategyContact(characterLayer,travelWalkSurface);
+ return{characters:characterLayer,buildings,commonHome,personalityWindow,effects:Object.assign(Object.create(comic),comic,{apply(st){puzzleFx.apply(st?.puzzleEffect);strategyFx?.apply(st);return comic.apply(st);},reset(){strategyFx?.reset();comic.reset?.();}})};
 }
 function releaseStoryCameraCompetitors(){drag=null;keys.clear();mode='manual';travel=null;stopCharacterOrbit();for(const id of ['orbit','walk'])$('#'+id).setAttribute('aria-pressed','false');}
 storyPlayer=createStoryPlayer({document,prepare:prepareStory,releaseOtherCameras:releaseStoryCameraCompetitors,onReset(){captureTimes=[];running=false;},applyCamera(p){
  camera.position.fromArray(p.position);target.fromArray(p.target);
  if(p.terrainRelative){camera.position.y+=villageGround(camera.position.x,camera.position.z);target.y+=villageGround(target.x,target.z);}
- if(camera.userData.baseFov!==p.fov){camera.userData.baseFov=p.fov;resize();}
+ if(camera.userData.baseFov!==p.fov||camera.userData.fitAspect!==(p.fitAspect??1.6)){camera.userData.baseFov=p.fov;camera.userData.fitAspect=p.fitAspect??1.6;resize();}
  if(p.roadFocusWeight){const a=characterLayer.actors.find(a=>a.data.id==='wolf');target.lerp(a.root.position.clone().add(new THREE.Vector3(0,a.data.heightMetres*.55,0)),p.roadFocusWeight);}
  if(p.centeredActor){const actor=characterLayer.actors.find(a=>a.data.id===p.centeredActor);camera.position.y+=(1-p.centerWeight)*villageGround(...p.initialTerrainPosition);target.y+=villageGround(...p.initialTerrainTarget);target.lerp(actor.root.position.clone().add(new THREE.Vector3(0,actor.data.heightMetres*.55,0)),p.centerWeight);}
  camera.lookAt(target);camera.updateMatrixWorld(true);spherical.setFromVector3(camera.position.clone().sub(target));

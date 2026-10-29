@@ -15,7 +15,7 @@
 .role h3{margin:0;font-size:18px}
 .role .type{font-size:13px;color:var(--sub);min-height:1.6em}
 .factor{display:grid;grid-template-columns:5.2em 1fr;align-items:center;gap:6px;margin:5px 0;font-size:13px}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .seg button{border:0;background:#fff;font:inherit;font-size:12px;padding:5px 0;cursor:pointer;color:var(--ink)}
 .seg button+button{border-left:1px solid var(--line)}
 .seg button[aria-pressed=true]{background:var(--leaf);color:#fff;font-weight:700}
@@ -36,7 +36,7 @@
 .factor.flow-change{border-color:#b52b35;background:#fff5f4}
 .flow-tag{display:block;font-size:10px;color:#a5212c;font-weight:700}
 .flow-detail{grid-column:1/-1;margin:2px 0 0;font-size:11px;color:#8c2028;line-height:1.5}
-.seg button{min-height:40px}
+.seg button{min-height:40px;font-size:11px}.factor{grid-template-columns:1fr}.cast{grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
 .seg button:focus-visible,.test-settings select:focus-visible,.test-settings button:focus-visible{outline:3px solid #285cb2;outline-offset:2px}
 .role{min-width:0}
 </style>
@@ -50,7 +50,8 @@
 
  <section class="panel test-settings" aria-labelledby="test-title">
   <h2 id="test-title">話の流れから試す</h2>
-  <p class="note">14種類から選ぶと、4人の性格が自動で入ります。そのまま再生したり、性格を変えて試せます。</p>
+  <p class="note">新作の攻略と防衛・従来の14種類から選ぶと、4人の性格が自動で入ります。そのまま再生したり、性格を変えて試せます。</p>
+  <label for="story-mode">お話のルール</label><select id="story-mode"><option value="classic">これまでのお話</option><option value="strategy">新作：攻略と防衛</option></select><p class="note">新作は開放性＋誠実性で勝負。同点では、対策を点検したコブタが守り切ります。</p>
   <label for="story-preset">見たい話の流れ</label>
   <select id="story-preset"><option value="">話を選んで性格を自動設定</option></select>
   <p id="current-flow" role="status" aria-live="polite"></p>
@@ -77,46 +78,50 @@
 <footer><div class="wrap">お話は性格をもとにした創作で、診断の科学的な結論ではありません。</div></footer>
 <script type="module">
 import {TYPE_NAMES} from './play/web_J38/personality_text.mjs';
-import {PRESETS,changesFor} from './test-settings.mjs?v=1';
+import {PRESETS,changesFor} from './test-settings.mjs?v=2';
+import {normalizeCode,normalizeCast} from './play/web_J38/strategy_rules.mjs';
 let warmup=null;
 const ROLES=[['pig_straw','長男','straw'],['pig_wood','次男','wood'],['pig_brick','三男','brick'],['wolf','おおかみ','wolf']];
 const F=[['O','開放性'],['C','誠実性'],['E','外向性'],['A','協調性'],['N','感受性']];
-const LV=[['1','低い'],['3','ふつう'],['5','高い']];
+const LV=[['1','低い'],['2','やや低い'],['3','ふつう'],['4','高い'],['5','最高']];
 const q=new URLSearchParams(location.search);
+let mode=q.get('mode')==='strategy'?'strategy':'classic';
+try{if(!q.has('mode'))mode=localStorage.getItem('story_three_pigs_mode')==='strategy'?'strategy':'classic';}catch{}
+const modeSelect=document.getElementById('story-mode');modeSelect.value=mode;modeSelect.onchange=()=>{mode=modeSelect.value;chosen=null;chooser.value='';reset.disabled=true;save();};
 let saved=null;try{saved=JSON.parse(localStorage.getItem('story_three_pigs_cast')||'null');}catch{}
 const cast={pig_straw:'33535',pig_wood:'55331',pig_brick:'33333',wolf:'11311'};
-for(const[id]of ROLES)if(/^[135]{5}$/.test(saved?.[id]??''))cast[id]=saved[id];
-if(q.get('cast')){const c=q.get('cast').split(',');ROLES.forEach(([id],i)=>{if(/^[135]{5}$/.test(c[i]||''))cast[id]=c[i];});}
-const norm=s=>{const m=String(s).match(/(?:code|type)=([1-5]{5})/)||String(s).match(/\b([1-5]{5})\b/);return m?m[1].replace(/[12]/g,'1').replace(/[45]/g,'5'):null;};
+for(const[id]of ROLES)if(/^[1-5]{5}$/.test(saved?.[id]??''))cast[id]=saved[id];
+if(q.get('cast')){const c=q.get('cast').split(',');ROLES.forEach(([id],i)=>{if(/^[1-5]{5}$/.test(c[i]||''))cast[id]=c[i];});}
+const norm=s=>{const m=String(s).match(/(?:code|type)=([1-5]{5})/)||String(s).match(/\b([1-5]{5})\b/);return m?m[1]:null;};
 if(q.get('me')&&norm(q.get('me'))){cast.pig_brick=norm(q.get('me'));}
 const box=document.getElementById('cast');
 const chooser=document.getElementById('story-preset'),reset=document.getElementById('reset-preset');
 for(const[pIndex,p]of PRESETS.entries()){const o=document.createElement('option');o.value=p.id;o.textContent=(pIndex+1)+'. '+p.label;chooser.append(o);}
 let chosen=null;
-function applyPreset(){if(!chosen)return;Object.assign(cast,chosen.cast);save();}
+function applyPreset(){if(!chosen)return;Object.assign(cast,chosen.cast);mode=chosen.mode??'classic';modeSelect.value=mode;save();}
 chooser.onchange=()=>{chosen=PRESETS.find(p=>p.id===chooser.value)??null;reset.disabled=!chosen;if(chosen)applyPreset();};
 reset.onclick=applyPreset;
 function render(){
- const analysis=changesFor(cast);
+ const analysis=changesFor(cast,mode);
  document.getElementById('current-flow').textContent='現在の話：'+analysis.current.label;
  box.innerHTML='';
  for(const[id,label,img]of ROLES){
   const d=document.createElement('section');d.className='role';const code=cast[id];
-  d.innerHTML=`<header><img src="../assets/role-${img}.png" alt=""><div><h3>${label}</h3><div class="type">${TYPE_NAMES[code]??''}</div></div></header>`+
+  d.innerHTML=`<header><img src="../assets/role-${img}.png" alt=""><div><h3>${label}</h3><div class="type">${TYPE_NAMES[normalizeCode(code)]??''}</div></div></header>`+
    F.map(([f,name],i)=>{const changes=analysis.changes[id][i],detailId=id+'-'+f+'-changes';return `<div class="factor${changes.length?' flow-change':''}" data-role="${id}" data-factor="${f}"><span>${name}${changes.length?'<span class="flow-tag">流れが変わる</span>':''}</span><div class="seg">${LV.map(([v,t])=>`<button type="button" data-i="${i}" data-v="${v}" aria-label="${label}の${name}：${t}" ${changes.length?'aria-describedby="'+detailId+'"':''} aria-pressed="${code[i]===v}">${t}</button>`).join('')}</div>${changes.length?'<p class="flow-detail" id="'+detailId+'">'+changes.map(c=>LV.find(l=>l[0]===c.value)[1]+' → '+c.label).join('<br>')+'</p>':''}</div>`;}).join('')+
    `<button class="mine">自分の性格にする</button>`;
   d.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{const i=b.dataset.i,v=b.dataset.v,c=[...cast[id]];c[i]=v;cast[id]=c.join('');save();box.querySelector('[data-role="'+id+'"][data-factor="'+F[i][0]+'"] button[data-v="'+v+'"]').focus({preventScroll:true});});
-  d.querySelector('.mine').onclick=()=>{const v=norm(document.getElementById('mine').value);const msg=document.getElementById('mine-msg');if(!v){msg.textContent='結果ページのアドレスか、5けたの番号を入れてください。';return;}cast[id]=v;msg.textContent=label+'を「'+(TYPE_NAMES[v]??v)+'」にしました。';save();};
+  d.querySelector('.mine').onclick=()=>{const v=norm(document.getElementById('mine').value);const msg=document.getElementById('mine-msg');if(!v){msg.textContent='結果ページのアドレスか、5けたの番号を入れてください。';return;}cast[id]=v;msg.textContent=label+'を「'+(TYPE_NAMES[normalizeCode(v)]??v)+'」にしました。';save();};
   box.append(d);
  }
- document.getElementById('play').href='play/web_J38/?cast='+ROLES.map(([id])=>cast[id]).join(',');
- warmup?.setCast(cast);
+ document.getElementById('play').href='play/web_J38/?cast='+ROLES.map(([id])=>cast[id]).join(',')+'&mode='+mode;
+ warmup?.setCast(normalizeCast(cast));
 }
-function save(){try{localStorage.setItem('story_three_pigs_cast',JSON.stringify(cast));}catch{}render();}
+function save(){try{localStorage.setItem('story_three_pigs_cast',JSON.stringify(cast));localStorage.setItem('story_three_pigs_mode',mode);}catch{}render();}
 render();
 import('../assets/story-warmup.mjs').then(({createWarmup})=>{
  warmup=createWarmup({stage:'selection',status:document.getElementById('warmup-status')});
- warmup.setCast(cast);
+ warmup.setCast(normalizeCast(cast));
 }).catch(()=>{document.getElementById('warmup-status').textContent='お話の開始時に素材を準備します。';});
 </script>
 </body>

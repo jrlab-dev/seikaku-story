@@ -1,7 +1,10 @@
 import {siteHouses,NAME as HOUSE_NAME} from './puzzle_houses.mjs';
+import {normalizeCast,evaluateStrategy} from './strategy_rules.mjs';
 const lv=d=>d==='1'?'low':d==='5'?'high':'mid';
 const F={O:0,C:1,E:2,A:3,N:4};
-export function evaluateEnding(c){
+export function evaluateEnding(c,options={}){
+ if(options.mode==='strategy')return evaluateStrategy(c);
+ c=normalizeCast(c);
  const L=(r,k)=>lv(c[r][F[k]]),adj={low:-.5,mid:0,high:.5};
  const P={low:1.25,mid:2,high:2.5}[L('wolf','E')];
  const sites=siteHouses(c),STR={0:0,1:1,2:1.5,3:3,4:4,5:5},S={straw:STR[sites.straw.strength],wood:STR[sites.wood.strength],brick:STR[sites.brick.strength]};

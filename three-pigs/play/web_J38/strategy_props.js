@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {CENTERS} from './endings/strategy.mjs';
+import {createRaidProps} from './strategy_raid_props.js';
 export function installStrategyContact(layer,ground){
  const update=layer.update.bind(layer);
  layer.update=(camera,dt)=>{
@@ -8,7 +9,8 @@ export function installStrategyContact(layer,ground){
   for(const a of layer.actors){
    if(!a.requestedVisible)continue;
    const foot=a.paperStatus?.running?(a.paperStatus.visibleFootY??0):0;
-   a.root.position.y=ground(a.root.position.x,a.root.position.z)+.018-foot;
+   const state=layer.costumeSceneState.actors.find(p=>p.id===a.data.id);
+   a.root.position.y=(state?.strategyWorldY??ground(a.root.position.x,a.root.position.z))+.018-foot+(state?.strategyLift??0);
    const p=a.shadow.geometry.attributes.position;
    for(let k=0;k<p.count;k++)p.setY(k,ground(a.root.position.x+p.getX(k),a.root.position.z+p.getZ(k))-a.root.position.y+.015);
    p.needsUpdate=true;a.shadow.visible=true;
@@ -42,7 +44,7 @@ export function createStrategyProps(scene,houses={}){
   const g=new THREE.Group();g.position.set(c[0],c[1]+.04,c[2]);root.add(g);
   box(g,stone,0,.015,4.8,4.7,.1,1.0);
   for(const x of[-2.4,2.4]){
-   if(x<0||site==='brick')box(g,iron,x,.72,3.5,.12,.12,2.6);
+   if(x<0)box(g,iron,x,.72,3.5,.12,.12,2.6);
    else{box(g,iron,x,.72,2.9,.12,.12,1.3);}
    for(const z of[2.3,4.8])box(g,oak,x,.85,z,.16,1.7,.18);
   }
@@ -55,9 +57,9 @@ export function createStrategyProps(scene,houses={}){
    for(const x of[-.36,.36])box(door,brass,x,0,.08,.045,1.72,.04);
    mesh(door,ball,brass,door===left?.33:-.33,-.03,.12,.07,.045,.07);
   }
-  const r={g,left,right};groups[site]=r;
+  const r={g,left,right};groups[site]=r;r.raid=createRaidProps(g,site);
   for(const o of g.children)if(o.position.z===3.15)o.position.z=4.95;
-  if(site!=='brick'){
+  {
    for(const z of[3.55,4.75])box(g,oak,2.4,.9,z,.15,1.8,.12);
    box(g,oak,2.4,1.82,4.15,.2,.12,1.35);
    const pivot=new THREE.Group();pivot.position.set(2.4,0,3.55);g.add(pivot);r.exit=pivot;
@@ -74,7 +76,7 @@ export function createStrategyProps(scene,houses={}){
    const dummy=new THREE.Group();g.add(dummy);r.dummy=dummy;dummy.position.set(-3.2,0,5);
    box(dummy,oak,0,.5,0,.055,1,.055);mesh(dummy,ball,brass,0,1.1,0,.2,.2,.16);box(dummy,red,0,.78,0,.4,.4,.08);
   }
-  if(site==='wood'){
+  if(site==='wood'||site==='brick'){
    for(const x of[2.18,2.92])for(const z of[4,4.6])box(g,iron,x,.2,z,.1,.4,.1);
    box(g,iron,2.55,.41,4.3,.95,.07,.8);
    mesh(g,cyl,iron,2.55,.7,4.3,.43,.58,.43);
@@ -114,16 +116,17 @@ export function createStrategyProps(scene,houses={}){
   for(const[site,rigs]of Object.entries(guards))for(const rig of rigs)rig.rotation.y=f?.site===site?(f.scan??0):0;
   for(const[site,r]of Object.entries(groups)){
    const active=f?.site===site,arrival=f?.arrival?.site===site;
-   r.g.visible=active||arrival;if(!r.g.visible)continue;
+   r.g.visible=active||arrival;if(!r.g.visible){r.raid.apply(null);continue;}
    const state=active?f:{phase:0,gate:f.arrival.gate,exit:0,scan:0,decoy:0,steam:0,lever:0,gear:0,wedge:0,alarm:0,fire:0};
    const t=state.phase;r.left.position.x=-.54-(state.gate??0)*.95;r.right.position.x=.54+(state.gate??0)*.95;
+   r.raid.apply(active?state:null);r.left.rotation.z=-(state.breach??0)*.18;r.right.rotation.z=(state.breach??0)*.18;
    if(r.exit)r.exit.rotation.y=Math.PI/2*(state.exit??0);
    if(r.head){r.head.rotation.y=state.scan;r.lamp.material.emissive.setHex(state.alarm&&Math.floor(t*4)%2?0xff3a00:0x220700);}
    if(r.dummy){r.dummy.visible=state.decoy>0;r.dummy.rotation.z=Math.sin(t*5)*.12;}
    if(r.lever){r.lever.rotation.z=-.75*state.lever;r.fire.visible=!!state.fire; r.fire.scale.y=.9+Math.sin(t*9)*.12;
-    r.steam.forEach((o,k)=>{o.visible=state.steam>.01;const u=(t*.65+k*.23)%1;o.position.set((k%6-2.5)*.45,.6+u*1.5,4.6+Math.sin(k)*.1);o.scale.setScalar((.7+u*.8)*state.steam);});
+    r.steam.forEach((o,k)=>{o.visible=state.revision!==2&&state.steam>.01;const u=(t*.65+k*.23)%1;o.position.set((k%6-2.5)*.45,.6+u*1.5,4.6+Math.sin(k)*.1);o.scale.setScalar((.7+u*.8)*state.steam);});
    }
-   if(r.gear){r.gear.rotation.z=state.gear;r.wedge.visible=state.wedge>0;r.wedge.position.set(-1.9+state.wedge*.55,.26,5.35);r.wedge.rotation.z=.2;}
+   if(r.gear){r.gear.visible=state.revision!==2;r.gear.rotation.z=state.gear;r.wedge.visible=state.wedge>0;r.wedge.position.set(-1.9+state.wedge*.55,.26,5.35);r.wedge.rotation.z=.2;}
   }
  }
  apply(null);

@@ -44,14 +44,14 @@ export function applyStrategyConstruction(s,t,sites){
   if(!owner||!wolf)return s;
   clearEntryScene(s);
   clearEntry(owner);Object.assign(owner,{x:c[0]+1.4,z:c[2]+3.9,yOffset:0,yaw:0,motion:'idle',walkDistance:0,visible:true,reactionPose:2,anchor:'strategy_straw_gate'});
-  const u=smooth((t-121.5)/2.5),x=wolf.x+(c[0]-.8-wolf.x)*u,z=wolf.z+(c[2]+7-wolf.z)*u;
+  const u=smooth((t-121.5)/2.5),x=wolf.x+(c[0]-wolf.x)*u,z=wolf.z+(c[2]+8.5-wolf.z)*u;
   clearEntry(wolf);delete wolf.reactionPose;
   Object.assign(wolf,{x,z,yOffset:0,visible:true,yaw:Math.PI,motion:t<124?'walk':'idle',motionTime:t-121.5,walkDistance:Math.hypot(x-(c[0]-.65),z-(c[2]+5.9)),anchor:'strategy_straw_gate_approach'});
   for(const a of s.actors)if(a.id==='pig_wood'||a.id==='pig_brick')a.visible=false;
   Object.assign(s.houses.straw,{door:'closed',doorOpen:0});
   s.build=null;s.completion=null;s.intro=null;s.drama=null;
   s.strategyPrelude={site:'straw',phase:t-122,gate:1-smooth((t-122)/2)};
-  s.camera={id:'strategy_straw',position:[c[0]+5.4,c[1]+3.6,c[2]+13.7],target:[c[0],c[1]+1.25,c[2]+4.2],fov:47,fitAspect:1.35,terrainRelative:false};
+  s.camera={id:'strategy_straw',position:[c[0]-6.5,c[1]+2.7,c[2]+12.7],target:[c[0],c[1]+1.05,c[2]+5.7],fov:48,fitAspect:1.35,terrainRelative:false};
   caption(s,t<124?'長男が前庭の門を閉める。':'長男は前庭の門を閉め、見張りを確かめました。');
   return s;
  }

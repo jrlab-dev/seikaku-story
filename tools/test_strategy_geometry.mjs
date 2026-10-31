@@ -53,7 +53,7 @@ function gates(a,b,prev,s,preset,t){
  if(cross&&Math.abs(cross.x-c[0])<2.4+r){counts.gateCrossings++;const open=Math.min(old.gate??0,f.gate??0),half=.03+.95*open;
   if(Math.abs(cross.x-c[0])+r>half+.015)fail('closed-or-narrow-gate',preset,t,a.id,{site,gate:open,openingHalfWidth:half,xFromCentre:cross.x-c[0],torsoRadius:r});}
  for(const side of [-1,1]){const sideCross=planeCross(a,b,'x',c[0]+side*2.4);if(!sideCross||sideCross.z<c[2]+2.3-r||sideCross.z>c[2]+4.8+r)continue;
-  const exit=side===1&&site!=='brick'&&sideCross.z>=c[2]+3.55+r&&sideCross.z<=c[2]+4.75-r&&Math.min(old.exit??0,f.exit??0)>.8;
+  const exit=side===1&&sideCross.z>=c[2]+3.55+r&&sideCross.z<=c[2]+4.75-r&&Math.min(old.exit??0,f.exit??0)>.8;
   if(!exit)fail('closed-side-barrier',preset,t,a.id,{site,side,zFromCentre:sideCross.z-c[2],exit:f.exit??0});}
  }
 }

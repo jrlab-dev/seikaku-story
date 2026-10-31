@@ -18,7 +18,7 @@ for(let n=0;n<=2620;n++){
   assert.equal(owner.ownerDoor,undefined);assert.equal(owner.encounterClose,undefined);
   assert.equal(s.encounter,null);assert.equal(s.houses.straw.doorOpen,0);
   assert.ok(s.strategyPrelude.gate>=0&&s.strategyPrelude.gate<=1);
-  if(t>=124){assert.equal(s.strategyPrelude.gate,0);assert.equal(wolf.x,1.3);assert.equal(wolf.z,4.75);}
+  if(t>=124){assert.equal(s.strategyPrelude.gate,0);assert.equal(wolf.x,2.1);assert.equal(wolf.z,6.25);}
   const same=structuredClone(s);applyStrategyConstruction(s,t,s.puzzleSites);assert.deepEqual(s,same);
  }
  if(!active)continue;

@@ -12,7 +12,7 @@ export {setCast,getCast,decideEnding} from './personality_story.mjs';
 export * from './story_timeline_v4.mjs';
 export let STORY_DURATION=240.45,SCENES=[];
 let branch='normal';
-export function selectBranch(id){branch=id;BASE.selectBranch(id);STORY_DURATION=id==='peace'?BASE.STORY_DURATION:planDuration(planFor(decideEnding()));SCENES=id==='peace'?BASE.SCENES:[{id:'opening_v7',at:0,title:'あるところに'},...BASE.SCENES.filter(s=>s.at>=23).map(s=>({...s,at:s.at+OPENING_SHIFT}))];if(getStoryMode()==='strategy'&&decideEnding().id.startsWith('strategy_'))SCENES=[...SCENES.filter(s=>s.at<131),...decideEnding().duels.map((d,i)=>({id:'strategy_'+d.site,at:131+i*48,title:['長男の見張り','次男の蒸気','三男の切替扉'][i]}))];return{id,duration:STORY_DURATION};}
+export function selectBranch(id){branch=id;BASE.selectBranch(id);STORY_DURATION=id==='peace'?BASE.STORY_DURATION:planDuration(planFor(decideEnding()));SCENES=id==='peace'?BASE.SCENES:[{id:'opening_v7',at:0,title:'あるところに'},...BASE.SCENES.filter(s=>s.at>=23).map(s=>({...s,at:s.at+OPENING_SHIFT}))];if(getStoryMode()==='strategy'&&decideEnding().id.startsWith('strategy_'))SCENES=[...SCENES.filter(s=>s.at<131),...decideEnding().duels.map((d,i)=>({id:'strategy_'+d.site,at:131+i*48,title:['長男の見張り','次男の蒸気','三男の多重防壁'][i]}))];return{id,duration:STORY_DURATION};}
 export function sampleStory(t){
  if(branch==='peace')return applyPigEscapeRule(BASE.sampleStory(t));
  const ending=decideEnding(),plan=planFor(ending);STORY_DURATION=planDuration(plan);

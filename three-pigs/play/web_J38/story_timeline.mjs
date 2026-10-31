@@ -33,5 +33,18 @@ function baseSample(t){
  else if(t<OPENING_DURATION+.35)s.cutOpacity=.85*(1-(t-OPENING_DURATION)/.35);
  return applyWolfPersonality(s,t);
 }
-export function createStoryClock(){let time=0,playing=false;return{get time(){return time},get playing(){return playing},play(){if(time>=STORY_DURATION)time=0;playing=true},pause(){playing=false},reset(){time=0;playing=false},seek(t){time=Math.max(0,Math.min(STORY_DURATION,Number.isFinite(t)?t:0))},tick(dt){if(playing)time=Math.min(STORY_DURATION,time+Math.max(0,Math.min(.1,dt)));if(time>=STORY_DURATION)playing=false;return sampleStory(time)}}}
+export function createStoryClock(now=()=>performance.now()/1000){
+ let time=0,playing=false,lastNow=now();
+ return{
+  get time(){return time},get playing(){return playing},
+  play(){if(time>=STORY_DURATION)time=0;lastNow=now();playing=true},
+  pause(){playing=false;lastNow=now()},
+  reset(){time=0;playing=false;lastNow=now()},
+  seek(t){time=Math.max(0,Math.min(STORY_DURATION,Number.isFinite(t)?t:0));lastNow=now()},
+  tick(dt){const current=now();const elapsed=dt===undefined?current-lastNow:dt;lastNow=current;
+   if(playing&&Number.isFinite(elapsed))time=Math.min(STORY_DURATION,time+Math.max(0,elapsed));
+   if(time>=STORY_DURATION)playing=false;return sampleStory(time);
+  }
+ };
+}
 selectBranch('normal');

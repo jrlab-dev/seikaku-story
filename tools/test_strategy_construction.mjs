@@ -27,21 +27,28 @@ for(let n=0;n<=2620;n++){
   assert.equal(s.movementMode,'exterior_inspection');assert.equal(s.encounter,null);continue;
  }
  const a=s.actors.find(a=>a.id==='pig_'+active.site),station=constructionStation(active.site,active.kind);
+ if(s.build){
+  assert.equal(active.phase,'onsite');
+  assert.equal(a.motion,'build_hammer');assert.equal(a.reactionBuild,undefined);
+  assert.ok(Number.isFinite(a.worldY));assert.ok(s.build.contactNode);
+  assert.deepEqual(s.build.worldRoot,[a.x,a.worldY,a.z]);
+  assert.equal(s.build.impact,s.build.striking);
+  assert.ok(Math.abs(Math.hypot(a.x-s.build.target[0],a.z-s.build.target[2])-.58)<1e-8);
+  if(s.build.stage===4){assert.ok(s.build.platform);assert.ok(s.build.platformHeight>2);}
+  const key=active.site,point=[a.x.toFixed(2),a.z.toFixed(2)].join(',');
+  if(!positions.has(key))positions.set(key,new Set());positions.get(key).add(point);
+  const again=sampleStory(t);assert.deepEqual(again,s,'construction is seek deterministic');
+  samples++;continue;
+ }
  assert.equal(a.x,station.x);assert.equal(a.z,station.z);assert.equal(a.yOffset,0);assert.equal(a.worldY,undefined);
  assert.ok(a.z-active.station[2]>-1e-9);
  const zCenter={straw:-2.25,wood:-15,brick:-14}[active.site];
  assert.ok(a.z-zCenter>=CONSTRUCTION_ENVELOPES[active.kind].max[2]+1-1e-9);
  assert.deepEqual(s.houses,before.houses);assert.equal(a.motion,before.actors.find(p=>p.id===a.id).motion);
- if(before.build){
-  assert.equal(s.build.stage,before.build.stage);assert.equal(s.build.striking,before.build.striking);
-  assert.equal(s.build.platform,false);assert.equal(s.build.impact,false);
-  const key=active.site;
-  const pose=[a.x,a.z,...s.camera.position,...s.camera.target];
-  if(positions.has(key))assert.deepEqual(pose,positions.get(key));else positions.set(key,pose);
- }
  samples++;
 }
 assert.equal(positions.size,3);assert.ok(samples>500);
+for(const points of positions.values())assert.ok(points.size>=5,'five building stages need multiple actual work positions');
 for(const kind of ['straw','wood','brick','tent']){
  const s={build:{house:'straw'},actors:[],camera:{id:'original'}};
  assert.deepEqual(applyStrategyConstruction(s,54,{straw:{visual:kind}}),s);

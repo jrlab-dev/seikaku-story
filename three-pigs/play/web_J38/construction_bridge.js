@@ -109,19 +109,22 @@ export function createConstructionBridge({THREE,entries,prepare,invalidate,groun
     const cz={straw:-2.25,wood:-15,brick:-14}[id],cx={straw:2.1,wood:-20,brick:20}[id],base={straw:0,wood:-.14,brick:1.06}[id];
     output[id]=[];
     for(let stage=0;stage<5;stage++){
-     const names=entries[id].manifest.parts.filter(p=>stage<2? /__(Frame|Corner_quoins)$/.test(p.node_name):stage===2||stage===4?/__Wall_(Front|Back|Left|Right)$/.test(p.node_name):/__Roof_(Thatch_|Left|Right|Main_Hip)/.test(p.node_name)).map(p=>p.node_name);
+     const names=entries[id].manifest.parts.filter(p=>stage<2? /__(Frame|Corner_quoins)$/.test(p.node_name):stage===2||stage===4?/__Wall_(Front|Back|Left|Right)$/.test(p.node_name):/__Roof(?:$|_(Thatch_|Left|Right|Main_Hip))/.test(p.node_name)).map(p=>p.node_name);
+     if(stage===3&&entries[id].kind==='karakuri_fort'){names.length=0;names.push('KarakuriFort__Turret_Caps');}
      const candidates=names.map(n=>a.root.getObjectByName(n));const sites=[];
      for(let sector=0;sector<4;sector++){
       const az=(45+sector*90)*Math.PI/180,right=new THREE.Vector3(Math.cos(az),0,-Math.sin(az));let hit=null;
-      const desired=stage===3?3.05:.57;
+      const roofBounds=new THREE.Box3();for(const o of candidates)roofBounds.union(new THREE.Box3().setFromObject(o));
+      const desired=stage===3?Math.max(3.05,roofBounds.min.y-base+.15):.57;
       const heights=[desired,...Array.from({length:32},(_,i)=>desired+(i%2?1:-1)*(.025+Math.floor(i/2)*.025))];
       for(const height of heights){
        let origin=new THREE.Vector3(cx,base+height,cz).addScaledVector(right,-8),direction=right,objects=candidates;
        if(stage===2||stage===4){const side=['Front','Right','Back','Left'][sector],object=candidates.find(o=>o.name.endsWith('_'+side)),box=new THREE.Box3().setFromObject(object);objects=[object];
-        if(sector===0){origin.set(box.min.x+.23,base+height,box.max.z+2);direction=new THREE.Vector3(0,0,-1);}
-        if(sector===1){origin.set(box.max.x+2,base+height,box.max.z-.23);direction=new THREE.Vector3(-1,0,0);}
-        if(sector===2){origin.set(box.max.x-.23,base+height,box.min.z-2);direction=new THREE.Vector3(0,0,1);}
-        if(sector===3){origin.set(box.min.x-2,base+height,box.min.z+.23);direction=new THREE.Vector3(1,0,0);}
+        const workshop=['karakuri','karakuri_fort'].includes(entries[id].kind);
+        if(sector===0){origin.set(workshop?cx+1.9:box.min.x+.23,base+height,box.max.z+2);direction=new THREE.Vector3(0,0,-1);}
+        if(sector===1){origin.set(box.max.x+2,base+height,workshop?cz:box.max.z-.23);direction=new THREE.Vector3(-1,0,0);}
+        if(sector===2){origin.set(workshop?cx:box.max.x-.23,base+height,box.min.z-2);direction=new THREE.Vector3(0,0,1);}
+        if(sector===3){origin.set(box.min.x-2,base+height,workshop?cz:box.min.z+.23);direction=new THREE.Vector3(1,0,0);}
        }
        const ray=new THREE.Raycaster(origin,direction,0,16),hits=ray.intersectObjects(objects,true);if(hits.length){hit=hits[0];break;}
       }

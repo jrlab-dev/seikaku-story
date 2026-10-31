@@ -10,7 +10,7 @@ export function installStrategyContact(layer,ground){
    if(!a.requestedVisible)continue;
    const foot=a.paperStatus?.running?(a.paperStatus.visibleFootY??0):0;
    const state=layer.costumeSceneState.actors.find(p=>p.id===a.data.id);
-   a.root.position.y=(state?.strategyWorldY??ground(a.root.position.x,a.root.position.z))+.018-foot+(state?.strategyLift??0);
+   a.root.position.y=(state?.strategyWorldY??state?.worldY??ground(a.root.position.x,a.root.position.z))+.018-foot+(state?.strategyLift??0);
    const p=a.shadow.geometry.attributes.position;
    for(let k=0;k<p.count;k++)p.setY(k,ground(a.root.position.x+p.getX(k),a.root.position.z+p.getZ(k))-a.root.position.y+.015);
    p.needsUpdate=true;a.shadow.visible=true;
@@ -111,7 +111,7 @@ export function createStrategyProps(scene,houses={}){
  let last=null;
  function apply(st){
   const f=st?.strategy??(st?.strategyPrelude?{scan:0,decoy:0,steam:0,lever:0,gear:0,wedge:0,alarm:0,fire:0,exit:0,...st.strategyPrelude}:null);root.visible=!!f;last=f??null;
-  workRoot.visible=!!st?.strategyConstruction&&!!st?.build;
+ workRoot.visible=false;
   for(const[site,g]of Object.entries(benches))g.visible=site===st?.strategyConstruction?.site;
   for(const[site,rigs]of Object.entries(guards))for(const rig of rigs)rig.rotation.y=f?.site===site?(f.scan??0):0;
   for(const[site,r]of Object.entries(groups)){

@@ -336,7 +336,7 @@ async function prepareStory(){
  const buildings=wrapPuzzleBuildings(createStoryBuildings({doors,straw:{reset:resetHouse,seek(t){if(!action)return;running=false;elapsed=t;action.reset().play();evaluateAt(t);action.paused=true;staticHouse.visible=false;collapseHouse.visible=true;},deform:deformStraw},wood,construction,invalidate(){renderer.shadowMap.needsUpdate=true;}}),{swapped:puzzle.swapped,construction});
  await contactPass.compile(scene);
  finishLoadStep('render');const puzzleFx=await createPuzzleEffectsLayer({scene,loadAsset,prepare,ground:villageGround,required:selectedAssets.effects});const comic=createComicEffects(scene,characterLayer,villageGround);finishLoadStep('effects');
- const strategyFx=selectedAssets.ending.startsWith('strategy_')?createStrategyProps(scene,puzzle.swapped):null;
+ const strategyFx=selectedAssets.ending.startsWith('strategy_')?createStrategyProps(scene,puzzle.swapped,constructionEntries):null;
  if(strategyFx)installStrategyContact(characterLayer,travelWalkSurface);
  return{characters:characterLayer,buildings,commonHome,personalityWindow,effects:Object.assign(Object.create(comic),comic,{apply(st){puzzleFx.apply(st?.puzzleEffect);strategyFx?.apply(st);return comic.apply(st);},reset(){strategyFx?.reset();comic.reset?.();}})};
 }

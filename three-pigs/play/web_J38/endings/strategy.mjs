@@ -1,4 +1,4 @@
-import {raidPlan} from './strategy_raid.mjs';
+import {raidPlan} from './strategy_house_raid.mjs';
 export const CENTERS={straw:[2.1,0,-2.25],wood:[-20,-.14,-15],brick:[20,1.06,-14]};
 const SITES=['straw','wood','brick'],LABEL=['長男','次男','三男'];
 const clamp=x=>Math.max(0,Math.min(1,x)),lerp=(a,b,u)=>a+(b-a)*u;
@@ -30,9 +30,9 @@ export function strategyPreparation(s,t,cast){
  if(t<start||t>110)return;
  const checked=+cast['pig_'+SITES[i]][1]>=3;
  const lines=[
-  ['見張りと門は別々。見つけたら押し戻すんだ。','門の補強と非常口。どちらも確かめよう。'],
+  ['壁も戸も丈夫に作ろう。家の中で安心して暮らすんだ。','家の戸の支えと裏口。どちらも確かめよう。'],
   ['蒸気は左右から。相手の動きを見て切り替えよう。','火と予備の配管、非常口も確かめよう。'],
-  ['手前に壁、奥に門。別々の仕組みで守ろう。','壁と門は別々に動く。逃げ道も確かめよう。']
+  ['丈夫な家と二重の戸の支え。兄弟も中へ迎えよう。','家の補強と裏口。逃げ道も確かめよう。']
  ];
  caption(s,LABEL[i]+'「'+(t-start<8?lines[i][0]:checked?lines[i][1]:'仕掛けはできた。動きの確認は、あとでいいや。')+'」');
 }

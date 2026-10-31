@@ -36,15 +36,10 @@ for(const p of PRESETS.filter(p=>p.mode==='strategy')){
  const first=JSON.stringify(sampleStory(156));sampleStory(duration);assert.equal(JSON.stringify(sampleStory(156)),first,'seek restoration');
 }
 setCast(STRATEGY_CAST);selectBranch('normal');
-assert.match(sampleStory(190).scene.caption,/火をつけ/);
+assert.match(sampleStory(191).scene.caption,/火をつけ/);
 assert.ok(sampleStory(190).actors.find(a=>a.id==='pig_wood').visible);
-assert.ok(sampleStory(260).strategy.bridge>0);
-for(let t=258;t<265;t+=.1){
- const s=sampleStory(t),wolf=s.actors.find(a=>a.id==='wolf');
- const expected=1.06+.04+1.45*Math.max(0,1-Math.abs(wolf.z+14-6.9)/1.6);
- assert.ok(Math.abs(wolf.strategyWorldY-expected)<1e-9,'wolf stands on the bridge');
- assert.ok(Number.isFinite(s.strategy.toolLift)&&Number.isFinite(s.strategy.toolPitch),'canopy follows the bridge');
-}
+assert.equal(sampleStory(260).strategy.revision,3);
+assert.equal(sampleStory(260).strategy.bridge,undefined);
 assert.equal(sampleStory(277).fullImage.key,'dinner_a');
 assert.equal(sampleStory(282).fullImage.key,'dinner_b');
 assert.equal(sampleStory(280).actors.filter(a=>a.visible).length,0);
@@ -52,9 +47,10 @@ for(const [start,end] of [[131,179],[179,227],[227,285]]){
  const danger=start+(start===227?38:26);
  const a=sampleStory(danger+1),b=sampleStory(danger+6);
  assert.ok(a.actors.some(x=>x.id.startsWith('pig_')&&x.motion==='paper_run'),'escape before intrusion');
- assert.equal(a.strategy.gate,0,'gate stays locked at escape onset');
+ const site=start===131?'straw':start===179?'wood':'brick';
+ assert.equal(a.houses[site].doorOpen,0,'house door stays locked at escape onset');
  assert.ok(b.strategy.breach>0,'door is mechanically breached later');
- assert.equal(sampleStory(start+25).strategy.decoy,0,'no decoy opens the gate');
+ assert.equal(sampleStory(start+25).strategy.decoy,undefined,'no decoy opens the house');
 }
 setStoryMode('classic');
 console.log(JSON.stringify({pairs,ties,timelineSamples:samples,presets:4,rawValuesPreserved:true,deterministicSeek:true}));

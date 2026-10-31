@@ -12,14 +12,12 @@ for(let n=0;n<=2620;n++){
  const t=n/20,s=sampleStory(t),before=structuredClone(s),out=applyStrategyConstruction(s,t,s.puzzleSites);
  assert.equal(out,s);
  const active=s.strategyConstruction;
- if(s.strategyPrelude){
-  const owner=s.actors.find(a=>a.id==='pig_straw'),wolf=s.actors.find(a=>a.id==='wolf');
-  assert.equal(owner.x,3.5);assert.equal(owner.z,1.65);assert.equal(owner.worldY,undefined);
-  assert.equal(owner.ownerDoor,undefined);assert.equal(owner.encounterClose,undefined);
-  assert.equal(s.encounter,null);assert.equal(s.houses.straw.doorOpen,0);
-  assert.ok(s.strategyPrelude.gate>=0&&s.strategyPrelude.gate<=1);
-  if(t>=124){assert.equal(s.strategyPrelude.gate,0);assert.equal(wolf.x,2.1);assert.equal(wolf.z,6.25);}
+ if(s.houseOccupancy){
+  const f=s.houseOccupancy,a=s.actors.find(a=>a.id==='pig_'+f.site);
+  assert.equal(s.movementMode,'house_entry');assert.equal(a.visible,true);
+  assert.ok(Number.isFinite(a.worldY));assert.equal(s.build,null);assert.equal(s.completion,null);
   const same=structuredClone(s);applyStrategyConstruction(s,t,s.puzzleSites);assert.deepEqual(s,same);
+  continue;
  }
  if(!active)continue;
  if(active.phase==='inspection'){
@@ -58,12 +56,4 @@ for(const t of [0,34.99,131,200]){
  const s={build:{house:'straw'},actors:[{id:'pig_straw',x:0,z:0}],camera:{id:'original'}};
  assert.equal(applyStrategyConstruction(s,t,{straw:{visual:'karakuri_fort'}}).camera.id,'original');
 }
-for(const t of [121.5,122,123,124,127,130.999]){
- const s=sampleStory(t);assert.ok(s.strategyPrelude);const q=s.strategyPrelude;
- if(t===122)assert.equal(q.gate,1);if(t>=124)assert.equal(q.gate,0);
- assert.equal(s.camera.id,'strategy_straw');
-}
-const beforeAttack=sampleStory(130.999),attack=sampleStory(131);
-for(const id of ['pig_straw','wolf']){const a=beforeAttack.actors.find(a=>a.id===id),b=attack.actors.find(a=>a.id===id);assert.ok(Math.hypot(a.x-b.x,a.z-b.z)<1e-9,'Prelude must join the attack positions for '+id);}
-assert.deepEqual(beforeAttack.camera.position,attack.camera.position);assert.deepEqual(beforeAttack.camera.target,attack.camera.target);
 console.log(JSON.stringify({passed:true,samples,sites:positions.size,visualValidation:'pending parent browser inspection'}));

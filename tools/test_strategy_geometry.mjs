@@ -40,11 +40,14 @@ function walls(a,b,prev,s,preset,t){
    // POSITION bounds surround doorway holes, so carve only the model's real door interval.
    const [left,right]=doorways[site],open=Math.min(prev.houses[site]?.doorOpen??0,s.houses[site]?.doorOpen??0);
    if(/Wall_Front$/.test(wall.name)&&open>=.7&&hit.x-r>=left&&hit.x+r<=right)continue;
+   const rearOpen=Math.min(prev.strategy?.site===site?prev.strategy.rearOpen??0:0,s.strategy?.site===site?s.strategy.rearOpen??0:0);
+   if(/Wall_Back$/.test(wall.name)&&rearOpen>.9&&hit.x-r>=CENTERS[site][0]-1.45&&hit.x+r<=CENTERS[site][0]+.15)continue;
    fail('house-wall',preset,t,a.id,{site,wall:wall.name,from:[a.x,a.z],to:[b.x,b.z],torsoRadius:r,doorOpen:open});
   }
  }
 }
 function gates(a,b,prev,s,preset,t){
+ if(s.strategy?.revision===3||s.strategyPrelude?.revision===3||s.houseOccupancy)return;
  const states=state=>{const f=state.strategy??state.strategyPrelude;if(!f)return{};const out={[f.site]:f};if(f.arrival)out[f.arrival.site]={gate:f.arrival.gate,exit:0};return out;};
  const before=states(prev),after=states(s);
  for(const[site,f]of Object.entries(after)){
@@ -90,11 +93,11 @@ for(const p of PRESETS.filter(p=>p.mode==='strategy')){
   prev=s;
  }
 }
-assert.ok(counts.gateCrossings>0,'No auxiliary gate crossings were exercised');
+assert.equal(counts.gateCrossings,0,'No auxiliary gates remain');
 assert.ok(counts.transferViewChecks>0||failures.some(f=>f.type==='missing-transfer-ground-focus'),'No transfer visibility samples were exercised');
 // Keep every failure in the JSON; console output remains compact.
 const totals=Object.fromEntries([...new Set(failures.map(f=>f.type))].map(type=>[type,failures.filter(f=>f.type===type).length]));
-const result={checkedAt:new Date().toISOString(),method:'Actual model wall POSITION bounds; swept 0.8m torso corridor in XZ; analytic active, arrival, and prelude gate leaves. Conservative bounds are not triangle collision or rendered visual QA.',stepSeconds:STEP,maxSpeedMetresPerSecond:MAX_SPEED,positionToleranceMetres:POSITION_TOLERANCE,torsoRadiusMetres:{pig:.40,wolf:.40},exclusions:'Only explicit scene/camera cuts and actor visibility changes; caption/phase boundaries are checked.',transferViewAssumption:'Real manifest heights and sprite_math.viewSupport; camera heights relative to groundFocus, actor local ground=0. Actual inter-actor terrain differences, foot offsets, occlusion and rendered pixels remain browser QA.',transferView,counts,totals,failures};
+const result={checkedAt:new Date().toISOString(),method:'Actual model wall POSITION bounds; swept 0.8m torso corridor in XZ; real front doorway and new 1.6m rear exit must be open. Conservative bounds are not triangle collision or rendered visual QA.',stepSeconds:STEP,maxSpeedMetresPerSecond:MAX_SPEED,positionToleranceMetres:POSITION_TOLERANCE,torsoRadiusMetres:{pig:.40,wolf:.40},exclusions:'Only explicit scene/camera cuts and actor visibility changes; caption/phase boundaries are checked.',transferViewAssumption:'Real manifest heights and sprite_math.viewSupport; camera heights relative to groundFocus, actor local ground=0. Actual inter-actor terrain differences, foot offsets, occlusion and rendered pixels remain browser QA.',transferView,counts,totals,failures};
 if(option('--output'))fs.writeFileSync(option('--output'),JSON.stringify(result,null,2));
 console.log(JSON.stringify({...result,failures:failures.slice(0,30)},null,2));
 assert.equal(failures.length,0,'Geometry regression failures: '+JSON.stringify(totals));

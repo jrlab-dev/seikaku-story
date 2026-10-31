@@ -1,6 +1,7 @@
 import {BUILDS} from './construction_montage.mjs';
 import {constructionShot} from './construction_camera.mjs';
 import {STRATEGY_BUILD_SITES} from './strategy_build_sites.mjs';
+import {applyHouseOccupancy} from './strategy_occupancy.mjs';
 const CENTERS={straw:[2.1,0,-2.25],wood:[-20,-.14,-15],brick:[20,1.06,-14]};
 export const CONSTRUCTION_ENVELOPES={
  karakuri_fort:{min:[-3.385596,-.57,-2.985244],max:[3.385596,6.55,3.510001]},
@@ -25,39 +26,7 @@ export function constructionStation(site,kind){
 
 export function applyStrategyConstruction(s,t,sites){
  if(!(t>=35&&t<131))return s;
- if(t>=110&&t<114.7){
-  const stations=[];
-  for(const site of ['straw','wood','brick']){
-   const kind=sites?.[site]?.visual,station=constructionStation(site,kind),a=s.actors.find(a=>a.id==='pig_'+site);
-   if(!station||!a)continue;
-   clearEntry(a);Object.assign(a,{x:station.x,z:station.z,yOffset:0,yaw:0,motion:'idle',walkDistance:0,visible:true,anchor:'strategy_'+site+'_inspection'});
-   Object.assign(s.houses[site],{intact:true,constructionStage:5,door:'closed',doorOpen:0});
-   stations.push({site,kind,station:[station.x,station.baseY,station.z],margin:MARGIN,modelBounds:station.bounds,grounded:true});
-  }
-  if(stations.length){
-   clearEntryScene(s);s.build=null;s.completion=null;s.movementMode='exterior_inspection';
-   s.strategyConstruction={...stations.at(-1),phase:'inspection',stations};
-   caption(s,'三匹は、完成した家の外で仕掛けを点検します。');
-  }
-  return s;
- }
- if(t>=121.5&&CONSTRUCTION_ENVELOPES[sites?.straw?.visual]){
-  if(s.strategyPrelude)return s;
-  const c=CENTERS.straw,owner=s.actors.find(a=>a.id==='pig_straw'),wolf=s.actors.find(a=>a.id==='wolf');
-  if(!owner||!wolf)return s;
-  clearEntryScene(s);
-  clearEntry(owner);Object.assign(owner,{x:c[0]+1.4,z:c[2]+3.9,yOffset:0,yaw:0,motion:'idle',walkDistance:0,visible:true,reactionPose:2,anchor:'strategy_straw_gate'});
-  const u=smooth((t-121.5)/2.5),x=wolf.x+(c[0]-wolf.x)*u,z=wolf.z+(c[2]+8.5-wolf.z)*u;
-  clearEntry(wolf);delete wolf.reactionPose;
-  Object.assign(wolf,{x,z,yOffset:0,visible:true,yaw:Math.PI,motion:t<124?'walk':'idle',motionTime:t-121.5,walkDistance:Math.hypot(x-(c[0]-.65),z-(c[2]+5.9)),anchor:'strategy_straw_gate_approach'});
-  for(const a of s.actors)if(a.id==='pig_wood'||a.id==='pig_brick')a.visible=false;
-  Object.assign(s.houses.straw,{door:'closed',doorOpen:0});
-  s.build=null;s.completion=null;s.intro=null;s.drama=null;
-  s.strategyPrelude={site:'straw',phase:t-122,gate:1-smooth((t-122)/2)};
-  s.camera={id:'strategy_straw',position:[c[0]-6.5,c[1]+2.7,c[2]+12.7],target:[c[0],c[1]+1.05,c[2]+5.7],fov:48,fitAspect:1.35,terrainRelative:false};
-  caption(s,t<124?'長男が前庭の門を閉める。':'長男は前庭の門を閉め、見張りを確かめました。');
-  return s;
- }
+ if(applyHouseOccupancy(s,t))return s;
  const site=s.build?.house||s.completion?.house||s.approach?.house;
  const kind=sites?.[site]?.visual,station=constructionStation(site,kind);
  if(!station)return s;
